@@ -1,0 +1,14 @@
+#pagezipper-button {
+  list-style-image: url("chrome://pagezipper/skin/zipper_24.png");
+}
+
+toolbar[iconsize="small"] #pagezipper-button {
+  list-style-image: url("chrome://pagezipper/skin/zipper_16.png");
+}
+
+
+#pagezipper-finder-status-bar-icon {
+        width: 83px;
+        margin: 0 5px;
+        background-color:red;
+}

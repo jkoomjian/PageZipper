@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://pagezipper/skin/skin.css" type="text/css"?>
+<!--!DOCTYPE overlay SYSTEM "chrome://pagezipper/locale/overlay.dtd"-->
+<overlay id="pagezipper-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<script src="pagezipper.js" />
+	
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="pagezipper-button" 
+						class="toolbarbutton-1" 
+						label="PageZipper" 
+						tooltiptext="Start PageZipper"
+    					oncommand="_pgzpToggleExtension()"/>
+	</toolbarpalette>
+	
+</overlay>

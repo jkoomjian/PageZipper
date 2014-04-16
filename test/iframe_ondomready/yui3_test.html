@@ -1,0 +1,61 @@
+<html>
+<head>
+	<script src="../../src_iframe//yui-min.js" type="text/javascript"></script>
+</head>
+<body>
+	<script type="text/javascript">
+
+		function loadIframe() {
+			var ifrspan = document.createElement('span');
+			ifrspan.innerHTML = "<iframe id=\"ifr1\" onload=\"alert('iframe loaded from onload')\" style=\"width: 900px; height: 1000px;\"></iframe>";
+			var ifr = ifrspan.childNodes[0];
+			document.body.appendChild(ifr);
+			ifr.src = "yui_iframe_example.html";
+			
+			runOnIframeLoadYUI2(ifr);
+			runOnIframeLoad(ifr);
+		}
+
+		function runOnIframeLoadYUI(ifr) {
+			YUI().use("event", function(Y) {
+				
+				function handleIframeReady(e) {
+					alert("ifame dom loaded from yui");
+				}
+				
+				Y.on("domready", handleIframeReady, ifr.contentDocument.body);
+			});
+		}
+		
+		function runOnIframeLoadYUI2(iframeElem) {
+			YUI().use("event", function(Y) {
+				function runCallback() {
+					alert(" yui dom loaded");
+					console.log(" yui dom loaded");
+				}
+				Y.on("domready", runCallback, iframeElem.contentDocument.body);
+			});
+		}
+		
+		function runOnIframeLoad(ifr) {
+			_pgzp_ifr = ifr;
+			//_pgzp_callback = callback;
+			_pgzp_int = setInterval("_runOnIframeLoad2()", 10); //check every 50 msec
+		}
+		function _runOnIframeLoad2() {
+			//console.log("ready state: " + _pgzp_ifr.contentDocument.readyState);
+			if (_pgzp_ifr.contentDocument.body.childNodes.length > 0) {
+				//Dom has loaded!
+				clearInterval(_pgzp_int);
+				//_pgzp_callback();
+				alert("ondomload from timer method");
+				console.log("ondomload from timer method");
+			}
+		}
+	</script>
+		
+	<a href="javascript:loadIframe()" id="yui_link">load iframe</a>
+		
+		
+</body>
+</html>

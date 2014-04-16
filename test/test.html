@@ -1,0 +1,114 @@
+<html><body>
+	
+<!--div id="scriptTest">
+		before
+		<script type="text/javascript">
+			image2 = new Image();
+			image2.src = "/photos/rothbaum/la_guama_el_cercado/2008-10-27_first_days_in_2_1.jpg";
+		</script>
+		middle
+		<script type="text/javascript" src=""></script>
+		after
+</div-->
+	
+<script type="text/javascript">
+
+String.prototype.strip = function() {
+	return this.replace(/^\s+/, '').replace(/\s+$/, '');
+}
+
+
+	
+function cleanText(text) {
+	text = text.replace(/[_-]/g, ' ');
+	alert("text: " + text);
+	text = text.replace(/[^a-z0-9\s]/gi, '');
+	alert("text: " + text);
+	text = text.toLowerCase().strip();
+	return text;
+}
+
+//var test1 = "  343-223<<-HEllo_bye&&?>>>";
+//alert("before: " + test1 + " after: '" + cleanText(test1) + "'");
+
+
+//var test2 = "<html><head></head><body onload='asfd'>asfd afda af</body></html>";
+//function bodyTest(data) {
+//	return data.match(/<body.*?>([\w\W]*?)<\/body>/i);
+//}
+//var results = bodyTest(test2);
+//alert("body: " + results.length + " | " + results[0] + " | " + results[1]);
+
+
+//var test3 = "before<script language='text/javascript'>af afd afd<" + "/script>after";
+//var test3 = document.getElementById("scriptTest").innerHTML;
+//var test3 = "before<script type=\"text/javascript\" src=\"http://js.revsci.net/gateway/gw.js?csid=K05540\" />after";
+//function removeScript(data) {
+//	return data.replace(/<script[\w\W]*?>[\w\W]*?<\/script>/ig, '').replace(/<script[\w\W]*?\/>/ig, '');
+//}
+//var results = removeScript(test3);
+//alert("scripts: " + results);
+
+/*function endsInNumber(text) {
+	var results = text.match(/^.*\d(\/+|\.\w+)?$/);
+	return results != null;
+}
+
+var testData =  [
+		"/apps/pbcs.dll/gallery?Site=D2&Date=20081031&Category=NEWS&ArtNo=810310806&Ref=PH&Params=Itemnr=2",
+		"/apps/pbcs.dll/gallery",
+		"/slideshow/2008/10/30/travel/escapes/1031-AMERICAN_3.html",
+		"http://www.techcrunch.com/page/2/",
+		"/includes/assets/images/dgrey_1.gif"
+		];
+	
+var str = '';		
+for (var i=0; i<testData.length; i++) {
+	str += '\nTest: ' + testData[i] + ' endsWithNumber: ' + endsInNumber(testData[i]);
+}
+alert(str);*/
+
+//alert("0 == null: " + (0 == null));
+
+//noscript
+//var noscript1 = "before first<noscript>blah blah blah</noscript>middle<noscript>more blah</noscript>after";
+//alert(noscript1.replace(/<noscript>([\w\W]*?)<\/noscript>/ig, "$1"))
+
+//isNumber
+//function isNumber(str) {
+//	return str && (str.search(/^\d+$/) >= 0);
+//}
+
+/*
+alert("1: " + isNumber("1"));
+alert("01: " + isNumber("01"));
+alert("A1: " + isNumber("A1"));
+alert("afd: " + isNumber("afd"));
+*/
+
+//var tAr = ["a", "b", "c", "d"];
+//alert("last: " + tAr[-1]);
+
+//var tarray = ["a", "b", "c"];
+//alert("last elem: " + tarray[-1]); //undefined
+//alert("last elem: " + tarray[ tarray.length - 1]);
+
+
+/* Page Bar Test */
+function testPageBar() {
+	var pageBar = [1, 2, 3, 5, 6, 8, 9, 12, 13, 14];
+	var currPageNum, prevPageNum = pageBar[0];
+	for (var i=1; i<pageBar.length; i++) {
+		currPageNum = pageBar[i];
+		if (Math.abs(currPageNum - prevPageNum) == 2) {
+			alert("page bar value: " + (currPageNum - 1));
+			return;
+		} else {
+			prevPageNum = currPageNum;
+		}
+	}
+}
+testPageBar();
+</script>	
+</body>
+</html>

@@ -1,0 +1,5 @@
+content	pagezipper	content/
+content	pagezipper	content/	contentaccessible=yes
+skin	pagezipper	classic/1.0	skin/
+overlay	chrome://browser/content/browser.xul	chrome://pagezipper/content/browser.xul
+style	chrome://global/content/customizeToolbar.xul	chrome://pagezipper/skin/skin.css

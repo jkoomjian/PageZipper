@@ -1,0 +1,131 @@
+<html>
+<head>
+	<script type="text/javascript">
+		var _page_zipper_is_bookmarklet = true;
+	</script>
+	<script type="text/javascript" src="/pwyl/test/web/js/unit_test_lib.js"></script>	
+</head>
+<body>
+	<div id="abs1" style="position:absolute;top:100px;left:100px;border:1px dotted red;">absolute</div>
+	<div id="static1">static</div>
+
+	
+<script type="text/javascript">
+	
+/*------------ Tests ---------------*/
+function testFilter() {
+	var testAr = [1, 2, 1, 2];
+	pgzp().filter(testAr, function(a) {return a == 1;});
+	assertEquals(testAr.length, 2);
+	assertEquals(testAr[0], 2);
+	assertEquals(testAr[1], 2);
+}
+
+function testSplice() {
+	var test = ["a", "b", "c"];
+	test.splice(1);
+	assertEquals(1, test.length);
+	assertEquals(test[0], "a");
+}
+
+function testUrlsEndsInNumber() {
+	var url1 = "http://www.zeit.de/zeit-wissen/2009/02/3D-Fernsehen#exklusivData";
+	var url2 = "http://www.zeit.de/zeit-wissen/2009/02/3D-Fernsehen?page=2";
+	var url3 = "http://www.zeit.de/zeit-wissen/2009/02/3D-Fernsehen/page2.html";
+	assertEquals(0, url3.search(/^.*?\d(\/+|\.\w+)?$/));
+//	alert("url: "  + url1.search(/^.*\d(\/+|\.\w+)?$/) );
+}
+
+function testGetUrlWOutAnchors() {
+	var url1 = "http://www.zeit.de/zeit-wissen/2009/02/3D-Fernsehen#exklusivData";
+	var url2 = "http://www.zeit.de/zeit-wissen/2009/02/3D-Fernsehen";
+	assertEquals(url2, pgzp().getUrlWOutAnchors(url1));
+	assertEquals(url2, pgzp().getUrlWOutAnchors(url2));
+}
+
+function testHumanReadableSyn() {
+	var tests = "2005";
+	var syn = "2";
+	var re = new RegExp("^(.*\\s+)?" + syn + "(\\s+.*)?$");
+	assertEquals(re.test("2005"), false);
+	assertEquals(re.test("page2"), false);
+	assertEquals(re.test("2page"), false);
+	assertEquals(re.test("2"), true);
+	assertEquals(re.test("  2  "), true);
+	assertEquals(re.test("page 2"), true);
+	assertEquals(re.test("2 ->"), true);
+}
+
+function testIsReallyANumber() {
+	var a = "http://www.example.com/2342";
+	var b = "http://www.example.com/2";
+	var c = "http://www.example.com/?page=2342";
+	var d = "http://www.example.com/?page=42";
+	var e = "http://www.example.com/adf2342.html";
+	var f = "http://www.example.com/adf34.html";
+	var g = "http://www.example.com/2342/hello.html";
+	var results = a.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+	assertEquals(results[1], "2342");
+	assertEquals( (parseInt(results[1], 10) < 99), false);
+	results = b.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+	assertEquals(results[1], "2");
+	assertEquals( (parseInt(results[1], 10) < 99), true);
+	results = c.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+	assertEquals(results[1], "2342");
+	assertEquals( (parseInt(results[1], 10) < 99), false);
+	results = d.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+	assertEquals(results[1], "42");
+	assertEquals( (parseInt(results[1], 10) < 99), true);
+	results = e.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+	assertEquals(results[1], "2342");
+	assertEquals( (parseInt(results[1], 10) < 99), false);
+	results = f.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+	assertEquals(results[1], "34");
+	assertEquals( (parseInt(results[1], 10) < 99), true);
+	results = g.match(/^.*?(\d+)(\/+|\.\w+)?$/);
+	assertNull(results);
+}
+
+function testStandaloneWord() {
+	assertFalse(pgzp().isStandaloneWord('older', 'update folder settings', true));
+	assertTrue(pgzp().isStandaloneWord('older', 'more older entries', true));
+	assertFalse(pgzp().isStandaloneWord('2', '2009', true));
+	assertTrue(pgzp().isStandaloneWord('2', '2', true));
+	assertTrue(pgzp().isStandaloneWord('2', 'page 2', true));
+	assertFalse(pgzp().isStandaloneWord('older', 'placeholder.jpg', false));
+	assertTrue(pgzp().isStandaloneWord('older', 'older', false));
+}
+
+function testgetNumberAtPos() {
+	assertEquals(pgzp().getNumberAtPos("asdf234asfd", 5), 234);
+	assertEquals(pgzp().getNumberAtPos("asdf234asfd", 4), 234);
+	assertEquals(pgzp().getNumberAtPos("asdf234asfd", 6), 234);
+	assertEquals(pgzp().getNumberAtPos("asdf234asfd", 2), -1);
+	assertEquals(pgzp().getNumberAtPos("234asfd", 2), 234);
+	assertEquals(pgzp().getNumberAtPos("asfd234", 6), 234);
+}
+
+function testStringFunctions() {
+	assertTrue(pgzp().startsWith("asd", "asdf"));
+	assertFalse(pgzp().startsWith("x", "asdf"));
+	assertTrue(pgzp().endsWith("df", "asdf"));
+	assertFalse(pgzp().endsWith("sd", "asdf"));
+}
+
+function testGetDomain() {
+	assertEquals("brockpress.com", pgzp().getDomain("http://media.www.brockpress.com/media/storage/paper384/news/2010/03/02/Technology/Facebook.Knows.Your.Dirty.Secrets-3882810.shtml"));
+	assertEquals("krook.org", pgzp().getDomain("http://krook.org/jsdom/"));
+	assertEquals("jonathankoomjian.com", pgzp().getDomain("http://www.jonathankoomjian.com/wiki/index.php?n=Main.Links"));
+	assertEquals("pbworks.com", pgzp().getDomain("http://jonsie25.pbworks.com/Gear#view=page"));
+}
+
+function testRemoveAbsolutePositioning() {
+	//remove abs positioning called when pgzp loaded
+	assertEquals( pgzp().jq("#abs1").css("position"), "static");
+	assertEquals( pgzp().jq("#static1").css("position"), "static");
+}
+
+</script>
+
+<script type="text/javascript" src="/pgzp/compiled/pagezipper_10.js"></script>	
+</body></html>

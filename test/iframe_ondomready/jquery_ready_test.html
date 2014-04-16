@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<script type="text/javascript" src="../src_iframe/jquery.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//pgzp_jq = jQuery.noConflict();
+			//alert("$: " + $);
+			
+//			var ifrspan = document.createElement('span');
+//			ifrspan.innerHTML = "<iframe id=\"ifr1\" onload=\"alert('ifr onload completed')\" style=\"width: 900px; height: 1000px;\"></iframe>";
+//			var ifr = ifrspan.childNodes[0];
+//			document.body.appendChild(ifr);
+//			ifr.src = "http://eu.techcrunch.com/2010/12/14/assange-granted-bail-but-appeal-by-swedish-prosecutors-puts-him-back-in-the-cells/";
+//			pgzp_jq(ifr.contentWindow).load(function(){
+//															alert("at dom load body: " + ifr.contentDocument.body + " # children: " + ifr.contentDocument.body.childNodes.length);
+//														});
+
+			var ifrspan = document.createElement('span');
+			ifrspan.innerHTML = "<iframe id=\"ifr1\" onload=\"alert('done from onload')\" style=\"width: 900px; height: 1000px;\"></iframe>";
+			var ifr = ifrspan.childNodes[0];
+			document.body.appendChild(ifr);
+			ifr.src = "jquery_ready_test2.html";
+//			runOnDomLoad( (ifr.contentDocument ? ifr.contentDocument : ifr.win.document), ifr.contentWindow, function() {
+//																																			alert("at dom loaded!");				
+//																																		});
+
+			runOnIframeLoad(ifr, function() {alert("helllo");});
+
+			function runOnIframeLoad(ifr, callback) {
+				_pgzp_ifr = ifr;
+				_pgzp_callback = callback;
+				_pgzp_int = setInterval("_runOnIframeLoad2()", 10); //check every 50 msec
+			}
+			function _runOnIframeLoad2() {
+				console.log("ready state: " + _pgzp_ifr.contentDocument.readyState);
+				if (_pgzp_ifr.contentDocument.body.childNodes.length > 0) {
+					//Dom has loaded!
+					clearInterval(_pgzp_int);
+					_pgzp_callback();
+				}
+			}
+			
+
+			function runOnDomLoad(ifrDoc, ifrWin, callback){
+				function init() {
+					if (arguments.callee.done) return;
+					  arguments.callee.done = true;
+					  // do your thing
+					  callback();
+					}
+					
+					/* Mozilla, good browsers */
+					if (ifrDoc.addEventListener) {
+						ifrDoc.addEventListener('DOMContentLoaded', init, false);
+					}
+					
+					/* IE */
+					(function() {
+					  /*@cc_on
+					  try {
+					    ifrDoc.body.doScroll('up');
+					    return init();
+					  } catch(e) {}
+					  /*@if (false) @*/
+					  if (/loaded|complete/.test(ifrDoc.readyState)) return init();
+					  /*@end @*/
+					  if (!init.done) setTimeout(arguments.callee, 30);
+					})();
+					
+					if (ifrWin.addEventListener) {
+						ifrWin.addEventListener('load', init, false);
+					} else if (ifrWin.attachEvent) {
+						ifrWin.attachEvent('onload', init);
+					}
+			}
+			
+			
+		</script>
+	</body>
+</html>

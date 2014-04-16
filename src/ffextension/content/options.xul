@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+ 
+<prefwindow 
+     title="PageZipper Preferences"
+     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+ 
+	<prefpane label="PageZipper Preferences">
+		
+		<preferences>
+			<preference id="pagezipper-autorun" name="extensions.pagezipper.autorun" type="bool"/>
+		</preferences>
+		
+		<groupbox>
+			<caption label="Settings"/>
+			<grid>
+				<rows>
+					<row>
+						<label control="autorun" value="Start PageZipper automatically"/>
+						<checkbox id="autorun" preference="pagezipper-autorun"/>
+					</row>
+					<row>
+						If enabled, PageZipper will only run on pages which link to a next page.
+					</row>
+				</rows>
+			</grid>
+		</groupbox>	
+		
+	</prefpane>
+ 
+</prefwindow>

@@ -1,0 +1,31 @@
+<html>
+<head>
+	<style type="text/css">
+		#pgzp_menu a, #pgzp_menu a * {border: 0; text-decoration: none;}
+		#pgzp_menu {position: fixed; top: 0px; float:left; padding: 0px 5px; background-color: #D3D3D3; z-index: 10000;}
+		.pgzp_block {display: block; float: left;}
+		.pgzp_button {display: block; width: 32px; height: 32px;}
+		a.pgzp_button_prev_active {background: transparent url('http://192.168.1.100/web/is/ffextension/src/skin/32-gnome-prev.png') no-repeat scroll top left; }
+		a:hover.pgzp_button_prev_active {background-image: url('http://192.168.1.100/web/is/ffextension/src/skin/32-gnome-prev_red.png'); }
+		a.pgzp_button_prev_inactive {background: transparent url('http://192.168.1.100/web/is/ffextension/src/skin/32-gnome-prev_gray.png') no-repeat scroll top left; }
+		a.pgzp_button_next_active {background: transparent url('http://192.168.1.100/web/is/ffextension/src/skin/32-gnome-next.png') no-repeat scroll top left; }
+		a:hover.pgzp_button_next_active {background-image: url('http://192.168.1.100/web/is/ffextension/src/skin/32-gnome-next_red.png'); }
+		a.pgzp_button_next_inactive {background: transparent url('http://192.168.1.100/web/is/ffextension/src/skin/32-gnome-next_gray.png') no-repeat scroll top left; }
+		#pgzp_curr_page {font-size: 24px;}
+		#pgzp_loaded_pages {font-size: 18px;}
+	</style>
+</head>
+<body>
+
+	
+<div id='pgzp_menu'>
+	<a href='http://www.printwhatyoulike.com/pagezipper' target='_blank' class='pgzp_block' style='padding-right: 5px'>
+		<img src='http://192.168.1.100/web/is/ffextension/src/skin/zipper_32.png' alt='PageZipper!' style='border-width: 0px' />
+	</a>
+	<a href='javascript:pgzp().goToNextPage(1)' id='pgzp_button_prev' class='pgzp_block pgzp_button pgzp_button_prev_active' title='Back - Control Down Arrow'></a>
+	<a href='javascript:pgzp().goToNextPage(-1)' id='pgzp_button_next' class='pgzp_block pgzp_button pgzp_button_next_active' title='Next - Control Up Arrow'></a>
+	<div class='pgzp_block' style='padding-left: 5px;'><span id='pgzp_curr_page'>1</span><span id='pgzp_loaded_pages'>/1</span></div>
+</div>
+
+</body>
+</html>

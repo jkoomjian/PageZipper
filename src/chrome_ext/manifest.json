@@ -1,0 +1,19 @@
+{
+  "name": "PageZipper",
+  "version": "1.0",
+  "description": "Painlessly merge a series of web pages into one",
+  "homepage_url": "http://printwhatyoulike.com/pagezipper",
+  "background_page": "background.html",
+  "icons": { "16": "zipper_16.png",
+	           "48": "zipper_48.png",
+	           "128": "zipper_128.png" },
+  "permissions": [
+    "tabs", "http://*/*"
+  ],
+  "browser_action": {
+      "name": "PageZipper",
+      "default_icon": "icon_19.png",
+      "default_title": "PageZipper"
+  },
+  "options_page": "options.html"
+}

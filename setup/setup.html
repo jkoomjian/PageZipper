@@ -1,0 +1,130 @@
+<html>
+
+<head>
+	<script type="text/javascript" src="/pgzp/src/jquery.js"></script>
+	<script type="text/javascript" src="http://www.printwhatyoulike.com/site/js/site.js"></script>
+</head>
+
+<body>
+	
+	<h3>Install Local PageZipper!</h3>
+	<ul>
+		<li>To 'install' a bookmarklet, drag the link into your bookmarks toolbar</li>
+		<li>If you don't see the bookmarks toolbar, go to View->Toolbars and make sure 'Bookmarks Toolbar' is checked</li>
+		<li><a href="" id="pgzp_local_ajax">PgzpLocal</a>: PageZipper Test - Ajax only suitable for loading pagezipper from localhost</li>
+		<li><a href="" id="bkmklt_link_ff">PgzpLocalCompiled</a>: PageZipper Compiled</li>
+	</ul>
+	
+	<h3>Setup The Project!</h3>
+	<ol>
+		<li>java and ruby are required to generate the production ready compressed code</li>
+		<li>Update the two loader scripts at the bottom of this page - replace 127.0.0.1/pgzp/ with the url the pgzp project can be accessed on this machine</li>
+		<li>Run generator/make.rb to generate the compressed bookmarklet and FF Extension in /compiled</li>
+	</ol>
+
+	<h3>Some Good Sites To Test:</h3>
+	<ul>
+		<li><a href="http://www.nytimes.com/slideshow/2008/10/30/travel/escapes/1031-AMERICAN_index.html" target="_blank">Seattle</a></li>
+		<li><a href="http://www.rottentomatoes.com/features/special/2007/botbp/?r=81&mid=1008916" target="_blank">Rotten Tomatoes</a></li>
+		<li><a href="http://www.makeuseof.com/" target="_blank">MakeUseOf</a></li>
+		<li><a href="http://www.redferret.net/" target="_blank">RedFerret</a></li>
+		<li><a href="http://www.time.com/time/specials/2007/article/1,28804,1809858_1809957,00.html" target="_blank">Time</a></li>
+		<li><a href="http://ihasahotdog.com/" target="_blank">ihasahotdog.com</a></li>
+	</ul>
+
+	<h3>Unit Tests</h3>
+	<ul>
+		<li><a href="../test/unit_tests.html">Unit Tests</a></li>
+	</ul>
+	
+	<h3>Test Routine:</h3>
+	<a href="http://www.desmoinesregister.com/apps/pbcs.dll/gallery?Site=D2&Date=20081031&Category=NEWS&ArtNo=810310806&Ref=PH&Params=Itemnr=2">http://www.desmoinesregister.com/apps/pbcs.dll/gallery?Site=D2&Date=20081031&Category=NEWS&ArtNo=810310806&Ref=PH&Params=Itemnr=2</a>
+	<br>
+	<a href="http://www.nytimes.com/slideshow/2008/10/30/travel/escapes/1031-AMERICAN_2.html">http://www.nytimes.com/slideshow/2008/10/30/travel/escapes/1031-AMERICAN_2.html</a>
+	<ul>
+		<li>test appending pages</li>
+		<li>test cntrl-down, cntrl-up - loads next 4</li>
+		<li>end of show</li>
+	</ul>
+	
+	<br>
+
+	<a href="http://www.boston.com/bigpicture/2009/03/scenes_from_the_recession.html">http://www.boston.com/bigpicture/2009/03/scenes_from_the_recession.html</a>
+	<ul>
+		<li>verify cntrl-down, up</li>
+	</ul>
+	
+	<br>
+
+	<a href="http://vpizza.org/~jmeehan/photo/index.cgi?mode=viewpicture&album=20021103-balloon-v1.0-ground&picture=133-3364_IMG.JPG&maxWidth=1024">http://vpizza.org/~jmeehan/photo/index.cgi?mode=viewpicture&album=20021103-balloon-v1.0-ground&picture=133-3364_IMG.JPG&maxWidth=1024</a>
+	<ul>
+		<li>verify resize</li>
+	</ul>
+	
+	<br>
+	
+	<a href="http://ihasahotdog.com/">http://ihasahotdog.com/</a>
+	<ul>
+		<li>verify multiple images/page + multiple pages works correctly - adds the next page when arriving at last image</li>
+	</ul>
+	
+	<hr/>
+	<h3>Sites which have caused trouble:</h3>
+	<a href="http://www.freecycle.org/group/United%20States/Iowa/Des%20Moines">http://www.freecycle.org/group/United%20States/Iowa/Des%20Moines</a> - more likes to mess up
+	<br><a href="http://www.wine-art.be/index2.php?page=Catalogus" target="_blank">Wine catalouge</a> - uses index
+	<br><a href="http://www.actionsquad.org/hammsoverview.htm" target="_blank">Action Squad</a> - uses index
+	<br><a href="http://www.seabourn.com/PlanACruise/Search/index.cfm?a=search&page=1&startrow=1&RegionID=1&date=0&shipID=0&duration=0&id=0&port=" target="_blank">also uses Index</a>
+		
+		
+	<script type="text/javascript" id="bookmarklet_loader">
+		function launchBookmarklet(){
+			if(window['pgzp']){
+				_pgzpToggleBookmarklet();
+			} else {
+				window._page_zipper_is_bookmarklet=true;
+				window._page_zipper=document.createElement('script');
+				window._page_zipper.type='text/javascript';
+				window._page_zipper.src='http://127.0.0.1/pgzp/compiled/pagezipper_10.js';
+				document.getElementsByTagName('head')[0].appendChild(window._page_zipper);
+			}
+		}
+	</script>
+	<script type="text/javascript" id="pgzp_local_ajax_js">
+		function launchBookmarklet(){
+			if(window['pgzp']){
+				_pgzpToggleBookmarklet();
+			} else {
+				window._page_zipper_is_bookmarklet=true;
+				window._page_zipper=document.createElement('script');
+				window._page_zipper.type='text/javascript';
+				window._page_zipper.src='http://127.0.0.1/pgzp/lib/LAB.min.js';
+				window._page_zipper.onload = function() {
+					/* use Lab.js to order js loads */
+					$LAB
+						.setOptions({BasePath: 'http://127.0.0.1/pgzp/src/'})
+						.script('header.js')
+						.script('jquery.js').wait()  /*force all previously queued scripts to load before preceding*/
+						.script('pagezipper.js').wait()
+						.script('compat.js')
+						.script('image.js')
+						.script('jstoolkit.js')
+						.script('menu.js')
+						.script('next_url.js')
+						.script('page_loader_ajax.js')
+						.script('page_loader_iframe.js')
+						.script('page_loader.js')
+						.script('util.js').wait()
+						.script('loader_bookmarklet.js'); /*kick off the bookmarklet*/
+				};
+				document.getElementsByTagName('head')[0].appendChild(window._page_zipper);
+			}
+		}
+	</script>
+	
+	<script type="text/javascript">
+		generateBookmarkletLink("pgzp_local_ajax_js", "pgzp_local_ajax");
+		generateBookmarkletLink("bookmarklet_loader", "bkmklt_link_ff");
+	</script>
+	
+</body>
+</html>

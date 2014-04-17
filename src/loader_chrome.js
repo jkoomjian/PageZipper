@@ -14,7 +14,7 @@ function _pgzpInitChromeExtension() {
 	pgzp().win = window;
 	pgzp().doc = window.document;
 	pgzp().loader_type = "chromeext";
-	pgzp().media_path = "chrome-extension://odfimgkjgifmfnbbmlaoiaophmmbkdfb/";
+	pgzp().media_path = chrome.extension.getURL("/");
 	pgzp().loadPageZipper();
 }
 

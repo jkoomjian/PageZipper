@@ -3,15 +3,15 @@
  *  Written by Jonathan Koomjian (jonathan@printwhatyoulike.com)
  *  
  *  You are free to reuse this software. 
- *  Please be nice and include a link back to the PageZipper 
+ *  Please be friendly and include a link back to the PageZipper 
  *  homepage (http://www.printwhatyoulike.com/pagezipper) on 
  *  the website of any software which incorporates PageZippper code.
  * 
  * PageZipper is open source
- * If you would like to contribute, check out the repository - http://pagezipper.googlecode.com
+ * Contributions are welcome - https://github.com/jkoomjian/PageZipper
  * 
  * 
- *  Version 0.7 - Dec. 14 2011
+ *  Version 0.8 - April 16, 2014
  *
  *                                           /;    ;\
  *                                      __  \\____//

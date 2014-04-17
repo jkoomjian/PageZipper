@@ -1,1 +1,1 @@
-/home/jonathan/workspaces_src/PageZipper/compiled/ffextension
+/home/jonathan/projects_src/PageZipper/compiled/ffextension

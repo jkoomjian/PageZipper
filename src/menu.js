@@ -3,7 +3,7 @@ PageZipper.prototype.addMenu = function() {
 	var css = "																																\
 		#pgzp_menu a, #pgzp_menu a * {border: 0; text-decoration: none;}																	\
 		#pgzp_menu {position: fixed; top: 0px; float:left; padding: 0px 5px; background-color: #D3D3D3; color: black; z-index: 2147483647;}		\
-		.pgzp_block {display: block; float: left;}																							\
+		.pgzp_block {display: block; float: left; line-height: 32px;}																							\
 		.pgzp_button {display: block; width: 32px; height: 32px;}																			\
 		a.pgzp_button_prev_active {background: transparent url('${media_path}32-gnome-prev.png') no-repeat scroll top left; }				\
 		a:hover.pgzp_button_prev_active {background-image: url('${media_path}32-gnome-prev_red.png'); }										\

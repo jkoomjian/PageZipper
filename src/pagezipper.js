@@ -109,6 +109,7 @@ PageZipper.prototype.mainBlock = function() {
 	// console.log("is loading: " + !pgzp().is_loading_page + "# pages: " + pgzp().pages.length + " nextLink: " + (nextLinkObj ? nextLinkObj.url : 'none') + " currPageIndex: " + currPageIndex + " currViewablePage: " + currViewablePage);
 	
 	pgzp().menuSetCurrPageNumber(currViewablePage + 1);
+	pgzp().setPageVisibility(currViewablePage);
 
 	if (!pgzp().is_loading_page &&
 			pgzp().pages[pgzp().pages.length-1]["nextLinkObj"] &&		//has next link
@@ -207,4 +208,23 @@ PageZipper.prototype.getAllTextOnPage = function(pageHtml) {
 												}
 											});
 	return str;
+}
+
+/*------------------------- Hide Old Pages ----------------------*/
+//hide pages farther than 10 pages back. This conserves the browsers resources and
+//prevents it from getting slowed down by displaying dozens of pages
+//Leave the first page showing, and make sure the current page is always showing
+PageZipper.prototype.setPageVisibility = function(currPageIndex) {
+
+	//make sure the current page is visible
+	var currPage = pgzp().pages[currPageIndex];
+	if (currPage.elemContent.style.visibility == "hidden") {
+		currPage.elemContent.style.visibility = "visible";
+	}
+
+	//hide pages farther back than 10 (show the first page)
+	if (currPageIndex > 5) {
+		var oldPage = pgzp().pages[currPageIndex - 5];
+		if (oldPage.elemContent.style.visibility != "hidden") oldPage.elemContent.style.visibility = "hidden";
+	}
 }

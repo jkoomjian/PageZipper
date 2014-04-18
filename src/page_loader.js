@@ -49,6 +49,6 @@ PageZipper.prototype.addExistingPage = function(url, body) {
 }
 
 PageZipper.prototype.addIframePlaceholder = function() {
-	var placeholder = pgzp().jq("<div/>").attr('id', 'pgzp_iframe_placeholder').css({position: 'absolute', top: pgzp().screen.getDocumentHeight()+'px', left: '0px'});
+	var placeholder = pgzp().jq("<div/>").attr('id', 'pgzp_iframe_placeholder').css({position: 'absolute', top: pgzp().jq(document).height()+'px', left: '0px'});
 	pgzp().jq(pgzp().doc.body).append(placeholder);
 }

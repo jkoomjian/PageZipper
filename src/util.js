@@ -89,7 +89,9 @@ PageZipper.prototype.isNumber = function(str) {
 }
 
 PageZipper.prototype.getDomain = function(url) {
-	var hna = url.match(/^http\:\/\/([\S]+?\.\w+)(\/.*)?$/i);
+	if (url.match("http://localhost/")) return "localhost";
+
+	var hna = url.match(/^http[s]?\:\/\/([\S]+?\.\w+)(\/.*)?$/i);
 	//absolute url
 	if (hna) {
 		//remove subdomains if they exist

@@ -29,6 +29,16 @@ function PageZipperAjax() {
 		pgzp().menuIncrementPagesLoaded();
 		nextPage.nextLinkObj = pgzp().getNextLink(nextPage.elemContent); //very slow- do this after the page has been loaded
 		pgzp().is_loading_page = false;
+
+		//make sure that the page load is working - if the doc height hasn't increased, switch to compat mode
+		if (pgzp().pages.length >= 3) {
+			var second_page = pgzp().jq( pgzp().pages[1].elemContent );
+			var last_page = pgzp().jq( pgzp().pages[pgzp().pages.length-1].elemContent );
+			if (last_page.offset().top <= second_page.offset().top) {
+				pgzp().toggleCompatMode();	
+			}
+		}
+
 		pgzp().mainBlock(); //continue the loop
 	}
 	

@@ -23,7 +23,7 @@ PageZipper.prototype.addMenu = function() {
 			<a href='javascript:pgzp().goToNext(-1)' id='pgzp_button_prev' class='pgzp_block pgzp_button pgzp_button_prev_active' title='Previous - Cntrl Up or Cntrl <'></a>	\
 			<a href='javascript:pgzp().goToNext(1)' id='pgzp_button_next' class='pgzp_block pgzp_button pgzp_button_next_active' title='Next - Cntrl Down or Cntrl >'></a>	\
 			<div class='pgzp_block' style='padding-left: 5px;'><span id='pgzp_curr_page' title='Current Page'>1</span><span id='pgzp_loaded_pages' title='Pages Loaded'>/1</span></div>								\
-			<a href='javascript:pgzp().toggleCompatMode()' id='pgzp_button_compat' class='pgzp_block pgzp_button pgzp_button_compat_inactive' title='Compatibilty Mode - Slower than regular mode, but less likely to encounter problems'></a>	\
+			<a href='javascript:pgzp().toggleCompatMode()' id='pgzp_button_compat' class='pgzp_block pgzp_button pgzp_button_compat_inactive' title='Compatibility Mode - Slower, but less likely to encounter problems'></a>	\
 			<a href='http://www.printwhatyoulike.com/pagezipper' target='_blank' title='PageZipper Home' class='pgzp_block pgzp_button' style='margin-left: -6px'>			\
 				<img src='${media_path}zipper_32.png' alt='PageZipper!' style='border-width: 0px' />										\
 			</a>																																							\

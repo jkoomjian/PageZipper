@@ -2,10 +2,12 @@
 
 require 'fileutils'
 
-@src = "../src"
+@root = File.join(File.dirname(__FILE__), '..')
+
+@src = "#{@root}/src"
 @ffext_src = "ffextension"
 @chrome_src = "chrome_ext"
-@output = "../compiled"
+@output = "#{@root}/compiled"
 @bookmarklet_name = "pagezipper_10.js"
 @ext_name = "pagezipper.js"
 @prod = ARGV[0] == "prod"

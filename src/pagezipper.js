@@ -41,7 +41,7 @@ function PageZipper() {
 PageZipper.prototype.loadPageZipper = function() {
 
 	//start with some housekeeping
-	this.jq = jQuery.noConflict();
+	this.jq = jQuery.noConflict(true);
 	this.ajax = new PageZipperAjax();
 	this.iframe = new PageZipperIframe();
 	
@@ -183,7 +183,7 @@ PageZipper.prototype.calculateDisplayMode = function(currPage){
 		imgs[ currPage.posterImgs[i].src ] = currPage.posterImgs[i];
 	}
 
-	for (imgUrl in imgs) {
+	for (var imgUrl in imgs) {
 		var img = imgs[imgUrl];
 		imgArea += img.offsetHeight * img.offsetWidth;
 	}

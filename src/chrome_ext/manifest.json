@@ -11,7 +11,7 @@
     "scripts": ["background.js"]
   },
   "permissions": [
-    "tabs", "http://*/*", "https://*/*", "https://*/*"
+    "tabs", "http://*/*", "https://*/*"
   ],
   "browser_action": {
       "name": "PageZipper",
@@ -22,5 +22,4 @@
         }
   },
   "web_accessible_resources": ["*"]
-  //"options_page": "options.html"
 }

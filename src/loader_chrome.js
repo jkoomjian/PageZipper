@@ -40,7 +40,7 @@ function _pgzpAutorun() {
 	//check for next link
 	pgzp().debug = true; //TODO
 	var nextLink = pgzp().getAutorunNextLink(pgzp().doc.body);
-	console.log( nextLink ? "Next url text: " + nextLink.text + " url: " + nextLink.url + " score: " + nextLink.finalScore : "no next link");
+	//console.log( nextLink ? "Next url text: " + nextLink.text + " url: " + nextLink.url + " score: " + nextLink.finalScore : "no next link");
 	this.debug = false;
 	if (nextLink) {
 		//there are next pages - start pagezipper!

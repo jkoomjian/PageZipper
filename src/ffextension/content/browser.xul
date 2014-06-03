@@ -10,7 +10,7 @@
 						class="toolbarbutton-1" 
 						label="PageZipper" 
 						tooltiptext="Start PageZipper"
-    					oncommand="_pgzpToggleExtension()"/>
+    					oncommand="pgzp._pgzpToggleExtension()"/>
 	</toolbarpalette>
 	
 </overlay>

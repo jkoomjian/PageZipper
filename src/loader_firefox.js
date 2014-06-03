@@ -9,7 +9,7 @@ function pgzp() {
 
 
 /*------------------------- Events ----------------------*/
-function _pgzpInitExtension() {
+pgzp._pgzpInitExtension = function() {
 	window.content.currPgzp = new PageZipper();
 	pgzp().win = window.content
 	pgzp().doc = pgzp().win.document;
@@ -20,11 +20,11 @@ function _pgzpInitExtension() {
 	pgzp().media_path = "chrome://pagezipper/skin/";
 	pgzp().loadPageZipper();
 	//Manage tabs
-	gBrowser.tabContainer.addEventListener("TabSelect", _pgzpOnTabChange, false);
+	gBrowser.tabContainer.addEventListener("TabSelect", pgzp._pgzpOnTabChange, false);
 	window.content._pgzpTab = gBrowser.selectedTab;
 }
 
-function _pgzpInitAutorun() {
+pgzp._pgzpInitAutorun = function() {
 	window.content.currPgzp = new PageZipper();
 	pgzp().win = window.content
 	pgzp().doc = pgzp().win.document;
@@ -33,46 +33,46 @@ function _pgzpInitAutorun() {
 	pgzp().pages.push({url: pgzp().win.location.href});
 }
 
-function _pgzpToggleExtension() {
-	if (!window.content['currPgzp']) _pgzpInitExtension();
+pgzp._pgzpToggleExtension = function() {
+	if (!window.content['currPgzp']) pgzp._pgzpInitExtension();
 
 	if (pgzp().is_running) {
 		pgzp().stopPageZipper();
-		_pgzpSetButtonStatus(false);
+		pgzp._pgzpSetButtonStatus(false);
 	} else {
 		pgzp().runPageZipper();
-		_pgzpSetButtonStatus(true);
+		pgzp._pgzpSetButtonStatus(true);
 	}
 }
 
 //Fired on every tab change
-function _pgzpOnTabChange() {
+pgzp._pgzpOnTabChange = function() {
 	//Firebug.Console.log("detected tab change");
 	if (window.content._pgzpTab && window.content._pgzpTab.selected) {
-		_pgzpSetButtonStatus(pgzp().is_running);
+		pgzp._pgzpSetButtonStatus(pgzp().is_running);
 		if (!pgzp().is_running) pgzp().runPageZipper();
 	} else {
-		_pgzpSetButtonStatus(false);
+		pgzp._pgzpSetButtonStatus(false);
 		if (pgzp().is_running) pgzp().stopPageZipper();
 	}
 }
 
 
 /*------------------------- Autorun ----------------------*/
-function _pgzpAutorun() {
+pgzp._pgzpAutorun = function() {
 	var scoreThreshold = 5000;
 	var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 	//Firebug.Console.log("@autorun: option: " + prefManager.getBoolPref("extensions.pagezipper.autorun") + " pgzp loaded: " + window.content['currPgzp']);
 	//check preferences and make sure pgzp has not already scored this page
 	if (prefManager.getBoolPref("extensions.pagezipper.autorun") && !window.content['currPgzp']) {
 		//check the score to see if this page has any 'next' pages
-		_pgzpInitAutorun();
+		pgzp._pgzpInitAutorun();
 		var nextLink = pgzp().getNextLink(pgzp().doc.body);
 		if (nextLink) Firebug.Console.log("Next url text: " + nextLink.text + " url: " + nextLink.url + " score: " + nextLink.finalScore);
 		if (nextLink && nextLink.finalScore > scoreThreshold) {
 			//there are next pages - start pagezipper
-			_pgzpInitExtension();
-			_pgzpToggleExtension();
+			pgzp._pgzpInitExtension();
+			pgzp._pgzpToggleExtension();
 		}
 	}
 }
@@ -80,14 +80,14 @@ function _pgzpAutorun() {
 
 /*------------------------- Configure FF ----------------------*/
 //Runs only once ever! - The first time pgzp is loaded after being installed
-function _pgzpOnFirstRun() {
-	_pgzpInstallFFButton("nav-bar", "pagezipper-button", "urlbar-container");
+pgzp._pgzpOnFirstRun = function() {
+	pgzp._pgzpInstallFFButton("nav-bar", "pagezipper-button", "urlbar-container");
 	// _pgzpInstallFFButton("addon-bar", "pagezipper-button", "addonbar-closebutton");
 }
 
 
 /*------------------------- PageZipper FF Extension Utils ----------------------*/
-function _pgzpSetButtonStatus(active) {
+pgzp._pgzpSetButtonStatus = function(active) {
 	var pgzpButton = document.getElementById("pagezipper-button")
 	pgzpButton.style.listStyleImage = "url('chrome://pagezipper/skin/zipper_24" + (active ? '_green' : '') + ".png')";
 }
@@ -102,25 +102,25 @@ function _pgzpSetButtonStatus(active) {
  * @param {string} toolbarId The ID of the toolbar to install to.
  * @param {string} id The ID of the button to install.
  */
-function _pgzpInstallFFButton(toolbarId, id, beforeId) {
-    if (!document.getElementById(id)) {
-        var toolbar = document.getElementById(toolbarId);
-        var before = toolbar.firstChild;
-        if (beforeId) {  
-            var elem = document.getElementById(beforeId);
-            if (elem && elem.parentNode == toolbar) before = elem;  
-        }
+pgzp._pgzpInstallFFButton = function(toolbarId, id, beforeId) {
+  if (!document.getElementById(id)) {
+      var toolbar = document.getElementById(toolbarId);
+      var before = toolbar.firstChild;
+      if (beforeId) {  
+          var elem = document.getElementById(beforeId);
+          if (elem && elem.parentNode == toolbar) before = elem;  
+      }
 
-        toolbar.insertItem(id, before);
-        toolbar.setAttribute("currentset", toolbar.currentSet);
-        document.persist(toolbar.id, "currentset");
+      toolbar.insertItem(id, before);
+      toolbar.setAttribute("currentset", toolbar.currentSet);
+      document.persist(toolbar.id, "currentset");
 
-        if (toolbarId == "addon-bar")
-            toolbar.collapsed = false;
-    }
+      if (toolbarId == "addon-bar")
+          toolbar.collapsed = false;
+  }
 }
 
-function _pgzpIsFirstRun() {  
+pgzp._pgzpIsFirstRun = function() {  
 	var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 	var hasBeenRun = "extensions.pagezipper.hasBeenRun";  
 	if (!prefManager.getBoolPref(hasBeenRun)) {  
@@ -130,27 +130,27 @@ function _pgzpIsFirstRun() {
 	false;
 }
 
-function _pgzpOnBrowserLoad(aEvent) {
-	if (_pgzpIsFirstRun()) _pgzpOnFirstRun();
+pgzp._pgzpOnBrowserLoad = function(aEvent) {
+	if (pgzp._pgzpIsFirstRun()) pgzp._pgzpOnFirstRun();
 	
 	//initialize page listener
 	var appcontent = document.getElementById("appcontent");   // browser  
-	if(appcontent) appcontent.addEventListener("DOMContentLoaded", _pgzpOnPageLoad, true);  
+	if(appcontent) appcontent.addEventListener("DOMContentLoaded", pgzp._pgzpOnPageLoad, true);  
 }
 
-function _pgzpOnPageLoad(aEvent) {
+pgzp._pgzpOnPageLoad = function(aEvent) {
 	// add event listener for page unload
-	aEvent.originalTarget.defaultView.addEventListener("unload", _pgzpOnPageUnload, true);  
+	aEvent.originalTarget.defaultView.addEventListener("unload", pgzp._pgzpOnPageUnload, true);  
 	
-	_pgzpAutorun();	
+	pgzp._pgzpAutorun();	
 }
 
-function _pgzpOnPageUnload(aEvent) {
+pgzp._pgzpOnPageUnload = function(aEvent) {
 	if (pgzp()) {
 		pgzp().stopPageZipper();
-		_pgzpSetButtonStatus(false);
+		pgzp._pgzpSetButtonStatus(false);
 	}
 }
 
 //Load on browser init
-window.addEventListener("load", _pgzpOnBrowserLoad, false);
+window.addEventListener("load", pgzp._pgzpOnBrowserLoad, false);

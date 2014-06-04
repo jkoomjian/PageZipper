@@ -35,13 +35,15 @@ function PageZipper() {
 	this.url_list;
 	this.media_path;
 }
+//stashing jQuery here so we can get it out of the global scope - required by FF addon reviewers
+PageZipper.jq = jQuery.noConflict(true);
 
 
 /*------------------------- Initialize ----------------------*/
 PageZipper.prototype.loadPageZipper = function() {
 
 	//start with some housekeeping
-	this.jq = jQuery.noConflict(true);
+	this.jq = PageZipper.jq;
 	this.ajax = new PageZipperAjax();
 	this.iframe = new PageZipperIframe();
 	

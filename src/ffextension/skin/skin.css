@@ -1,14 +1,24 @@
 #pagezipper-button {
-  list-style-image: url("chrome://pagezipper/skin/zipper_24.png");
+  list-style-image: url("chrome://pagezipper/skin/zipper_24_all.png");
+  -moz-image-region: rect( 0px 24px 24px  0px);
+}
+
+/* changing the image doesn't work, but changing image-region does */
+#pagezipper-button[active=true] {
+  -moz-image-region: rect( 0px 48px 24px  24px);
 }
 
 toolbar[iconsize="small"] #pagezipper-button {
-  list-style-image: url("chrome://pagezipper/skin/zipper_16.png");
+  list-style-image: url("chrome://pagezipper/skin/zipper_16_all.png");
+  -moz-image-region: rect( 0px 16px 16px  0px);
 }
 
+toolbar[iconsize="small"] #pagezipper-button[active=true] {
+  -moz-image-region: rect( 0px 32px 16px  16px);
+}
 
 #pagezipper-finder-status-bar-icon {
-        width: 83px;
-        margin: 0 5px;
-        background-color:red;
+  width: 83px;
+  margin: 0 5px;
+  background-color:red;
 }

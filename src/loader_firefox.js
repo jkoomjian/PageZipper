@@ -89,7 +89,7 @@ pgzp._pgzpOnFirstRun = function() {
 /*------------------------- PageZipper FF Extension Utils ----------------------*/
 pgzp._pgzpSetButtonStatus = function(active) {
 	var pgzpButton = document.getElementById("pagezipper-button")
-	pgzpButton.style.listStyleImage = "url('chrome://pagezipper/skin/zipper_24" + (active ? '_green' : '') + ".png')";
+	pgzpButton.setAttribute("active", (active ? "true" : "false"));
 }
 
 

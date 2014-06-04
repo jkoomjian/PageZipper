@@ -53,7 +53,6 @@ pgzp._pgzpOnTabChange = function() {
 		if (!pgzp().is_running) pgzp().runPageZipper();
 	} else {
 		pgzp._pgzpSetButtonStatus(false);
-		if (pgzp().is_running) pgzp().stopPageZipper();
 	}
 }
 

@@ -23,6 +23,14 @@
 		<li>Run generator/make.rb to generate the compressed bookmarklet and FF Extension in /compiled</li>
 	</ol>
 
+	<h3>Testing Firefox Extension:</h3>
+	<ol>
+		<li>Close FF</li>
+		<li>Run the command below, close FF when it pops up, update the FF path if it changes</li>
+		<li>rm ~/.mozilla/firefox/xafkuvdp.default/extensions/pagezipper@printwhatyoulike.com; firefox; ruby generator/make.rb; cp setup/pagezipper@printwhatyoulike.com  ~/.mozilla/firefox/xafkuvdp.default/extensions/; firefox "www.jonathankoomjian.com" &</li>
+		<li>Add the plugin, restart FF</li>
+	</ol>
+
 	<h3>Some Good Sites To Test:</h3>
 	<ul>
 		<li><a href="http://www.nytimes.com/slideshow/2008/10/30/travel/escapes/1031-AMERICAN_index.html" target="_blank">Seattle</a></li>

@@ -46,6 +46,13 @@ function PageZipperAjax() {
 		var page = pgzp().doc.createElement("div");
 		page.id = "pgzp_page" + pgzp().pages.length;
 		page.style.clear = 'both';
+
+		//Sanitize data for FF extension
+		if (pgzp().loader_type == "ffextension") {
+			var parserUtils = Components.classes["@mozilla.org/parserutils;1"].getService(Components.interfaces.nsIParserUtils);
+			data = parserUtils.sanitize(data, 2);
+		}
+
 		page.innerHTML = data;
 		return pgzp().buildPage(url, page);
 	}

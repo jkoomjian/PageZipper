@@ -3,9 +3,10 @@
  
 <prefwindow 
      title="PageZipper Preferences"
-     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+     id="pgzp-options-window">
  
-	<prefpane label="PageZipper Preferences">
+	<prefpane label="PageZipper Preferences" id="pgzp-options-prefpane">
 		
 		<preferences>
 			<preference id="pagezipper-autorun" name="extensions.pagezipper.autorun" type="bool"/>

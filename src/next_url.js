@@ -33,7 +33,7 @@ PageZipper.prototype.NextLink = function(text, link, alreadyLoaded, isHumanReada
 				if (pgzp().debug) debugStr += "\n\t" + trial + "\t\t\t" + nScore + "\tx\t" + weight + "\t=\t" + (nScore * weight);
 			}
 		}
-		if (pgzp().debug) pgzp().log(debugStr + "\nFinal Score:\t" + this.finalScore);
+		//pgzp().log(debugStr + "\nFinal Score:\t" + this.finalScore);
 		return this.finalScore;
 	}
 	this.isSynNumber = function() {
@@ -197,7 +197,7 @@ PageZipper.prototype.getAutorunNextLink = function(body) {
 			return b[0] - a[0];
 		});
 
-	pgzp().log(scoredLinks);
+	// pgzp().log(scoredLinks);
 
 	//make sure the top link has a score of at least 15000
 	if (scoredLinks[0][0] < 15000) return null;
@@ -224,7 +224,7 @@ PageZipper.prototype.getAutorunNextLink = function(body) {
 PageZipper.prototype.getAllScoredLinks = function(body) {
 	var allNextLinks = pgzp().getAllNextLinks(body);
 	var pageBarInfo = pgzp().getCurrentPageNumberFromPageBar(allNextLinks);
-	pgzp().log("looking for page #: " + (pageBarInfo[0] + 1) + " w/confidence: " + pageBarInfo[1]);
+	// pgzp().log("looking for page #: " + (pageBarInfo[0] + 1) + " w/confidence: " + pageBarInfo[1]);
 	pgzp().nextSynonyms[pgzp().nextSynonyms.length-1].syn = (pageBarInfo[0] + 1) + "";	//update nextSynonyms
 	pgzp().nextSynonyms[pgzp().nextSynonyms.length-1].weight = pageBarInfo[1];	//update weight/confidence
 	pgzp().linkTextIndex = pgzp().indexDuplicateLinks(allNextLinks);
@@ -250,7 +250,7 @@ PageZipper.prototype.scoreLinks = function(allNextLinks) {
 			}
 		}
 	}
-	if (pgzp().debug) pgzp().log(debugMsg);
+	// pgzp().log(debugMsg);
 }
 
 //normalize scores from 1-100
@@ -282,7 +282,7 @@ PageZipper.prototype.normalizeTrialSet = function(trialName, allLinks) {
 		allLinks[i].addScore(trialName, nScore, true);
 		if (pgzp().debug) debugMsg += "\nNScore " + i + ": " + allLinks[i].text + ": score: " + score + " curve: " + curve + " higest: " + highest + " lowest: " + lowest + " nscore: " + nScore;
 	}
-	if (pgzp().debug) pgzp().log(debugMsg);
+	//pgzp().log(debugMsg);
 }
 
 //calculate total score
@@ -303,7 +303,7 @@ PageZipper.prototype.getHighestTotalScore = function(allNextLinks) {
 		for (i=0; i<allNextLinks.length; i++) {
 			debugMsg += "\n" + allNextLinks[i].finalScore + ": " + allNextLinks[i].text + ": " + allNextLinks[i].url;
 		}
-		pgzp().log(debugMsg);
+		// pgzp().log(debugMsg);
 	}
 	
 	return highestScoringLink;
@@ -402,7 +402,7 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 	pageBar.sort(	function(a,b){
 						return a.pageNum - b.pageNum;
 					});
-	pgzp().logList(pageBar, "indexes ordered by size", "#{o.pageNum}\t#{o.text}");
+	// pgzp().logList(pageBar, "indexes ordered by size", "#{o.pageNum}\t#{o.text}");
 	
 	//mark pageBar for later
 	for (i=0; i<pageBar.length; i++) pageBar[i].isPageBar = true;
@@ -447,7 +447,7 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 PageZipper.prototype.__scorePageBar = function(pageBar) {
 	var similarityScore = pgzp().trials['url_similarity'].doScore(pageBar[0]);
 	var totalScore = pageBar.length + (similarityScore / 20);
-	pgzp().log("page bar length: " + pageBar.length + " sim score: " + similarityScore + " total score: " + totalScore);
+	// pgzp().log("page bar length: " + pageBar.length + " sim score: " + similarityScore + " total score: " + totalScore);
 	return totalScore;
 }
 

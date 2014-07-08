@@ -79,15 +79,15 @@ PageZipper.prototype.menuIncrementPagesLoaded = function(numPages) {
 	var loadedPages = pgzp().doc.getElementById("pgzp_loaded_pages"), num;
 	if (loadedPages) {
 		//just to make this more confusing, parseInt is in window, not window.content in ff-extension
-		num = parseInt(loadedPages.innerHTML.replace("/", "", "g"), 10);
+		num = parseInt(loadedPages.textContent.replace("/", "", "g"), 10);
 		num = numPages ? numPages : num+1;
-		loadedPages.innerHTML = "/" + num;
+		loadedPages.textContent = "/" + num;
 	}
 }
 
 PageZipper.prototype.menuSetCurrPageNumber = function(currPage) {
 	var currPageObj = pgzp().pages[currPage - 1];
-	pgzp().doc.getElementById("pgzp_curr_page").innerHTML = currPage;
+	pgzp().doc.getElementById("pgzp_curr_page").textContent = currPage;
 	
 	//disable/enable arrows as required
 	if (pgzp().displayMode == "text") {

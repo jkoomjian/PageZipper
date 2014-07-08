@@ -1,4 +1,4 @@
-/** PageZipper - www.printwhatyoulike.com/pagezipper
+/*! PageZipper - www.printwhatyoulike.com/pagezipper
  *  A bookmarklet to make any page infinte scroll
  *  Written by Jonathan Koomjian (jonathan@printwhatyoulike.com)
  *  

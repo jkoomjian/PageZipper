@@ -59,13 +59,17 @@ puts "Build Bookmarklet"
 clean()
 build_pgzp("#{@output}/#{@bookmarklet_name}", "loader_bookmarklet.js")
 
-##copy the ff extension
-puts "Build Firefox Extension"
-`cp -r #{@src}/#{@ffext_src} #{@output}`
-build_pgzp("#{@output}/#{@ffext_src}/content/#{@ext_name}", "loader_firefox.js")
-
 ##copy chrome extension
 puts "Build Chrome Extension"
 `cp -r #{@src}/#{@chrome_src} #{@output}`
 `cp -r #{@src}/#{@ffext_src}/skin/*.png #{@output}/#{@chrome_src}`
 build_pgzp("#{@output}/#{@chrome_src}/#{@ext_name}", "loader_chrome.js");
+
+##copy the ff extension
+##jQuery must be included separately for the FF reviewers
+puts "Build Firefox Extension"
+`cp -r #{@src}/#{@ffext_src} #{@output}`
+# remove jquery from src files, and copy it over
+jq = @jsFiles.slice!(1)
+`cp -r #{@src}/#{jq} #{@output}/#{@ffext_src}/content/#{jq}`
+build_pgzp("#{@output}/#{@ffext_src}/content/#{@ext_name}", "loader_firefox.js")

@@ -3,6 +3,7 @@
 <!--!DOCTYPE overlay SYSTEM "chrome://pagezipper/locale/overlay.dtd"-->
 <overlay id="pagezipper-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
+	<script src="jquery.js" />
 	<script src="pagezipper.js" />
 	
 	<toolbarpalette id="BrowserToolbarPalette">

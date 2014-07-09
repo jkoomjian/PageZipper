@@ -20,10 +20,10 @@ PageZipper.prototype.addMenu = function() {
 
 	var html = "																																							\
 		<div id='pgzp_menu'>																																				\
-			<a href='javascript:pgzp().goToNext(-1)' id='pgzp_button_prev' class='pgzp_block pgzp_button pgzp_button_prev_active' title='Previous - Cntrl Up or Cntrl <'></a>	\
-			<a href='javascript:pgzp().goToNext(1)' id='pgzp_button_next' class='pgzp_block pgzp_button pgzp_button_next_active' title='Next - Cntrl Down or Cntrl >'></a>	\
+			<a href='#' id='pgzp_button_prev' class='pgzp_block pgzp_button pgzp_button_prev_active' title='Previous - Cntrl Up or Cntrl <'></a>	\
+			<a href='#' id='pgzp_button_next' class='pgzp_block pgzp_button pgzp_button_next_active' title='Next - Cntrl Down or Cntrl >'></a>	\
 			<div class='pgzp_block' style='padding-left: 5px;'><span id='pgzp_curr_page' title='Current Page'>1</span><span id='pgzp_loaded_pages' title='Pages Loaded'>/1</span></div>								\
-			<a href='javascript:pgzp().toggleCompatMode()' id='pgzp_button_compat' class='pgzp_block pgzp_button pgzp_button_compat_inactive' title='Compatibility Mode - Slower, but less likely to encounter problems'></a>	\
+			<a href='#' id='pgzp_button_compat' class='pgzp_block pgzp_button pgzp_button_compat_inactive' title='Compatibility Mode - Slower, but less likely to encounter problems'></a>	\
 			<a href='http://www.printwhatyoulike.com/pagezipper' target='_blank' title='PageZipper Home' class='pgzp_block pgzp_button' style='margin-left: -6px'>			\
 				<img src='${media_path}zipper_32.png' alt='PageZipper!' style='border-width: 0px' />										\
 			</a>																																							\
@@ -50,7 +50,18 @@ PageZipper.prototype.addMenu = function() {
 	div = div.childNodes[0];
 	pgzp().doc.body.appendChild(div);
 	pgzp().positionMenu();
-	
+
+	//add event handlers
+	pgzp().doc.getElementById("pgzp_button_prev").addEventListener("click", function() {
+		pgzp().goToNext(-1);
+	}, false);
+	pgzp().doc.getElementById("pgzp_button_next").addEventListener("click", function() {
+		pgzp().goToNext(1);
+	}, false);
+	pgzp().doc.getElementById("pgzp_button_compat").addEventListener("click", function() {
+		pgzp().toggleCompatMode();
+	}, false);
+
 	//make some changes for the extension
 	if (pgzp().loader_type == "ffextension" || pgzp().loader_type == "chromeext") {
 		var fixLink = function(linkId, eventHandler) {

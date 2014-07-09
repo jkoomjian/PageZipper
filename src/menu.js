@@ -52,27 +52,13 @@ PageZipper.prototype.addMenu = function() {
 	pgzp().positionMenu();
 
 	//add event handlers
-	pgzp().doc.getElementById("pgzp_button_prev").addEventListener("click", function() {
-		pgzp().goToNext(-1);
-	}, false);
-	pgzp().doc.getElementById("pgzp_button_next").addEventListener("click", function() {
-		pgzp().goToNext(1);
-	}, false);
-	pgzp().doc.getElementById("pgzp_button_compat").addEventListener("click", function() {
-		pgzp().toggleCompatMode();
-	}, false);
-
-	//make some changes for the extension
-	if (pgzp().loader_type == "ffextension" || pgzp().loader_type == "chromeext") {
-		var fixLink = function(linkId, eventHandler) {
-			var link = pgzp().doc.getElementById(linkId);
-			link.removeAttribute("href");
-			pgzp().jq(link).bind("click", eventHandler);
-		}
-		fixLink("pgzp_button_prev", pgzp().prevArrow)
-		fixLink("pgzp_button_next", pgzp().nextArrow)
-		fixLink("pgzp_button_compat", pgzp().toggleCompatMode)
+	var fixLink = function(linkId, eventHandler) {
+		var link = pgzp().doc.getElementById(linkId);
+		pgzp().jq(link).bind("click", eventHandler, false);
 	}
+	fixLink("pgzp_button_prev", function(event){pgzp().goToNext(-1); return false;});
+	fixLink("pgzp_button_next", function(){pgzp().goToNext(1); return false;});
+	fixLink("pgzp_button_compat", pgzp().toggleCompatMode);
 }
 
 PageZipper.prototype.positionMenu = function() {
@@ -189,10 +175,6 @@ PageZipper.prototype.goToNext = function(inc){
 			pgzp().goToPreviousPosterImage();
 	}
 }
-
-//For FF Extension
-PageZipper.prototype.nextArrow = function(){pgzp().goToNext(1);}
-PageZipper.prototype.prevArrow = function(){pgzp().goToNext(-1);}
 
 PageZipper.prototype.goToNextPage = function(inc, currPageIndex) {
 	var currPage, pos, amountToScroll, ps;

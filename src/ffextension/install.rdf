@@ -3,7 +3,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>pagezipper@printwhatyoulike.com</em:id>
 		<em:name>PageZipper</em:name>
-		<em:version>1.4.1</em:version>
+		<em:version>1.4.3</em:version>
 		<em:type>2</em:type>
 		<em:description>Painlessly merge a series of web pages into one.</em:description>
 		<em:creator>Jonathan Koomjian</em:creator>

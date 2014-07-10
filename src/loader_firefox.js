@@ -67,7 +67,7 @@ pgzp._pgzpAutorun = function() {
 		//check the score to see if this page has any 'next' pages
 		pgzp._pgzpInitAutorun();
 		var nextLink = pgzp().getNextLink(pgzp().doc.body);
-		if (nextLink) Firebug.Console.log("Next url text: " + nextLink.text + " url: " + nextLink.url + " score: " + nextLink.finalScore);
+		//if (nextLink) Firebug.Console.log("Next url text: " + nextLink.text + " url: " + nextLink.url + " score: " + nextLink.finalScore);
 		if (nextLink && nextLink.finalScore > scoreThreshold) {
 			//there are next pages - start pagezipper
 			pgzp._pgzpInitExtension();

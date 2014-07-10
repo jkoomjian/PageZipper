@@ -56,9 +56,9 @@ PageZipper.prototype.addMenu = function() {
 		var link = pgzp().doc.getElementById(linkId);
 		pgzp().jq(link).bind("click", eventHandler, false);
 	}
-	fixLink("pgzp_button_prev", function(event){pgzp().goToNext(-1); return false;});
+	fixLink("pgzp_button_prev", function(){pgzp().goToNext(-1); return false;});
 	fixLink("pgzp_button_next", function(){pgzp().goToNext(1); return false;});
-	fixLink("pgzp_button_compat", pgzp().toggleCompatMode);
+	fixLink("pgzp_button_compat", function(){pgzp().toggleCompatMode(); return false;});
 }
 
 PageZipper.prototype.positionMenu = function() {

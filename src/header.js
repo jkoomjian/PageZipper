@@ -11,7 +11,7 @@
  * Contributions are welcome - https://github.com/jkoomjian/PageZipper
  * 
  * 
- *  Version 0.8 - April 16, 2014
+ *  Version 1.4.4 - October 9, 2014
  *
  *                                           /;    ;\
  *                                      __  \\____//

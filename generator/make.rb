@@ -67,9 +67,12 @@ build_pgzp("#{@output}/#{@chrome_src}/#{@ext_name}", "loader_chrome.js");
 
 ##copy the ff extension
 ##jQuery must be included separately for the FF reviewers
+##also the FF reviewers don't want the source to be compressed
+## :(
 puts "Build Firefox Extension"
 `cp -r #{@src}/#{@ffext_src} #{@output}`
 # remove jquery from src files, and copy it over
 jq = @jsFiles.slice!(1)
 `cp -r #{@src}/#{jq} #{@output}/#{@ffext_src}/content/#{jq}`
+@prod = false
 build_pgzp("#{@output}/#{@ffext_src}/content/#{@ext_name}", "loader_firefox.js")

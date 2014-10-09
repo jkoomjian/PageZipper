@@ -99,7 +99,7 @@ PageZipper.prototype.menuSetCurrPageNumber = function(currPage) {
 		//for next, disble if currPage == lastPage and we are below last image on page
 		var disableNext = 	(currPage == pgzp().pages.length && 
 							currPageObj.posterImgs && 
-							pgzp().findPos( currPageObj.posterImgs[ currPageObj.posterImgs.length-1 ] ).y < (top+pgzp().poster_image_margin_top+1)
+							pgzp().findPos( currPageObj.posterImgs[ currPageObj.posterImgs.length-1 ] ).y < (top+pgzp().poster_image_min_vmargin+1)
 							);
 		pgzp().updateButtonState(!disableNext, "next");
 	}

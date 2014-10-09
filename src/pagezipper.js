@@ -17,8 +17,7 @@ function PageZipper() {
 						];
 	this.minimumPageBuffer = 1;				//number of unread pages to keep queued
 	this.minimumPageBufferGallery = 4; 		//# unread pages with image galleries
-	this.poster_image_margin_top = 40; 		//how close from the top edge of the browser should the next poster image be placed
-	this.poster_image_margin_bottom = 10;	//how close from the bottom edge of the browser should the next poster image be placed
+	this.poster_image_min_vmargin = 40; 		//how close from the top & bottom edge of the browser should the next poster image be placed
 	this.in_compat_mode = false;				//in compat/iframe mode? default is ajax mode
 	this.debug = false;
 

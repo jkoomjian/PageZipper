@@ -89,7 +89,7 @@ PageZipper.prototype.getPosterImagesOnPage = function(page) {
 
 //if a given image is taller than the viewport, resize the image to fit perfectly in the viewport
 PageZipper.prototype.resizeImageToViewport = function(img) {
-	var usableViewport = pgzp().screen.getViewportHeight() - pgzp().poster_image_margin_top - pgzp().poster_image_margin_bottom;
+	var usableViewport = pgzp().screen.getViewportHeight() - (pgzp().poster_image_min_vmargin * 2);
 	if (img.offsetHeight > usableViewport) {
 		//scale image
 		img.style.width = ( usableViewport / img.offsetHeight ) * img.offsetWidth + 'px';
@@ -97,15 +97,26 @@ PageZipper.prototype.resizeImageToViewport = function(img) {
 	}
 }
 
-//go to the next poster image
-//TODO combine goToNext and goToPrevious
+//Center given image vertically in the veiwport
+PageZipper.prototype.centerImage = function(img, pos) {
+	pos = pos || pgzp().findPos(img);
+	var usableMargin = (pgzp().screen.getViewportHeight() - img.offsetHeight) / 2;
+	var margin = (usableMargin > pgzp().poster_image_min_vmargin) ? usableMargin : pgzp().poster_image_min_vmargin;
+	margin = Math.ceil(margin);
+	//save the amount of margin used for later
+	img["pgzpCenterOffset"] = margin;
+	var amountToScroll = pos.y - margin - pgzp().screen.getScrollTop();
+	pgzp().win.scrollBy(0, amountToScroll);
+}
+
+
 PageZipper.prototype.goToNextPosterImage = function() {
-	var browserBorderTop = pgzp().screen.getScrollTop() + pgzp().poster_image_margin_top + 1; //start looking for next poster image below this line
-	var top_margin;
+	//looking for next poster image below this browserBorderTop
+	var browserBorderTop = pgzp().screen.getScrollTop();
 	
 	for (var i=0; i<pgzp().pages.length; i++) {
 		//calculate the largest image here - we leave this as late as possible b/c all images on page have to be loaded
-		if (pgzp().pages[i].posterImgs == null) pgzp().pages[i].posterImgs = pgzp().getPosterImagesOnPage(pgzp().pages[i].elemContent);
+		pgzp().ensurePageHasPosterImgsSet(pgzp().pages[i]);
 		
 		for (var j=0; j<pgzp().pages[i].posterImgs.length; j++) {
 			var currPosterImg = pgzp().pages[i].posterImgs[j];
@@ -114,22 +125,19 @@ PageZipper.prototype.goToNextPosterImage = function() {
 			//array should be ordered top to bottom
 			if (pos.y > browserBorderTop) {
 				
-				//make sure this is not a centered image
-				if (currPosterImg["pgzpCenterOffset"] && ((parseInt(currPosterImg["pgzpCenterOffset"], 10) + browserBorderTop) >= pos.y)) continue; 
-				
-				pgzp().resizeImageToViewport(currPosterImg);
-				
-				//center image
-				var center_margin = (pgzp().screen.getViewportHeight() - currPosterImg.offsetHeight) / 2
-				if (center_margin > pgzp().poster_image_margin_top) {
-					top_margin = center_margin;
-					currPosterImg["pgzpCenterOffset"] = center_margin;
-				} else {
-					top_margin = pgzp().poster_image_margin_top;
+				//account for the margin from centerImage
+				if (currPosterImg["pgzpCenterOffset"]) {
+					//adjustedBrowserBorderTop is where the image should be if it hasn't been scrolled by the user
+					var adjustedBrowserBorderTop = pgzp().screen.getScrollTop() + parseInt(currPosterImg["pgzpCenterOffset"], 10);
+					if (pos.y > adjustedBrowserBorderTop) {
+						//is next image
+					} else {
+						continue;
+					}
 				}
 				
-				var amountToScroll = pos.y - top_margin - pgzp().screen.getScrollTop();
-				pgzp().win.scrollBy(0, amountToScroll);
+				pgzp().resizeImageToViewport(currPosterImg);
+				pgzp().centerImage(currPosterImg, pos);
 				return;
 			}
 		}
@@ -137,37 +145,35 @@ PageZipper.prototype.goToNextPosterImage = function() {
 }
 
 PageZipper.prototype.goToPreviousPosterImage = function() {
-	var browserBorderBottom = pgzp().screen.getScrollTop() + pgzp().screen.getViewportHeight() - pgzp().poster_image_margin_top - 1; //start looking for next poster above below this line
-	var top_margin;
-	
-	//iterate from bottom to top- find first image w/top above browser top
-	for (var i=(pgzp().pages.length-1); i>=0; i--) {
-		if (pgzp().pages[i].posterImgs == null) pgzp().pages[i].posterImgs = pgzp().getPosterImagesOnPage(pgzp().pages[i].elemContent);
-		
-		for (var j=(pgzp().pages[i].posterImgs.length-1); j>=0; j--) {
+	//looking for first poster img where img top < browserBorderTop (some part of img is not displayed)
+	var browserBorderTop = pgzp().screen.getScrollTop();
+	var prevImg = null;
+
+	//find the first image where imgTop > browserBorderTop (top of img is displayed),
+	//then jump to the img before that one
+	for (var i=0; i<pgzp().pages.length; i++) {
+		pgzp().ensurePageHasPosterImgsSet(pgzp().pages[i]);
+
+		for (var j=0; j<pgzp().pages[i].posterImgs.length; j++) {		
 			var currPosterImg = pgzp().pages[i].posterImgs[j];
 			var pos = pgzp().findPos(currPosterImg);
+			//when user clicks prev on first img
+			if (!prevImg) prevImg = currPosterImg;
+
 			//array should be ordered top to bottom
-			if (pos.y < browserBorderBottom) {
-				
-				//make sure this is not a centered image
-				if (currPosterImg["pgzpCenterOffset"] && ((parseInt(currPosterImg["pgzpCenterOffset"], 10) + pgzp().screen.getScrollTop() - 1) <= pos.y)) continue;
-				
-				pgzp().resizeImageToViewport(currPosterImg);
-
-				//center image
-				var center_margin = (pgzp().screen.getViewportHeight() - currPosterImg.offsetHeight) / 2
-				if (center_margin > pgzp().poster_image_margin_top) {
-					top_margin = center_margin;
-					currPosterImg["pgzpCenterOffset"] = center_margin;
-				} else {
-					top_margin = pgzp().poster_image_margin_top;
-				}
-
-				var amountToScroll = (pos.y - top_margin) - pgzp().screen.getScrollTop();
-				pgzp().win.scrollBy(0, amountToScroll);
+			if (pos.y > browserBorderTop) {
+				pgzp().resizeImageToViewport(prevImg);
+				pgzp().centerImage(prevImg);
 				return;
+			} else {
+				prevImg = currPosterImg;
 			}
 		}
+	}
+}
+
+PageZipper.prototype.ensurePageHasPosterImgsSet = function(page) {
+	if (page.posterImgs == null) {
+		page.posterImgs = pgzp().getPosterImagesOnPage(page.elemContent);
 	}
 }

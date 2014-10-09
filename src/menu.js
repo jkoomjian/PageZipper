@@ -53,8 +53,8 @@ PageZipper.prototype.addMenu = function() {
 
 	//add event handlers
 	var fixLink = function(linkId, eventHandler) {
-		var link = pgzp().doc.getElementById(linkId);
-		pgzp().jq(link).bind("click", eventHandler, false);
+		var link = pgzp().jq("#" + linkId);
+		link.on("click", null, eventHandler);
 	}
 	fixLink("pgzp_button_prev", function(){pgzp().goToNext(-1); return false;});
 	fixLink("pgzp_button_next", function(){pgzp().goToNext(1); return false;});

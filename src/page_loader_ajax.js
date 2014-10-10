@@ -12,9 +12,10 @@ function PageZipperAjax() {
 							//try to get only the body, but use the entire doc if we cant locate it
 							var results = data.match(/<body.*?>([\w\W]*?)<\/body>/i);
 							data = (results && results.length >= 2) ? results[1] : data;
-							//remove all js to prevent pgzp.doc.write() from messing us up!
-							//data = data.replace(/<script[\w\W]*?>[\w\W]*?<\/script>/ig, '').replace(/<script[\w\W]*?\/>/ig, '').replace(/<noscript>([\w\W]*?)<\/noscript>/ig, "$1");
-							//pgzp().log("body: " + data);
+							//remove all js to prevent document.write() from messing us up!
+							data = data.replace(/<script[\w\W]*?>[\w\W]*?<\/script>/ig, '')
+										.replace(/<script[\w\W]*?\/>/ig, '')
+										.replace(/<noscript>([\w\W]*?)<\/noscript>/ig, "$1");
 							pgzp().ajax.processPageAdd(url, data);
 						}
 					});
@@ -46,13 +47,6 @@ function PageZipperAjax() {
 		var page = pgzp().doc.createElement("div");
 		page.id = "pgzp_page" + pgzp().pages.length;
 		page.style.clear = 'both';
-
-		//Sanitize data for FF extension
-		if (pgzp().loader_type == "ffextension") {
-			var parserUtils = Components.classes["@mozilla.org/parserutils;1"].getService(Components.interfaces.nsIParserUtils);
-			data = parserUtils.sanitize(data, 2);
-		}
-
 		page.innerHTML = data;
 		return pgzp().buildPage(url, page);
 	}

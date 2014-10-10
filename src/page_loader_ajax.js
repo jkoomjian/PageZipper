@@ -15,7 +15,8 @@ function PageZipperAjax() {
 							//remove all js to prevent document.write() from messing us up!
 							data = data.replace(/<script[\w\W]*?>[\w\W]*?<\/script>/ig, '')
 										.replace(/<script[\w\W]*?\/>/ig, '')
-										.replace(/<noscript>([\w\W]*?)<\/noscript>/ig, "$1");
+										.replace(/<noscript>([\w\W]*?)<\/noscript>/ig, "$1")
+										.replace(/<meta HTTP-EQUIV=["']?refresh["']?[\w\W]*?>/ig, '');
 							pgzp().ajax.processPageAdd(url, data);
 						}
 					});

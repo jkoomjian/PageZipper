@@ -9,6 +9,7 @@ function PageZipperAjax() {
 		pgzp().jq.ajax({url: url,
 						dataType: 'html',
 						success: function(data){
+							debugger;
 							//try to get only the body, but use the entire doc if we cant locate it
 							var results = data.match(/<body.*?>([\w\W]*?)<\/body>/i);
 							data = (results && results.length >= 2) ? results[1] : data;

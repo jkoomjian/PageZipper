@@ -2,8 +2,8 @@
 PageZipper.prototype.addMenu = function() {
 	var css = "																																\
 		#pgzp_menu a, #pgzp_menu a * {border: 0; text-decoration: none;}																	\
-		#pgzp_menu {position: fixed; top: 0px; float:left; padding: 0px 5px; background-color: #D3D3D3; color: black; z-index: 2147483647;}		\
-		.pgzp_block {display: block; float: left; line-height: 32px;}																							\
+		#pgzp_menu {position: fixed; top: 0px; right: 8px; padding: 0px 5px; background-color: #D3D3D3; color: black; z-index: 2147483647;}	\
+		.pgzp_block {display: block; float: left; line-height: 32px;}																		\
 		.pgzp_button {display: block; width: 32px; height: 32px;}																			\
 		a.pgzp_button_prev_active {background: transparent url('${media_path}32-gnome-prev.png') no-repeat scroll top left; }				\
 		a:hover.pgzp_button_prev_active {background-image: url('${media_path}32-gnome-prev_red.png'); }										\
@@ -12,8 +12,8 @@ PageZipper.prototype.addMenu = function() {
 		a:hover.pgzp_button_next_active {background-image: url('${media_path}32-gnome-next_red.png'); }										\
 		a.pgzp_button_next_inactive {background: transparent url('${media_path}32-gnome-next_gray.png') no-repeat scroll top left; }		\
 		#pgzp_button_compat {padding-left: 6px;}																							\
-		.pgzp_button_compat_active {background: transparent url('${media_path}compat-mode.png') no-repeat scroll 4px 4px;}				\
-		.pgzp_button_compat_inactive {background: transparent url('${media_path}compat-mode-inactive.png') no-repeat scroll 4px 4px;}			\
+		.pgzp_button_compat_active {background: transparent url('${media_path}compat-mode.png') no-repeat scroll 4px 4px;}					\
+		.pgzp_button_compat_inactive {background: transparent url('${media_path}compat-mode-inactive.png') no-repeat scroll 4px 4px;}		\
 		#pgzp_curr_page {font-size: 24px;}																									\
 		#pgzp_loaded_pages {font-size: 18px;}																								\
 	";
@@ -49,7 +49,6 @@ PageZipper.prototype.addMenu = function() {
 	div.innerHTML = html;
 	div = div.childNodes[0];
 	pgzp().doc.body.appendChild(div);
-	pgzp().positionMenu();
 
 	//add event handlers
 	var assignLinkHandler = function(linkId, eventHandler) {
@@ -64,12 +63,6 @@ PageZipper.prototype.addMenu = function() {
 	assignLinkHandler("pgzp_button_prev", function(){pgzp().goToNext(-1)});
 	assignLinkHandler("pgzp_button_next", function(){pgzp().goToNext(1)});
 	assignLinkHandler("pgzp_button_compat", function(){pgzp().toggleCompatMode()});
-}
-
-PageZipper.prototype.positionMenu = function() {
-	var div = pgzp().doc.getElementById('pgzp_menu');
-	//if (div) b/c sometimes iframes included by the page call resize
-	if (div) div.style.left = (pgzp().screen.getViewportWidth() - div.offsetWidth - 30) + 'px';
 }
 
 PageZipper.prototype.removeMenu = function() {

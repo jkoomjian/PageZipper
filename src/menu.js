@@ -52,13 +52,18 @@ PageZipper.prototype.addMenu = function() {
 	pgzp().positionMenu();
 
 	//add event handlers
-	var fixLink = function(linkId, eventHandler) {
-		var link = pgzp().jq("#" + linkId);
-		link.on("click", null, eventHandler);
+	var assignLinkHandler = function(linkId, eventHandler) {
+		//require pgzp().doc for FF ext :-(
+		var link = pgzp().doc.getElementById(linkId);
+		pgzp().jq(link).bind("click", function(event) {
+			eventHandler();
+			event.preventDefault ? event.preventDefault() : event.returnValue = false;
+			return false;
+		});
 	}
-	fixLink("pgzp_button_prev", function(){pgzp().goToNext(-1); return false;});
-	fixLink("pgzp_button_next", function(){pgzp().goToNext(1); return false;});
-	fixLink("pgzp_button_compat", function(){pgzp().toggleCompatMode(); return false;});
+	assignLinkHandler("pgzp_button_prev", function(){pgzp().goToNext(-1)});
+	assignLinkHandler("pgzp_button_next", function(){pgzp().goToNext(1)});
+	assignLinkHandler("pgzp_button_compat", function(){pgzp().toggleCompatMode()});
 }
 
 PageZipper.prototype.positionMenu = function() {

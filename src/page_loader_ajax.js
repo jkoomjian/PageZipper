@@ -23,6 +23,10 @@ function PageZipperAjax() {
 	}
 	
 	this.processPageAdd = function(url, nextPageData) {
+		
+		//store page height - make sure this increases when the new page is added
+		var docHeight = pgzp().jq(pgzp().doc).height();
+
 		var nextPage = pgzp().ajax.buildPageFromData(url, nextPageData);
 		pgzp().pages.push(nextPage);
 		pgzp().url_list.push( nextPage.url );  //track urls we've already loaded, so they don't get loaded again
@@ -33,10 +37,9 @@ function PageZipperAjax() {
 		pgzp().is_loading_page = false;
 
 		//make sure that the page load is working - if the doc height hasn't increased, switch to compat mode
-		if (pgzp().pages.length >= 3) {
-			var second_page = pgzp().jq( pgzp().pages[1].elemContent );
-			var last_page = pgzp().jq( pgzp().pages[pgzp().pages.length-1].elemContent );
-			if (last_page.offset().top <= second_page.offset().top) {
+		if (!pgzp().in_compat_mode) {
+			var updatedDocHeight = pgzp().jq(pgzp().doc).height();
+			if (updatedDocHeight <= docHeight) {
 				pgzp().toggleCompatMode();	
 			}
 		}

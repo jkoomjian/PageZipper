@@ -36,10 +36,11 @@ function PageZipperAjax() {
 		nextPage.nextLinkObj = pgzp().getNextLink(nextPage.elemContent); //very slow- do this after the page has been loaded
 		pgzp().is_loading_page = false;
 
-		//make sure that the page load is working - if the doc height hasn't increased, switch to compat mode
+		//make sure that the page load is working
+		//if the doc height hasn't increased by >=100px, switch to compat mode
 		if (!pgzp().in_compat_mode) {
 			var updatedDocHeight = pgzp().jq(pgzp().doc).height();
-			if (updatedDocHeight <= docHeight) {
+			if ((updatedDocHeight - 100) <= docHeight) {
 				pgzp().toggleCompatMode();	
 			}
 		}

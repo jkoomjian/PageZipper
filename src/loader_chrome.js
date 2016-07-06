@@ -9,7 +9,7 @@ function pgzp() {
 
 /*------------------------- Load ----------------------*/
 
-function _pgzpInitChromeExtension() {
+function _pgzpInitExtension() {
 	window.currPgzp = new PageZipper();
 	pgzp().win = window;
 	pgzp().doc = window.document;
@@ -20,7 +20,7 @@ function _pgzpInitChromeExtension() {
 
 /*------------------------- Methods ----------------------*/
 function _pgzpToggleBookmarklet() {
-	if (pgzp().is_running) { 
+	if (pgzp().is_running) {
 		pgzp().stopPageZipper();
 	} else {
 		pgzp().runPageZipper();
@@ -44,7 +44,7 @@ function _pgzpAutorun() {
 	this.debug = false;
 	if (nextLink) {
 		//there are next pages - start pagezipper!
-		_pgzpInitChromeExtension();
+		_pgzpInitExtension();
 		_pgzpToggleBookmarklet();
 	}
 }

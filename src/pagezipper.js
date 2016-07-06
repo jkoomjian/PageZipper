@@ -45,15 +45,15 @@ PageZipper.prototype.loadPageZipper = function() {
 	this.jq = PageZipper.jq;
 	this.ajax = new PageZipperAjax();
 	this.iframe = new PageZipperIframe();
-	
+
 	//add in Node value - ff provides these, but they do not exist for the extension ?!?! Or for IE
 	if (!window['Node']) {
 	    window.Node = {
 		    ELEMENT_NODE: 1,
 	    	TEXT_NODE: 3
-		}
+		};
 	}
-	
+
 	pgzp().currDomain = pgzp().getDomain(pgzp().win.location.href);
 	pgzp().url_list = [ pgzp().win.location.href ];
 	if (pgzp().loader_type !=  "autorun") {
@@ -70,16 +70,16 @@ PageZipper.prototype.loadPageZipper = function() {
 			currDoc.write = currDoc.writeln = currDoc.open = currDoc.close = function(str) { return; };
 		}
 	}
-}
+};
 
 PageZipper.prototype.runPageZipper = function() {
-	pgzp().jq(pgzp().doc).bind("keydown", this.keyDown)
-	pgzp().jq(pgzp().doc).bind("keyup", this.keyUp)
+	pgzp().jq(pgzp().doc).bind("keydown", this.keyDown);
+	pgzp().jq(pgzp().doc).bind("keyup", this.keyUp);
 	if (pgzp().loader_type != "ffextension") pgzp().jq(pgzp().win).bind("resize", this.positionMenu); //gets called on new tab in ffext
 	pgzp().addMenu();
 	pgzp().updateButtonState(pgzp().in_compat_mode, 'compat');
 	this.is_running = pgzp().win.setInterval(pgzp().mainBlock, 250);
-}
+};
 
 PageZipper.prototype.stopPageZipper = function() {
 	if (this.is_running) {
@@ -89,7 +89,7 @@ PageZipper.prototype.stopPageZipper = function() {
 		pgzp().jq(pgzp().doc).unbind("keydown", this.keyDown);
 		pgzp().jq(pgzp().doc).unbind("keyup", this.keyUp);
 		if (pgzp().loader_type != "ffextension") pgzp().jq(pgzp().win).unbind("resize", this.positionMenu);
-		
+
 		//compat only - turn off key bindings added to every iframe
 		if (pgzp().in_compat_mode) {
 			for (var i=1; i<pgzp().pages.length; i++){
@@ -108,7 +108,7 @@ PageZipper.prototype.mainBlock = function() {
 
 	// var nextLinkObj = pgzp().pages[pgzp().pages.length-1]["nextLinkObj"]
 	// console.log("is loading: " + !pgzp().is_loading_page + "# pages: " + pgzp().pages.length + " nextLink: " + (nextLinkObj ? nextLinkObj.url : 'none') + " currPageIndex: " + currPageIndex + " currViewablePage: " + currViewablePage);
-	
+
 	pgzp().menuSetCurrPageNumber(currViewablePage + 1);
 	pgzp().setPageVisibility(currViewablePage);
 
@@ -138,7 +138,7 @@ PageZipper.prototype.getCurrentPage = function() {
 		} else {
 			currPageBottom = pgzp().findPos( pgzp().pages[ (i+1) ].inPageElem ).y;
 		}
-		
+
 		//curr page if we have the following order on the page
 		// pageTop
 		// viewBottom
@@ -155,7 +155,7 @@ PageZipper.prototype.getCurrentPage = function() {
 PageZipper.prototype.getViewableCurrentPage = function(currPage) {
 	//update page # once next page takes up more than 50% of space in viewport
 	var currPageObj = pgzp().pages[currPage];
-	
+
 	if  ((pgzp().findPos(currPageObj.inPageElem).y - Math.abs(pgzp().screen.getScrollTop())) > (pgzp().screen.getViewportHeight() / 2)) {
 		return currPage - 1;
 	}
@@ -167,7 +167,7 @@ PageZipper.prototype.getViewableCurrentPage = function(currPage) {
 PageZipper.prototype.calculateDisplayMode = function(currPage){
 	var textArea = 0, imgArea = 0;
 	var i=0, txtP, imgs = {};
-	
+
 	//first calculate the area of all text on this page
 	var txtP = pgzp().doc.createElement("div");
 	txtP.style.clear = "both";
@@ -175,10 +175,10 @@ PageZipper.prototype.calculateDisplayMode = function(currPage){
 	pgzp().doc.body.appendChild(txtP);
 	textArea = txtP.offsetWidth * txtP.offsetHeight;
 	pgzp().doc.body.removeChild(txtP);
-	
+
 	//calculate area of poster imgs
 	if (currPage.posterImgs == null) currPage.posterImgs = pgzp().getPosterImagesOnPage(currPage.elemContent);
-	
+
 	//make sure we remove all duplicates! This is important for sites like google and yahoo which use the same image multiple times (sprite.png)
 	for (i=0; i<currPage.posterImgs.length; i++) {
 		imgs[ currPage.posterImgs[i].src ] = currPage.posterImgs[i];
@@ -188,14 +188,14 @@ PageZipper.prototype.calculateDisplayMode = function(currPage){
 		var img = imgs[imgUrl];
 		imgArea += img.offsetHeight * img.offsetWidth;
 	}
-	
+
 	//pgzp().log("textArea: " + textArea + " imgArea: " + imgArea + " mode: " + ((textArea >= imgArea) ? "text" : "image"));
 	return (textArea >= imgArea) ? "text" : "image";
 }
 
 PageZipper.prototype.getAllTextOnPage = function(pageHtml) {
 	var str = "";
-	
+
 	pgzp().depthFirstRecursion(pageHtml, 	function(curr) {
 												if (curr.nodeType == Node.TEXT_NODE && curr.parentNode.nodeType == Node.ELEMENT_NODE && typeof(curr.parentNode.tagName) == "string") {
 													try {

@@ -5,6 +5,7 @@ require 'fileutils'
 @root = File.join(File.dirname(__FILE__), '..')
 
 @src = "#{@root}/src"
+@extension_icons = "extension_icons"
 @ffext_src = "ffextension"
 @chrome_src = "chrome_ext"
 @output = "#{@root}/compiled"
@@ -26,6 +27,8 @@ require 'fileutils'
                     "util.js",
                     ]
 
+## ----- Helpers -----
+
 ##clean the output directory - don't delete .svn dir
 def clean
   Dir.foreach(@output){|f|
@@ -40,9 +43,9 @@ end
 
 def build_pgzp(output, loader_file)
   ##for each js file, append to output
-  @jsFiles.concat([loader_file]).each {|currFile| 
+  @jsFiles.concat([loader_file]).each {|currFile|
      puts currFile
-  
+
     #for now don't compile
     if @prod
       `java -jar yuicompressor-2.4.2.jar --nomunge #{@src}/#{currFile} >> #{output}`
@@ -54,25 +57,28 @@ def build_pgzp(output, loader_file)
   @jsFiles.pop()
 end
 
-##bookmarklet
+## ----- Build Bookmarklet -----
 puts "Build Bookmarklet"
 clean()
 build_pgzp("#{@output}/#{@bookmarklet_name}", "loader_bookmarklet.js")
 
-##copy chrome extension
+## ----- Build Chrome Extension -----
 puts "Build Chrome Extension"
 `cp -r #{@src}/#{@chrome_src} #{@output}`
-`cp -r #{@src}/#{@ffext_src}/skin/*.png #{@output}/#{@chrome_src}`
+`cp -r #{@src}/#{@extension_icons}/*.png #{@output}/#{@chrome_src}`
 build_pgzp("#{@output}/#{@chrome_src}/#{@ext_name}", "loader_chrome.js");
 
-##copy the ff extension
-##jQuery must be included separately for the FF reviewers
-##also the FF reviewers don't want the source to be compressed
+## ----- Build FF Extension -----
+## copy the ff extension
+## jQuery must be included separately for the FF reviewers
+## also the FF reviewers don't want the source to be compressed
 ## :(
 puts "Build Firefox Extension"
 `cp -r #{@src}/#{@ffext_src} #{@output}`
+`cp -r #{@src}/#{@extension_icons}/*.png #{@output}/#{@ffext_src}`
+
 # remove jquery from src files, and copy it over
 jq = @jsFiles.slice!(1)
-`cp -r #{@src}/#{jq} #{@output}/#{@ffext_src}/content/#{jq}`
+`cp -r #{@src}/#{jq} #{@output}/#{@ffext_src}/#{jq}`
 @prod = false
-build_pgzp("#{@output}/#{@ffext_src}/content/#{@ext_name}", "loader_firefox.js")
+build_pgzp("#{@output}/#{@ffext_src}/#{@ext_name}", "loader_firefox.js")

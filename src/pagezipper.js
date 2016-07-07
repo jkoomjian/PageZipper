@@ -33,16 +33,15 @@ function PageZipper() {
 	this.currDomain;
 	this.url_list;
 	this.media_path;
+
+	//loading jQuery here to keep it out of the global scope - required by FF addon reviewers
+	this.jq = jQuery.noConflict(true);
 }
-//stashing jQuery here so we can get it out of the global scope - required by FF addon reviewers
-PageZipper.jq = jQuery.noConflict(true);
 
 
 /*------------------------- Initialize ----------------------*/
 PageZipper.prototype.loadPageZipper = function() {
-
 	//start with some housekeeping
-	this.jq = PageZipper.jq;
 	this.ajax = new PageZipperAjax();
 	this.iframe = new PageZipperIframe();
 
@@ -66,7 +65,7 @@ PageZipper.prototype.loadPageZipper = function() {
 		//Override document.write to prevent additional pages from writing to this closed page and messing everything up! - won't apply in iframes
 		if (!pgzp().in_compat_mode) {
 			//FF makes this hard due to security: mikeconley.ca/blog/2009/05/02/overriding-firefox's-windowalert-part-2/ developer.mozilla.org/en/XPCNativeWrapper
-			var currDoc = pgzp().loader_type == "ffextension" ? document.getElementById('content').contentWindow.wrappedJSObject.document : pgzp().doc;
+			var currDoc = pgzp().doc;
 			currDoc.write = currDoc.writeln = currDoc.open = currDoc.close = function(str) { return; };
 		}
 	}
@@ -98,7 +97,7 @@ PageZipper.prototype.stopPageZipper = function() {
 			}
 		}
 	}
-}
+};
 
 /*------------------------- Main Block ----------------------*/
 PageZipper.prototype.mainBlock = function() {
@@ -119,7 +118,7 @@ PageZipper.prototype.mainBlock = function() {
 		pgzp().is_loading_page = true;
 		pgzp().loadPage( pgzp().pages[pgzp().pages.length-1].nextLinkObj.url );
 	}
-}
+};
 
 /*------------------------- Determine Current Page ----------------------*/
 //returns the 0-based index of the current displayed page in pgzp().pages
@@ -149,7 +148,7 @@ PageZipper.prototype.getCurrentPage = function() {
 		}
 	}
 	return pgzp().pages.length;  //we're at the end of pgzp().pages
-}
+};
 
 //gets the current page as viewed by user - whichever page takes up the most space on page is current viewable page
 PageZipper.prototype.getViewableCurrentPage = function(currPage) {
@@ -160,7 +159,7 @@ PageZipper.prototype.getViewableCurrentPage = function(currPage) {
 		return currPage - 1;
 	}
 	return currPage;
-}
+};
 
 /*------------------------- Display Mode ----------------------*/
 
@@ -169,7 +168,7 @@ PageZipper.prototype.calculateDisplayMode = function(currPage){
 	var i=0, txtP, imgs = {};
 
 	//first calculate the area of all text on this page
-	var txtP = pgzp().doc.createElement("div");
+	txtP = pgzp().doc.createElement("div");
 	txtP.style.clear = "both";
 	txtP.appendChild( pgzp().doc.createTextNode(  pgzp().getAllTextOnPage(currPage.elemContent) ));
 	pgzp().doc.body.appendChild(txtP);
@@ -191,7 +190,7 @@ PageZipper.prototype.calculateDisplayMode = function(currPage){
 
 	//pgzp().log("textArea: " + textArea + " imgArea: " + imgArea + " mode: " + ((textArea >= imgArea) ? "text" : "image"));
 	return (textArea >= imgArea) ? "text" : "image";
-}
+};
 
 PageZipper.prototype.getAllTextOnPage = function(pageHtml) {
 	var str = "";
@@ -209,7 +208,7 @@ PageZipper.prototype.getAllTextOnPage = function(pageHtml) {
 												}
 											});
 	return str;
-}
+};
 
 /*------------------------- Hide Old Pages ----------------------*/
 //hide pages farther than 10 pages back. This conserves the browsers resources and
@@ -228,4 +227,4 @@ PageZipper.prototype.setPageVisibility = function(currPageIndex) {
 		var oldPage = pgzp().pages[currPageIndex - 5];
 		if (oldPage.elemContent.style.visibility != "hidden") oldPage.elemContent.style.visibility = "hidden";
 	}
-}
+};

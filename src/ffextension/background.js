@@ -2,10 +2,9 @@ var loaded_tabs = {}, icon_src = "";
 
 //Pgzp icon is clicked
 browser.browserAction.onClicked.addListener(function(tab) {
-	console.log("browser icon clicked!!");
 
 	if (!loaded_tabs[tab.id]) {
-		browser.tabs.executeScript(tab.id, {'file': 'jQuery.js'}, function () {
+		browser.tabs.executeScript(tab.id, {'file': 'jquery.js'}, function () {
 			browser.tabs.executeScript(tab.id, {'file': 'pagezipper.js'}, function () {
 					browser.tabs.executeScript(tab.id, {'code': '_pgzpInitExtension();_pgzpToggleBookmarklet();'});
 			});
@@ -27,6 +26,7 @@ browser.browserAction.onClicked.addListener(function(tab) {
 
 // New page is loaded in tab
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+
 	//deactivate pgzp button on page load
 	delete loaded_tabs[tabId];
 

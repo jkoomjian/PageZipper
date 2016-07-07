@@ -15,7 +15,6 @@ function _pgzpInitExtension() {
 	pgzp().doc = window.document;
 	pgzp().loader_type = "ffextension";
 	pgzp().media_path = browser.extension.getURL("/");
-	console.log("media_path: " + pgzp().media_path);
 	pgzp().loadPageZipper();
 }
 

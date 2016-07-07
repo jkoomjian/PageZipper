@@ -53,47 +53,47 @@ PageZipper.prototype.loadPageZipper = function() {
 		};
 	}
 
-	pgzp().currDomain = pgzp().getDomain(pgzp().win.location.href);
-	pgzp().url_list = [ pgzp().win.location.href ];
-	if (pgzp().loader_type !=  "autorun") {
-		pgzp().addExistingPage(pgzp().win.location.href, pgzp().doc.body);
-		pgzp().displayMode = pgzp().calculateDisplayMode(pgzp().pages[0]);
-		if (pgzp().displayMode == 'image' && pgzp().pages[0].posterImgs.length == 1) {
-			pgzp().onePosterPerPageMode = true;
-			pgzp().minimumPageBuffer = pgzp().minimumPageBufferGallery;
+	pgzp.currDomain = pgzp.getDomain(pgzp.win.location.href);
+	pgzp.url_list = [ pgzp.win.location.href ];
+	if (pgzp.loader_type !=  "autorun") {
+		pgzp.addExistingPage(pgzp.win.location.href, pgzp.doc.body);
+		pgzp.displayMode = pgzp.calculateDisplayMode(pgzp.pages[0]);
+		if (pgzp.displayMode == 'image' && pgzp.pages[0].posterImgs.length == 1) {
+			pgzp.onePosterPerPageMode = true;
+			pgzp.minimumPageBuffer = pgzp.minimumPageBufferGallery;
 		}
 		//Override document.write to prevent additional pages from writing to this closed page and messing everything up! - won't apply in iframes
-		if (!pgzp().in_compat_mode) {
+		if (!pgzp.in_compat_mode) {
 			//FF makes this hard due to security: mikeconley.ca/blog/2009/05/02/overriding-firefox's-windowalert-part-2/ developer.mozilla.org/en/XPCNativeWrapper
-			var currDoc = pgzp().doc;
+			var currDoc = pgzp.doc;
 			currDoc.write = currDoc.writeln = currDoc.open = currDoc.close = function(str) { return; };
 		}
 	}
 };
 
 PageZipper.prototype.runPageZipper = function() {
-	pgzp().jq(pgzp().doc).bind("keydown", this.keyDown);
-	pgzp().jq(pgzp().doc).bind("keyup", this.keyUp);
-	if (pgzp().loader_type != "ffextension") pgzp().jq(pgzp().win).bind("resize", this.positionMenu); //gets called on new tab in ffext
-	pgzp().addMenu();
-	pgzp().updateButtonState(pgzp().in_compat_mode, 'compat');
-	this.is_running = pgzp().win.setInterval(pgzp().mainBlock, 250);
+	pgzp.jq(pgzp.doc).bind("keydown", this.keyDown);
+	pgzp.jq(pgzp.doc).bind("keyup", this.keyUp);
+	if (pgzp.loader_type != "ffextension") pgzp.jq(pgzp.win).bind("resize", this.positionMenu); //gets called on new tab in ffext
+	pgzp.addMenu();
+	pgzp.updateButtonState(pgzp.in_compat_mode, 'compat');
+	this.is_running = pgzp.win.setInterval(pgzp.mainBlock, 250);
 };
 
 PageZipper.prototype.stopPageZipper = function() {
 	if (this.is_running) {
-		pgzp().win.clearInterval(this.is_running);
+		pgzp.win.clearInterval(this.is_running);
 		this.is_running = null;
-		pgzp().removeMenu();
-		pgzp().jq(pgzp().doc).unbind("keydown", this.keyDown);
-		pgzp().jq(pgzp().doc).unbind("keyup", this.keyUp);
-		if (pgzp().loader_type != "ffextension") pgzp().jq(pgzp().win).unbind("resize", this.positionMenu);
+		pgzp.removeMenu();
+		pgzp.jq(pgzp.doc).unbind("keydown", this.keyDown);
+		pgzp.jq(pgzp.doc).unbind("keyup", this.keyUp);
+		if (pgzp.loader_type != "ffextension") pgzp.jq(pgzp.win).unbind("resize", this.positionMenu);
 
 		//compat only - turn off key bindings added to every iframe
-		if (pgzp().in_compat_mode) {
-			for (var i=1; i<pgzp().pages.length; i++){
-				pgzp().jq(pgzp().pages[i].ifrDoc).unbind("keydown", this.keyDown);
-				pgzp().jq(pgzp().pages[i].ifrDoc).unbind("keyup", this.keyUp);
+		if (pgzp.in_compat_mode) {
+			for (var i=1; i<pgzp.pages.length; i++){
+				pgzp.jq(pgzp.pages[i].ifrDoc).unbind("keydown", this.keyDown);
+				pgzp.jq(pgzp.pages[i].ifrDoc).unbind("keyup", this.keyUp);
 			}
 		}
 	}
@@ -101,41 +101,41 @@ PageZipper.prototype.stopPageZipper = function() {
 
 /*------------------------- Main Block ----------------------*/
 PageZipper.prototype.mainBlock = function() {
-	if (!pgzp()) return; //Firefox when we have switched tabs
-	var currPageIndex = pgzp().getCurrentPage();
-	var currViewablePage = pgzp().getViewableCurrentPage(currPageIndex);
+	if (!pgzp) return; //Firefox when we have switched tabs
+	var currPageIndex = pgzp.getCurrentPage();
+	var currViewablePage = pgzp.getViewableCurrentPage(currPageIndex);
 
-	// var nextLinkObj = pgzp().pages[pgzp().pages.length-1]["nextLinkObj"]
-	// console.log("is loading: " + !pgzp().is_loading_page + "# pages: " + pgzp().pages.length + " nextLink: " + (nextLinkObj ? nextLinkObj.url : 'none') + " currPageIndex: " + currPageIndex + " currViewablePage: " + currViewablePage);
+	// var nextLinkObj = pgzp.pages[pgzp.pages.length-1]["nextLinkObj"]
+	// console.log("is loading: " + !pgzp.is_loading_page + "# pages: " + pgzp.pages.length + " nextLink: " + (nextLinkObj ? nextLinkObj.url : 'none') + " currPageIndex: " + currPageIndex + " currViewablePage: " + currViewablePage);
 
-	pgzp().menuSetCurrPageNumber(currViewablePage + 1);
-	pgzp().setPageVisibility(currViewablePage);
+	pgzp.menuSetCurrPageNumber(currViewablePage + 1);
+	pgzp.setPageVisibility(currViewablePage);
 
-	if (!pgzp().is_loading_page &&
-			pgzp().pages[pgzp().pages.length-1]["nextLinkObj"] &&		//has next link
-			((pgzp().pages.length - currPageIndex - 1) < pgzp().minimumPageBuffer)	//scrolling
+	if (!pgzp.is_loading_page &&
+			pgzp.pages[pgzp.pages.length-1]["nextLinkObj"] &&		//has next link
+			((pgzp.pages.length - currPageIndex - 1) < pgzp.minimumPageBuffer)	//scrolling
 		) {
-		pgzp().is_loading_page = true;
-		pgzp().loadPage( pgzp().pages[pgzp().pages.length-1].nextLinkObj.url );
+		pgzp.is_loading_page = true;
+		pgzp.loadPage( pgzp.pages[pgzp.pages.length-1].nextLinkObj.url );
 	}
 };
 
 /*------------------------- Determine Current Page ----------------------*/
-//returns the 0-based index of the current displayed page in pgzp().pages
+//returns the 0-based index of the current displayed page in pgzp.pages
 PageZipper.prototype.getCurrentPage = function() {
 	var i, currPage, currPageTop, currPageBottom;
-	var currViewBottom = pgzp().screen.getScrollTop() + pgzp().screen.getViewportHeight();
-	for (i=0; i<pgzp().pages.length; i++) {
-		currPage = pgzp().pages[i].inPageElem;
-		currPageTop = pgzp().findPos(currPage).y;
+	var currViewBottom = pgzp.screen.getScrollTop() + pgzp.screen.getViewportHeight();
+	for (i=0; i<pgzp.pages.length; i++) {
+		currPage = pgzp.pages[i].inPageElem;
+		currPageTop = pgzp.findPos(currPage).y;
 
 		//if this is the last elem, calculate from bottom of page, else calculate distance to next page
-		if (i == (pgzp().pages.length - 1)) {
-			currPageBottom = pgzp().screen.getDocumentHeight();
+		if (i == (pgzp.pages.length - 1)) {
+			currPageBottom = pgzp.screen.getDocumentHeight();
 			//if this is the last page, and page bottom does not extend to bottom, set currPageBottom to currViewBottom
 			if (currPageBottom < currViewBottom) currPageBottom = currViewBottom;
 		} else {
-			currPageBottom = pgzp().findPos( pgzp().pages[ (i+1) ].inPageElem ).y;
+			currPageBottom = pgzp.findPos( pgzp.pages[ (i+1) ].inPageElem ).y;
 		}
 
 		//curr page if we have the following order on the page
@@ -147,15 +147,15 @@ PageZipper.prototype.getCurrentPage = function() {
 			return i;
 		}
 	}
-	return pgzp().pages.length;  //we're at the end of pgzp().pages
+	return pgzp.pages.length;  //we're at the end of pgzp.pages
 };
 
 //gets the current page as viewed by user - whichever page takes up the most space on page is current viewable page
 PageZipper.prototype.getViewableCurrentPage = function(currPage) {
 	//update page # once next page takes up more than 50% of space in viewport
-	var currPageObj = pgzp().pages[currPage];
+	var currPageObj = pgzp.pages[currPage];
 
-	if  ((pgzp().findPos(currPageObj.inPageElem).y - Math.abs(pgzp().screen.getScrollTop())) > (pgzp().screen.getViewportHeight() / 2)) {
+	if  ((pgzp.findPos(currPageObj.inPageElem).y - Math.abs(pgzp.screen.getScrollTop())) > (pgzp.screen.getViewportHeight() / 2)) {
 		return currPage - 1;
 	}
 	return currPage;
@@ -168,15 +168,15 @@ PageZipper.prototype.calculateDisplayMode = function(currPage){
 	var i=0, txtP, imgs = {};
 
 	//first calculate the area of all text on this page
-	txtP = pgzp().doc.createElement("div");
+	txtP = pgzp.doc.createElement("div");
 	txtP.style.clear = "both";
-	txtP.appendChild( pgzp().doc.createTextNode(  pgzp().getAllTextOnPage(currPage.elemContent) ));
-	pgzp().doc.body.appendChild(txtP);
+	txtP.appendChild( pgzp.doc.createTextNode(  pgzp.getAllTextOnPage(currPage.elemContent) ));
+	pgzp.doc.body.appendChild(txtP);
 	textArea = txtP.offsetWidth * txtP.offsetHeight;
-	pgzp().doc.body.removeChild(txtP);
+	pgzp.doc.body.removeChild(txtP);
 
 	//calculate area of poster imgs
-	if (currPage.posterImgs == null) currPage.posterImgs = pgzp().getPosterImagesOnPage(currPage.elemContent);
+	if (currPage.posterImgs == null) currPage.posterImgs = pgzp.getPosterImagesOnPage(currPage.elemContent);
 
 	//make sure we remove all duplicates! This is important for sites like google and yahoo which use the same image multiple times (sprite.png)
 	for (i=0; i<currPage.posterImgs.length; i++) {
@@ -188,14 +188,14 @@ PageZipper.prototype.calculateDisplayMode = function(currPage){
 		imgArea += img.offsetHeight * img.offsetWidth;
 	}
 
-	//pgzp().log("textArea: " + textArea + " imgArea: " + imgArea + " mode: " + ((textArea >= imgArea) ? "text" : "image"));
+	//pgzp.log("textArea: " + textArea + " imgArea: " + imgArea + " mode: " + ((textArea >= imgArea) ? "text" : "image"));
 	return (textArea >= imgArea) ? "text" : "image";
 };
 
 PageZipper.prototype.getAllTextOnPage = function(pageHtml) {
 	var str = "";
 
-	pgzp().depthFirstRecursion(pageHtml, 	function(curr) {
+	pgzp.depthFirstRecursion(pageHtml, 	function(curr) {
 												if (curr.nodeType == Node.TEXT_NODE && curr.parentNode.nodeType == Node.ELEMENT_NODE && typeof(curr.parentNode.tagName) == "string") {
 													try {
 														var tagName = curr.parentNode.tagName.toLowerCase();
@@ -217,14 +217,14 @@ PageZipper.prototype.getAllTextOnPage = function(pageHtml) {
 PageZipper.prototype.setPageVisibility = function(currPageIndex) {
 
 	//make sure the current page is visible
-	var currPage = pgzp().pages[currPageIndex];
+	var currPage = pgzp.pages[currPageIndex];
 	if (currPage.elemContent.style.visibility == "hidden") {
 		currPage.elemContent.style.visibility = "visible";
 	}
 
 	//hide pages farther back than 10 (show the first page)
 	if (currPageIndex > 5) {
-		var oldPage = pgzp().pages[currPageIndex - 5];
+		var oldPage = pgzp.pages[currPageIndex - 5];
 		if (oldPage.elemContent.style.visibility != "hidden") oldPage.elemContent.style.visibility = "hidden";
 	}
 };

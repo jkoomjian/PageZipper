@@ -47,12 +47,12 @@ function runTest() {
 function runTest2(ifrId) {
 	var ifr = document.getElementById(ifrId);
 	var pageBody = ifr.contentWindow.document.body;
-	var nextPage = pgzp().buildPage(ifr.src, ifr);
+	var nextPage = pgzp.buildPage(ifr.src, ifr);
 	nextPage.url = bigUrlsArray[currTestIndex][2];
-	pgzp().pages = [nextPage];	
-	pgzp().currDomain = pgzp().getDomain(bigUrlsArray[currTestIndex][1]); //urls must be absolute
+	pgzp.pages = [nextPage];	
+	pgzp.currDomain = pgzp.getDomain(bigUrlsArray[currTestIndex][1]); //urls must be absolute
 	
-	var nextLinkObj = pgzp().getNextLink(pageBody);
+	var nextLinkObj = pgzp.getNextLink(pageBody);
 //	alert("next link: " + nextLinkObj.url + "\nCorrect url: " + bigUrlsArray[currTestIndex][1] + "\nGot the correct url: " + (nextLinkObj.url == bigUrlsArray[currTestIndex][1]));
 	assertEquals(nextLinkObj.url, bigUrlsArray[currTestIndex][1]);
 	currTestIndex++;

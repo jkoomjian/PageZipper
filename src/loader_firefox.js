@@ -1,29 +1,20 @@
 /*------------------------- Load FF Extension ----------------------*/
 
-/* Get the local copies of all our important variables
- * Required because in FF extension 'window' points to the browser dom window - is global across all tabs
- * window.content is the tab scope */
-function pgzp() {
-	return window.currPgzp;
-}
-
-/*------------------------- Load ----------------------*/
-
 function _pgzpInitExtension() {
-	window.currPgzp = new PageZipper();
-	pgzp().win = window;
-	pgzp().doc = window.document;
-	pgzp().loader_type = "ffextension";
-	pgzp().media_path = browser.extension.getURL("/");
-	pgzp().loadPageZipper();
+	window.pgzp = new PageZipper();
+	pgzp.win = window;
+	pgzp.doc = window.document;
+	pgzp.loader_type = "ffextension";
+	pgzp.media_path = browser.extension.getURL("/");
+	pgzp.loadPageZipper();
 }
 
 /*------------------------- Methods ----------------------*/
 function _pgzpToggleBookmarklet() {
-	if (pgzp().is_running) {
-		pgzp().stopPageZipper();
+	if (pgzp.is_running) {
+		pgzp.stopPageZipper();
 	} else {
-		pgzp().runPageZipper();
+		pgzp.runPageZipper();
 	}
 }
 
@@ -31,15 +22,15 @@ function _pgzpToggleBookmarklet() {
 // function _pgzpAutorun() {
 // 	//init
 // 	window.currPgzp = new PageZipper();
-// 	pgzp().win = window;
-// 	pgzp().doc = window.document;
-// 	pgzp().loader_type = "autorun";
-// 	pgzp().loadPageZipper();
-// 	pgzp().pages.push({url: pgzp().win.location.href});
+// 	pgzp.win = window;
+// 	pgzp.doc = window.document;
+// 	pgzp.loader_type = "autorun";
+// 	pgzp.loadPageZipper();
+// 	pgzp.pages.push({url: pgzp.win.location.href});
 //
 // 	//check for next link
-// 	pgzp().debug = true; //TODO
-// 	var nextLink = pgzp().getAutorunNextLink(pgzp().doc.body);
+// 	pgzp.debug = true; //TODO
+// 	var nextLink = pgzp.getAutorunNextLink(pgzp.doc.body);
 // 	//console.log( nextLink ? "Next url text: " + nextLink.text + " url: " + nextLink.url + " score: " + nextLink.finalScore : "no next link");
 // 	this.debug = false;
 // 	if (nextLink) {

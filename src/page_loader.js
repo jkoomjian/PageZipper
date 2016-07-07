@@ -24,35 +24,35 @@ PageZipper.prototype.buildPage = function(url, elemContent) {
 
 //takes a url, returns a div containing the body content of the page at url
 PageZipper.prototype.loadPage = function(url) {
-	pgzp().in_compat_mode ? pgzp().iframe.loadPage(url) : pgzp().ajax.loadPage(url);
+	pgzp.in_compat_mode ? pgzp.iframe.loadPage(url) : pgzp.ajax.loadPage(url);
 }
 
 PageZipper.prototype.addExistingPage = function(url, body) {
 	
-	var nextPage = pgzp().buildPage(url, body);
+	var nextPage = pgzp.buildPage(url, body);
 	
-	if (pgzp().in_compat_mode) {
-		pgzp().addIframePlaceholder();
+	if (pgzp.in_compat_mode) {
+		pgzp.addIframePlaceholder();
 	} else {
-		pgzp().ajax.removeAbsolutePositioning(nextPage.elemContent);
+		pgzp.ajax.removeAbsolutePositioning(nextPage.elemContent);
 	}
 	
-	pgzp().pages.push(nextPage);
+	pgzp.pages.push(nextPage);
 
 	//must set this here, else will try to get largest image on all of pgzp.doc.body, which may be multiple pages by the time it is called
-	nextPage.posterImgs = pgzp().getPosterImagesOnPage(nextPage.elemContent);
+	nextPage.posterImgs = pgzp.getPosterImagesOnPage(nextPage.elemContent);
 	
 	//very slow- do this after the page has been loaded
-	nextPage.nextLinkObj = pgzp().getNextLink(nextPage.elemContent);
+	nextPage.nextLinkObj = pgzp.getNextLink(nextPage.elemContent);
 
 	return nextPage;
 }
 
 PageZipper.prototype.addIframePlaceholder = function() {
-	var placeholder = pgzp().jq("<div/>")
+	var placeholder = pgzp.jq("<div/>")
 											.attr('id', 'pgzp_iframe_placeholder')
 											.css({position: 'absolute',
-														top: pgzp().jq(pgzp().doc).height()+'px',
+														top: pgzp.jq(pgzp.doc).height()+'px',
 														left: '0px'});
-	pgzp().jq(pgzp().doc.body).append(placeholder);
+	pgzp.jq(pgzp.doc.body).append(placeholder);
 }

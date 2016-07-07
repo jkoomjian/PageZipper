@@ -16,7 +16,7 @@
 // Util function to default a bad number to 0
 // --------------------------------------------------------------------
 PageZipper.prototype.zero = function(n) {
-	return (!pgzp().defined(n) || isNaN(n))?0:n;
+	return (!pgzp.defined(n) || isNaN(n))?0:n;
 };
 
 // Determine if a reference is defined
@@ -32,7 +32,7 @@ PageZipper.prototype.css = (function(){
 
 	// Convert an RGB string in the form "rgb (255, 255, 255)" to "#ffffff"
 	css.rgb2hex = function(rgbString) {
-		if (typeof(rgbString)!="string" || !pgzp().defined(rgbString.match)) { return null; }
+		if (typeof(rgbString)!="string" || !pgzp.defined(rgbString.match)) { return null; }
 		var result = rgbString.match(/^\s*rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*/);
 		if (result==null) { return rgbString; }
 		var rgb = +result[1] << 16 | +result[2] << 8 | +result[3];
@@ -48,7 +48,7 @@ PageZipper.prototype.css = (function(){
 
 	// Convert hyphen style names like border-width to camel case like borderWidth
 	css.hyphen2camel = function(property) {
-		if (!pgzp().defined(property) || property==null) { return null; }
+		if (!pgzp.defined(property) || property==null) { return null; }
 		if (property.indexOf("-")<0) { return property; }
 		var str = "";
 		var c = null;
@@ -72,13 +72,13 @@ PageZipper.prototype.css = (function(){
 				val = css.getStyle(o,"styleFloat"); 
 			}
 		}
-		else if (o.currentStyle && pgzp().defined(o.currentStyle[camelProperty])) {
+		else if (o.currentStyle && pgzp.defined(o.currentStyle[camelProperty])) {
 			val = o.currentStyle[camelProperty];
 		}
-		else if (pgzp().win.getComputedStyle) {
-			val = pgzp().win.getComputedStyle(o,null).getPropertyValue(property);
+		else if (pgzp.win.getComputedStyle) {
+			val = pgzp.win.getComputedStyle(o,null).getPropertyValue(property);
 		}
-		else if (o.style && pgzp().defined(o.style[camelProperty])) {
+		else if (o.style && pgzp.defined(o.style[camelProperty])) {
 			val = o.style[camelProperty];
 		}
 		// For color values, make the value consistent across browsers
@@ -95,7 +95,7 @@ PageZipper.prototype.css = (function(){
 	
 	// Set a style on an object
 	css.setStyle = function(o, property, value) {
-		if (o==null || !pgzp().defined(o.style) || !pgzp().defined(property) || property==null || !pgzp().defined(value)) { return false; }
+		if (o==null || !pgzp.defined(o.style) || !pgzp.defined(property) || property==null || !pgzp.defined(value)) { return false; }
 		if (property=="float") {
 			o.style["cssFloat"] = value;
 	  		o.style["styleFloat"] = value;
@@ -103,7 +103,7 @@ PageZipper.prototype.css = (function(){
 			o.style['-moz-opacity'] = value;
 			o.style['-khtml-opacity'] = value;
 			o.style.opacity = value;
-			if (pgzp().defined(o.style.filter)) {
+			if (pgzp.defined(o.style.filter)) {
 				o.style.filter = "alpha(opacity=" + value*100 + ")";
 			}
 		} else {
@@ -115,7 +115,7 @@ PageZipper.prototype.css = (function(){
 	
 	// Determine if an object or class string contains a given class.
 	css.hasClass = function(obj,className) {
-		if (!pgzp().defined(obj) || obj==null || !RegExp) { return false; }
+		if (!pgzp.defined(obj) || obj==null || !RegExp) { return false; }
 		var re = new RegExp("(^|\\s)" + className + "(\\s|$)");
 		if (typeof(obj)=="string") {
 		  return re.test(obj);
@@ -127,20 +127,20 @@ PageZipper.prototype.css = (function(){
   
 	  // Add a class to an object
 	css.addClass = function(obj,className) {
-		if (typeof(obj)!="object" || obj==null || !pgzp().defined(obj.className)) { return false; }
+		if (typeof(obj)!="object" || obj==null || !pgzp.defined(obj.className)) { return false; }
 		if (obj.className==null || obj.className=='') { 
 			obj.className = className; 
 			return true; 
 		}
-		if (pgzp().css.hasClass(obj,className)) { return true; }
+		if (pgzp.css.hasClass(obj,className)) { return true; }
 		obj.className = obj.className + " " + className;
 		return true;
 	};
   
  	// Remove a class from an object
 	css.removeClass = function(obj,className) {
-		if (typeof(obj)!="object" || obj==null || !pgzp().defined(obj.className) || obj.className==null) { return false; }
-		if (!pgzp().css.hasClass(obj,className)) { return false; }
+		if (typeof(obj)!="object" || obj==null || !pgzp.defined(obj.className) || obj.className==null) { return false; }
+		if (!pgzp.css.hasClass(obj,className)) { return false; }
 		var re = new RegExp("(^|\\s+)" + className + "(\\s+|$)");
 		obj.className = obj.className.replace(re,' ');
 		return true;
@@ -148,9 +148,9 @@ PageZipper.prototype.css = (function(){
   
 	// Fully replace a class with a new one
 	css.replaceClass = function(obj,className,newClassName) {
-		if (typeof(obj)!="object" || obj==null || !pgzp().defined(obj.className) || obj.className==null) { return false; }
-		pgzp().css.removeClass(obj,className);
-		pgzp().css.addClass(obj,newClassName);
+		if (typeof(obj)!="object" || obj==null || !pgzp.defined(obj.className) || obj.className==null) { return false; }
+		pgzp.css.removeClass(obj,className);
+		pgzp.css.addClass(obj,newClassName);
 		return true;
 	};
 	
@@ -166,11 +166,11 @@ PageZipper.prototype.screen = (function() {
 	
 	// Get a reference to the body
 	screen.getBody = function() {
-		if (pgzp().doc.body) {
-			return pgzp().doc.body;
+		if (pgzp.doc.body) {
+			return pgzp.doc.body;
 		}
-		if (pgzp().doc.getElementsByTagName) {
-			var bodies = pgzp().doc.getElementsByTagName("BODY");
+		if (pgzp.doc.getElementsByTagName) {
+			var bodies = pgzp.doc.getElementsByTagName("BODY");
 			if (bodies!=null && bodies.length>0) {
 				return bodies[0];
 			}
@@ -180,45 +180,45 @@ PageZipper.prototype.screen = (function() {
 
 	// Get the amount that the main document has scrolled from top
 	screen.getScrollTop = function() {
-		if (pgzp().doc.documentElement && pgzp().defined(pgzp().doc.documentElement.scrollTop) && pgzp().doc.documentElement.scrollTop>0) {
-			return pgzp().doc.documentElement.scrollTop;
+		if (pgzp.doc.documentElement && pgzp.defined(pgzp.doc.documentElement.scrollTop) && pgzp.doc.documentElement.scrollTop>0) {
+			return pgzp.doc.documentElement.scrollTop;
 		}
-		if (pgzp().doc.body && pgzp().defined(pgzp().doc.body.scrollTop)) {
-			return pgzp().doc.body.scrollTop;
+		if (pgzp.doc.body && pgzp.defined(pgzp.doc.body.scrollTop)) {
+			return pgzp.doc.body.scrollTop;
 		}
 		return null;
 	};
 	
 	// Get the height of the entire document
 	screen.getDocumentHeight = function() {
-		var body = pgzp().screen.getBody();
-		var innerHeight = (pgzp().defined(self.innerHeight)&&!isNaN(self.innerHeight))?self.innerHeight:0;
-		if (pgzp().doc.documentElement && (!pgzp().doc.compatMode || pgzp().doc.compatMode=="CSS1Compat")) {
-		    var topMargin = parseInt(pgzp().css.getStyle(body,'margin-top'),10) || 0;
-		    var bottomMargin = parseInt(pgzp().css.getStyle(body,'margin-bottom'), 10) || 0;
-			return Math.max(body.offsetHeight + topMargin + bottomMargin, pgzp().doc.documentElement.clientHeight, pgzp().doc.documentElement.scrollHeight, pgzp().zero(self.innerHeight));
+		var body = pgzp.screen.getBody();
+		var innerHeight = (pgzp.defined(self.innerHeight)&&!isNaN(self.innerHeight))?self.innerHeight:0;
+		if (pgzp.doc.documentElement && (!pgzp.doc.compatMode || pgzp.doc.compatMode=="CSS1Compat")) {
+		    var topMargin = parseInt(pgzp.css.getStyle(body,'margin-top'),10) || 0;
+		    var bottomMargin = parseInt(pgzp.css.getStyle(body,'margin-bottom'), 10) || 0;
+			return Math.max(body.offsetHeight + topMargin + bottomMargin, pgzp.doc.documentElement.clientHeight, pgzp.doc.documentElement.scrollHeight, pgzp.zero(self.innerHeight));
 		}
-		return Math.max(body.scrollHeight, body.clientHeight, pgzp().zero(self.innerHeight));
+		return Math.max(body.scrollHeight, body.clientHeight, pgzp.zero(self.innerHeight));
 	};
 	
 	// Get the width of the viewport (viewable area) in the browser window
 	screen.getViewportWidth = function() {
-    	if (pgzp().doc.documentElement && (!pgzp().doc.compatMode || pgzp().doc.compatMode=="CSS1Compat")) {
-			return pgzp().doc.documentElement.clientWidth;
-		} else if (pgzp().doc.compatMode && pgzp().doc.body) {
-      		return pgzp().doc.body.clientWidth;
+    	if (pgzp.doc.documentElement && (!pgzp.doc.compatMode || pgzp.doc.compatMode=="CSS1Compat")) {
+			return pgzp.doc.documentElement.clientWidth;
+		} else if (pgzp.doc.compatMode && pgzp.doc.body) {
+      		return pgzp.doc.body.clientWidth;
 		}
 		return screen.zero(self.innerWidth);
 	};
 
 	// Get the height of the viewport (viewable area) in the browser window
 	screen.getViewportHeight = function() {
-		if (!pgzp().win.opera && pgzp().doc.documentElement && (!pgzp().doc.compatMode || pgzp().doc.compatMode=="CSS1Compat")) {
-			return pgzp().doc.documentElement.clientHeight;
-		} else if (pgzp().doc.compatMode && !pgzp().win.opera && pgzp().doc.body) {
-			return pgzp().doc.body.clientHeight;
+		if (!pgzp.win.opera && pgzp.doc.documentElement && (!pgzp.doc.compatMode || pgzp.doc.compatMode=="CSS1Compat")) {
+			return pgzp.doc.documentElement.clientHeight;
+		} else if (pgzp.doc.compatMode && !pgzp.win.opera && pgzp.doc.body) {
+			return pgzp.doc.body.clientHeight;
 		}
-		return pgzp().zero(self.innerHeight);
+		return pgzp.zero(self.innerHeight);
 	};
 
 	return screen;

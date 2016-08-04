@@ -14,11 +14,11 @@ require 'fileutils'
 @prod = ARGV[0] == "prod"
 @jsFiles = [
                     "header.js",
-                    "jquery.js",
+                    "lib/jquery.js",
                     "pagezipper.js",
                     "compat.js",
                     "image.js",
-                    "jstoolkit.js",
+                    "lib/jstoolkit.js",
                     "menu.js",
                     "next_url.js",
                     "page_loader_ajax.js",
@@ -44,7 +44,7 @@ end
 def build_pgzp(output, loader_file)
   ##for each js file, append to output
   @jsFiles.concat([loader_file]).each {|currFile|
-     puts currFile
+    puts currFile
 
     #for now don't compile
     if @prod
@@ -79,6 +79,7 @@ puts "Build Firefox Extension"
 
 # remove jquery from src files, and copy it over
 jq = @jsFiles.slice!(1)
-`cp -r #{@src}/#{jq} #{@output}/#{@ffext_src}/#{jq}`
+jq_filename = jq.split("/")[-1]  #only get the filename
+`cp -r #{@src}/#{jq} #{@output}/#{@ffext_src}/#{jq_filename}`
 @prod = false
 build_pgzp("#{@output}/#{@ffext_src}/#{@ext_name}", "loader_firefox.js")

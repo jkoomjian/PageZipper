@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	
+
 	<h3>Install Local PageZipper!</h3>
 	<ul>
 		<li>To 'install' a bookmarklet, drag the link into your bookmarks toolbar</li>
@@ -15,7 +15,7 @@
 		<li><a href="" id="pgzp_local_ajax">PgzpLocal</a>: PageZipper Test - Ajax only suitable for loading pagezipper from localhost</li>
 		<li><a href="" id="bkmklt_link_ff">PgzpLocalCompiled</a>: PageZipper Compiled</li>
 	</ul>
-	
+
 	<h3>Setup The Project!</h3>
 	<ol>
 		<li>java and ruby are required to generate the production ready compressed code</li>
@@ -45,7 +45,7 @@
 	<ul>
 		<li><a href="../test/unit_tests.html">Unit Tests</a></li>
 	</ul>
-	
+
 	<h3>Test Routine:</h3>
 	<a href="http://www.desmoinesregister.com/apps/pbcs.dll/gallery?Site=D2&Date=20081031&Category=NEWS&ArtNo=810310806&Ref=PH&Params=Itemnr=2">http://www.desmoinesregister.com/apps/pbcs.dll/gallery?Site=D2&Date=20081031&Category=NEWS&ArtNo=810310806&Ref=PH&Params=Itemnr=2</a>
 	<br>
@@ -55,36 +55,36 @@
 		<li>test cntrl-down, cntrl-up - loads next 4</li>
 		<li>end of show</li>
 	</ul>
-	
+
 	<br>
 
 	<a href="http://www.boston.com/bigpicture/2009/03/scenes_from_the_recession.html">http://www.boston.com/bigpicture/2009/03/scenes_from_the_recession.html</a>
 	<ul>
 		<li>verify cntrl-down, up</li>
 	</ul>
-	
+
 	<br>
 
 	<a href="http://vpizza.org/~jmeehan/photo/index.cgi?mode=viewpicture&album=20021103-balloon-v1.0-ground&picture=133-3364_IMG.JPG&maxWidth=1024">http://vpizza.org/~jmeehan/photo/index.cgi?mode=viewpicture&album=20021103-balloon-v1.0-ground&picture=133-3364_IMG.JPG&maxWidth=1024</a>
 	<ul>
 		<li>verify resize</li>
 	</ul>
-	
+
 	<br>
-	
+
 	<a href="http://ihasahotdog.com/">http://ihasahotdog.com/</a>
 	<ul>
 		<li>verify multiple images/page + multiple pages works correctly - adds the next page when arriving at last image</li>
 	</ul>
-	
+
 	<hr/>
 	<h3>Sites which have caused trouble:</h3>
 	<a href="http://www.freecycle.org/group/United%20States/Iowa/Des%20Moines">http://www.freecycle.org/group/United%20States/Iowa/Des%20Moines</a> - more likes to mess up
 	<br><a href="http://www.wine-art.be/index2.php?page=Catalogus" target="_blank">Wine catalouge</a> - uses index
 	<br><a href="http://www.actionsquad.org/hammsoverview.htm" target="_blank">Action Squad</a> - uses index
 	<br><a href="http://www.seabourn.com/PlanACruise/Search/index.cfm?a=search&page=1&startrow=1&RegionID=1&date=0&shipID=0&duration=0&id=0&port=" target="_blank">also uses Index</a>
-		
-		
+
+
 	<script type="text/javascript" id="bookmarklet_loader">
 		function launchBookmarklet(){
 			if(window['pgzp']){
@@ -112,11 +112,11 @@
 					$LAB
 						.setOptions({BasePath: 'http://127.0.0.1/pgzp/src/'})
 						.script('header.js')
-						.script('jquery.js').wait()  /*force all previously queued scripts to load before preceding*/
+						.script('lib/jquery.js').wait()  /*force all previously queued scripts to load before preceding*/
 						.script('pagezipper.js').wait()
 						.script('compat.js')
 						.script('image.js')
-						.script('jstoolkit.js')
+						.script('lib/jstoolkit.js')
 						.script('menu.js')
 						.script('next_url.js')
 						.script('page_loader_ajax.js')
@@ -129,11 +129,11 @@
 			}
 		}
 	</script>
-	
+
 	<script type="text/javascript">
 		generateBookmarkletLink("pgzp_local_ajax_js", "pgzp_local_ajax");
 		generateBookmarkletLink("bookmarklet_loader", "bkmklt_link_ff");
 	</script>
-	
+
 </body>
 </html>

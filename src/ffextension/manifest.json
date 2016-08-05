@@ -21,7 +21,7 @@
   },
 
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["extension_options/common.js", "background.js"]
   },
 
   "browser_action": {
@@ -35,6 +35,7 @@
     "tabs",
     "http://*/*", "https://*/*",
     "activeTab",
-    "storage"
+    "storage",
+    "webNavigation"
   ]
 }

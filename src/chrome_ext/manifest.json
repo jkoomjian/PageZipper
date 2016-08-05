@@ -9,7 +9,7 @@
              "48": "zipper_48.png",
              "128": "zipper_128.png" },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["extension_options/common.js", "background.js"]
   },
   "browser_action": {
       "name": "PageZipper",
@@ -24,6 +24,7 @@
     "tabs",
     "http://*/*", "https://*/*",
     "activeTab",
-    "storage"
+    "storage",
+    "webNavigation"
   ]
 }

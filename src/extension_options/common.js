@@ -1,3 +1,5 @@
+const pgzpBP = chrome.extension.getBackgroundPage();
+
 function saveChangeToList(siteUrl, callback, saveFlag) {
   var domain = getDomain(siteUrl);
   if (saveFlag === undefined) saveFlag = "domain";
@@ -23,6 +25,14 @@ function saveChangeToList(siteUrl, callback, saveFlag) {
   });
 }
 
+function getFromList(url, callback) {
+  var domain = getDomain(url), toGet = {};
+  toGet['whitelist'] = {};
+  pgzpBP.browserStorage.get(toGet, function(items) {
+    callback( items['whitelist'][domain] );
+  });
+}
+
 function getDomain(url) {
   if (url.indexOf("http") !== 0) {
     url = "http://" + url;
@@ -42,4 +52,10 @@ function getDomain(url) {
 
 function isActiveDomain(domainValue) {
   return domainValue == "domain" || domainValue == "nohome";
+}
+
+function is_homepage(url) {
+  var a = document.createElement("a");
+  a.href = url;
+  return a.pathname == "/";
 }

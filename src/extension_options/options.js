@@ -1,4 +1,3 @@
-const pgzpBP = chrome.extension.getBackgroundPage();
 var optionsApp = angular.module('optionsApp', ['ngRoute']);
 
 

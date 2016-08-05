@@ -1,15 +1,16 @@
+/*-------------------- Background Variables -----------------*/
 var loaded_tabs = {};
 //FF does not yet support chrome.storage.sync
 var browserStorage = chrome.storage.local;
 
-//Pgzp icon is clicked
-browser.browserAction.onClicked.addListener(function(tab) {
+/*-------------------- Event Handlers -----------------*/
+function runPgzp(tab) {
 	var icon_src = "";
 
 	if (!loaded_tabs[tab.id]) {
-		browser.tabs.executeScript(tab.id, {'file': 'jquery.js'}, function () {
-			browser.tabs.executeScript(tab.id, {'file': 'pagezipper.js'}, function () {
-					browser.tabs.executeScript(tab.id, {'code': '_pgzpInitExtension();_pgzpToggleBookmarklet();'});
+		chrome.tabs.executeScript(tab.id, {'file': 'jquery.js'}, function () {
+			chrome.tabs.executeScript(tab.id, {'file': 'pagezipper.js'}, function () {
+					chrome.tabs.executeScript(tab.id, {'code': '_pgzpInitExtension();_pgzpToggleBookmarklet();'});
 			});
 		});
 		loaded_tabs[tab.id] = "on";
@@ -17,21 +18,45 @@ browser.browserAction.onClicked.addListener(function(tab) {
 	} else if (loaded_tabs[tab.id] == "on") {
 		loaded_tabs[tab.id] = "off";
 		icon_src = "icon19.png";
-		browser.tabs.executeScript(tab.id, {'code': '_pgzpToggleBookmarklet()'});
+		chrome.tabs.executeScript(tab.id, {'code': '_pgzpToggleBookmarklet()'});
 	} else if (loaded_tabs[tab.id] == "off") {
 		loaded_tabs[tab.id] = "on";
 		icon_src = "icon19-on.png";
-		browser.tabs.executeScript(tab.id, {'code': '_pgzpToggleBookmarklet()'});
+		chrome.tabs.executeScript(tab.id, {'code': '_pgzpToggleBookmarklet()'});
 	}
 
-	browser.browserAction.setIcon({tabId: tab.id, path: browser.extension.getURL(icon_src)});
-});
+	chrome.browserAction.setIcon({tabId: tab.id, path: chrome.extension.getURL(icon_src)});
+}
 
-// New page is loaded in tab
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+function updateActiveTab(tabId, changeInfo, tab) {
 	if (changeInfo.status == "complete" && loaded_tabs[tabId]) {
 		// deactivate pgzp button on page load - restarting pgzp in this tab will require reloading everything
 		delete loaded_tabs[tabId];
-		browser.browserAction.setIcon({tabId: tab.id, path: browser.extension.getURL("icon19.png")});
+		chrome.browserAction.setIcon({tabId: tab.id, path: chrome.extension.getURL("icon19.png")});
 	}
-});
+}
+
+function autoRun(details) {
+	//ensure pgzp is not already running in this tab
+	if (loaded_tabs[details.tabId]) return;
+
+	var url = details.url;
+	var currTab = {id: details.tabId};
+	getFromList(url, function(domainValue) {
+		debugger;
+		if (domainValue == "domain" || (domainValue == "nohome" && !is_homepage(url))) {
+			runPgzp(currTab);
+		}
+	});
+}
+
+
+/*-------------------- Event Handlers -----------------*/
+
+//Update media queries after page load
+chrome.webNavigation.onDOMContentLoaded.addListener(autoRun);
+
+// Run Pgzp when the toolbar button is clicked
+chrome.browserAction.onClicked.addListener(runPgzp);
+
+chrome.tabs.onUpdated.addListener(updateActiveTab);

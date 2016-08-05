@@ -1,0 +1,24 @@
+<div class="lightbox" ng-click="closeAddNew($event); $event.stopPropagation();">
+  <div class="add-panel">
+    <div class="close">X</div>
+    <h4>Add Site</h4>
+    <div class="subtext">
+      Add a new site to the whitelist
+    </div>
+    <div class="form-fields">
+      <input type="text" id="new-site"
+              placeholder="http://www.google.com" tabindex="1"
+              ng-model="newSiteBox"
+              ng-pattern="/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/"
+              ng-required="true" />
+      <input type="submit" id="new-site-submit" value="Add" tabindex="2" ng-disabled="!newSiteBox" ng-click="addSite()" />
+    </div>
+    <div class="options" ng-show="!autoRun">
+      <input type="checkbox" id="skipHomeCheckbox" ng-model="skipHomeCheckbox" />
+      <label for="skipHomeCheckbox">
+        Don't run on homepage
+        <div class="subtext">(Ex. will run on nytimes.com/article but not nytimes.com/)</div>
+      </label>
+    </div>
+  </div>
+</div>

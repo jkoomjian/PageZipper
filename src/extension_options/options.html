@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="optionsApp">
+<head>
+  <title>PageZipper Settings</title>
+  <script src="./lib/jquery.js"></script>
+  <script src="./lib/angular.min.js"></script>
+  <script src="./lib/angular-route.min.js"></script>
+  <script src="common.js"></script>
+  <script src="options.js"></script>
+  <link rel="stylesheet" href="options.css" />
+</head>
+
+<body ng-controller="optionsController">
+
+  <div class="wl-well">
+    <h2>PageZipper Settings</h2>
+
+    <div class="whitelist subsetting">
+
+      <div>
+        <h3>Whitelist</h3>
+        <div class="subtext">PageZipper will run automatically on the sites below:</div>
+      </div>
+
+      <div class="searchWrapper">
+        <input type="search" placeholder="Search" ng-model="searchKey" />
+      </div>
+
+      <div class="wl-list">
+        <div class="wl-sites">
+
+          <div>
+            <div class="wl-site" ng-repeat="site in whitelist|filter:searchKey">
+              <div class="wls-host">{{site}}</div>
+              <div class="wls-delete" ng-click="deleteSite()">X</div>
+            </div>
+          </div>
+
+        </div>
+        <button id="add-new" class="wl-add" ng-click="showAddNew()">Add New</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="finished-row">
+    <button id="finished" ng-click="closeOptions()">Close</button>
+  </div>
+
+  <div ng-view></div>
+
+</body>
+</html>

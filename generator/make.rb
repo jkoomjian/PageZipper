@@ -66,6 +66,7 @@ build_pgzp("#{@output}/#{@bookmarklet_name}", "loader_bookmarklet.js")
 puts "Build Chrome Extension"
 `cp -r #{@src}/#{@chrome_src} #{@output}`
 `cp -r #{@src}/#{@extension_icons}/*.png #{@output}/#{@chrome_src}`
+`cp -r #{@src}/extension_options #{@output}/#{@chrome_src}`
 build_pgzp("#{@output}/#{@chrome_src}/#{@ext_name}", "loader_chrome.js");
 
 ## ----- Build FF Extension -----

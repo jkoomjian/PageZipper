@@ -1,0 +1,49 @@
+.hidden {display: none;}
+
+body {
+  max-width: 600px;
+  margin: 20px auto;
+  font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+  text-align: center;
+}
+
+.subsetting {width: 60%; margin: 25px auto 0 auto;}
+.subsetting h3 {text-align: left; margin-bottom: 8px;}
+
+.searchWrapper {/*width: 60%; margin: 0 auto;*/ text-align: right;}
+
+.wl-well {}
+.wl-well h2 {margin-bottom: 5px;}
+.wl-well .subtext {font-size: 0.9em; margin-bottom: 15px; text-align: left;}
+.wl-list {border: 2px solid #ccc; /*width: 60%;*/ margin: 5px auto 20px auto; text-align: left;}
+.wl-sites {max-height: 300px; overflow-y: auto;}
+.wl-site {line-height: 40px; border-bottom: 1px dotted lightgray;}
+.wl-site > div {vertical-align: middle; display: inline-block;}
+.wls-host {width: 90%; padding-left: 30px; box-sizing: border-box;}
+/*.wls-host::first-letter {text-transform: uppercase;}*/
+.wls-delete {width: 8%;}
+.wl-add {width: 100%; padding: 10px 0; border-radius: 0;}
+.finished-row {width: 60%; margin: 0 auto; text-align: right;}
+
+.lightbox {position: absolute; top: 0; bottom: 0; right: 0; left: 0; background-color: rgba(0, 0, 0, 0.5);}
+.add-panel {
+  width: 350px; margin: 0 auto;
+  position: absolute; top: 40%; transform: translateY(-50%); left: 0; right: 0;
+  border: 1px solid black; background-color: lightgray;
+  box-shadow: 5px 5px 10px 0 #575757; padding: 20px;
+  z-index: 100;
+}
+h4 {margin: 0 0 10px 0;}
+.close {position: absolute; top: 10px; right: 10px; padding: 0px}
+.form-fields {margin: 10px 0 0 0;}
+.form-fields > input {box-sizing: border-box; height: 30px;}
+.form-fields input#new-site {padding-right: 16px; padding-left: 10px; margin-right: 3px; width: 60%;}
+.form-fields input#new-site.ng-valid {background: #FFF url('img/icon-checkmark-circled.png') no-repeat 98% center;}
+.form-fields input#new-site.ng-dirty.ng-invalid {background: #FFF url('img/icon-close-circled.png') no-repeat 98% center;}
+.form-fields input#new-site-submit {width: 15%;}
+.close, #add-new, .wls-delete {cursor: pointer;}
+
+.options {box-sizing: border-box; margin-left: 12.5%; margin-top: 1em; text-align: left;}
+.options > * {vertical-align: middle; display: inline-block; max-width: 90%;}
+.options > input {margin: 0 5px 0 0;}
+.options .subtext {font-size: 0.85em;}

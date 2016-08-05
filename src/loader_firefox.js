@@ -4,6 +4,6 @@ function _pgzpInitExtension() {
 	pgzp.win = window;
 	pgzp.doc = window.document;
 	pgzp.loader_type = "ffextension";
-	pgzp.media_path = browser.extension.getURL("/");
+	pgzp.media_path = browser.extension.getURL("/extension_icons/");
 	pgzp.loadPageZipper();
 }

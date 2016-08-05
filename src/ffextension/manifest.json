@@ -8,9 +8,9 @@
     "page": "extension_options/options.html",
     "open_in_tab": true
   },
-  "icons": {  "16": "zipper_16.png",
-              "48": "zipper_48.png",
-              "128": "zipper_128.png"},
+  "icons": {  "16": "extension_icons/zipper_16.png",
+              "48": "extension_icons/zipper_48.png",
+              "128": "extension_icons/zipper_128.png"},
 
   "applications": {
     "gecko": {
@@ -25,7 +25,7 @@
   },
 
   "browser_action": {
-    "default_icon": "zipper_32.png",
+    "default_icon": "extension_icons/zipper_32.png",
     "default_title": "PageZipper"
   },
 

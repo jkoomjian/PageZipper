@@ -18,7 +18,6 @@ function autoRun(details) {
 	var url = details.url;
 	var currTab = {id: details.tabId};
 	getFromList(url, function(domainValue) {
-		debugger;
 		if (domainValue == "domain" || (domainValue == "nohome" && !is_homepage(url))) {
 			runPgzp(currTab);
 		}

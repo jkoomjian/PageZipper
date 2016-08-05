@@ -65,8 +65,9 @@ build_pgzp("#{@output}/#{@bookmarklet_name}", "loader_bookmarklet.js")
 ## ----- Build Chrome Extension -----
 puts "Build Chrome Extension"
 `cp -r #{@src}/#{@chrome_src} #{@output}`
+# TODO get rid of this cp
 `cp -r #{@src}/#{@extension_icons}/*.png #{@output}/#{@chrome_src}`
-`cp -r #{@src}/extension_options #{@output}/#{@chrome_src}`
+`cp -r #{@src}/extension_* #{@output}/#{@chrome_src}`
 build_pgzp("#{@output}/#{@chrome_src}/#{@ext_name}", "loader_chrome.js");
 
 ## ----- Build FF Extension -----
@@ -76,8 +77,9 @@ build_pgzp("#{@output}/#{@chrome_src}/#{@ext_name}", "loader_chrome.js");
 ## :(
 puts "Build Firefox Extension"
 `cp -r #{@src}/#{@ffext_src} #{@output}`
+# TODO get rid of this cp
 `cp -r #{@src}/#{@extension_icons}/*.png #{@output}/#{@ffext_src}`
-`cp -r #{@src}/extension_options #{@output}/#{@ffext_src}`
+`cp -r #{@src}/extension_* #{@output}/#{@ffext_src}`
 
 # remove jquery from src files, and copy it over
 jq = @jsFiles.slice!(1)

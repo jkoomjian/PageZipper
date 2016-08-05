@@ -10,14 +10,6 @@ function _pgzpInitBookmarklet() {
 	pgzp.loadPageZipper();
 }
 
-function _pgzpToggleBookmarklet() {
-	if (pgzp.is_running) {
-		pgzp.stopPageZipper();
-	} else {
-		pgzp.runPageZipper();
-	}
-}
-
-//Start!
+/*------------------------- Start!! ----------------------*/
 _pgzpInitBookmarklet();
 _pgzpToggleBookmarklet();

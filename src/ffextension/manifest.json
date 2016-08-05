@@ -21,7 +21,7 @@
   },
 
   "background": {
-    "scripts": ["extension_options/common.js", "background.js"]
+    "scripts": ["extension_options/common.js", "background.js", "extension_common/background-common.js"]
   },
 
   "browser_action": {

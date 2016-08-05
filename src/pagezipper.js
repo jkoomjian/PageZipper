@@ -228,3 +228,13 @@ PageZipper.prototype.setPageVisibility = function(currPageIndex) {
 		if (oldPage.elemContent.style.visibility != "hidden") oldPage.elemContent.style.visibility = "hidden";
 	}
 };
+
+/*------------------------- Loader ----------------------*/
+// to be called after _pgzpInitBookmarklet() or _pgzpInitExtension()
+function _pgzpToggleBookmarklet() {
+	if (pgzp.is_running) {
+		pgzp.stopPageZipper();
+	} else {
+		pgzp.runPageZipper();
+	}
+}

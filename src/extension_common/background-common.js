@@ -31,7 +31,7 @@ function autoRun(details) {
 /*-------------------- Event Handlers -----------------*/
 
 //Update media queries after page load
-chrome.webNavigation.onDOMContentLoaded.addListener(autoRun); //
+chrome.webNavigation.onDOMContentLoaded.addListener(autoRun);
 
 // Run Pgzp when the toolbar button is clicked
 chrome.browserAction.onClicked.addListener(runPgzp);

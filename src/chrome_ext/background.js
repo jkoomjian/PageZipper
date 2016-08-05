@@ -1,4 +1,6 @@
 var loaded_tabs = {};
+//FF does not yet support chrome.storage.sync
+var browserStorage = chrome.storage.sync;
 
 //browserAction = pgzp icon
 chrome.browserAction.onClicked.addListener(function(tab) {

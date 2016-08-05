@@ -1,13 +1,16 @@
 {
   "manifest_version": 2,
   "name": "PageZipper",
-  "description": "Painlessly merge a series of web pages into one.",
   "version": "1.5",
+  "description": "Painlessly merge a series of web pages into one.",
   "homepage_url": "http://printwhatyoulike.com/pagezipper",
-  "icons": {
-    "48": "zipper_48.png",
-    "128": "zipper_128.png"
+  "options_ui": {
+    "page": "extension_options/options.html",
+    "open_in_tab": true
   },
+  "icons": {  "16": "zipper_16.png",
+              "48": "zipper_48.png",
+              "128": "zipper_128.png"},
 
   "applications": {
     "gecko": {
@@ -21,15 +24,17 @@
     "scripts": ["background.js"]
   },
 
-  "permissions": [
-    "tabs", "http://*/*", "https://*/*"
-  ],
-
-
   "browser_action": {
     "default_icon": "zipper_32.png",
     "default_title": "PageZipper"
   },
 
-  "web_accessible_resources": ["*"]
+  "web_accessible_resources": ["*"],
+
+  "permissions": [
+    "tabs",
+    "http://*/*", "https://*/*",
+    "activeTab",
+    "storage"
+  ]
 }

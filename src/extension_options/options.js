@@ -1,3 +1,4 @@
+const pgzpBP = chrome.extension.getBackgroundPage();
 var optionsApp = angular.module('optionsApp', ['ngRoute']);
 
 
@@ -14,7 +15,7 @@ optionsApp.config(function($routeProvider){
 optionsApp.factory('chromeSync', function() {
   return {
     get: function(callback) {
-      chrome.storage.sync.get("whitelist", function(items) {
+      pgzpBP.browserStorage.get("whitelist", function(items) {
         items = items["whitelist"] || {};
         callback(items);
       });

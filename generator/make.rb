@@ -77,6 +77,7 @@ build_pgzp("#{@output}/#{@chrome_src}/#{@ext_name}", "loader_chrome.js");
 puts "Build Firefox Extension"
 `cp -r #{@src}/#{@ffext_src} #{@output}`
 `cp -r #{@src}/#{@extension_icons}/*.png #{@output}/#{@ffext_src}`
+`cp -r #{@src}/extension_options #{@output}/#{@ffext_src}`
 
 # remove jquery from src files, and copy it over
 jq = @jsFiles.slice!(1)

@@ -10,13 +10,13 @@ function saveChangeToList(siteUrl, callback, saveFlag) {
   //Update persistent storage
   var toGet = {};
   toGet["whitelist"] = {};
-  chrome.storage.sync.get(toGet, function(items) {
+  pgzpBP.browserStorage.get(toGet, function(items) {
     let currList = items["whitelist"];
     currList[domain] = saveFlag;
 
     var toSet = {};
     toSet["whitelist"] = currList;
-    chrome.storage.sync.set(toSet, function() {
+    pgzpBP.browserStorage.set(toSet, function() {
       if (callback) callback();
     });
 

@@ -4,6 +4,7 @@ var browserStorage = chrome.storage.sync;
 
 /*-------------------- Event Handlers -----------------*/
 function runPgzp(tab) {
+	debugger;
 	var icon_src = "";
 
 	if (!loaded_tabs[tab.id]) {

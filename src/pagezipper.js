@@ -74,7 +74,6 @@ PageZipper.prototype.loadPageZipper = function() {
 PageZipper.prototype.runPageZipper = function() {
 	pgzp.jq(pgzp.doc).bind("keydown", this.keyDown);
 	pgzp.jq(pgzp.doc).bind("keyup", this.keyUp);
-	if (pgzp.loader_type != "ffextension") pgzp.jq(pgzp.win).bind("resize", this.positionMenu); //gets called on new tab in ffext
 	pgzp.addMenu();
 	pgzp.updateButtonState(pgzp.in_compat_mode, 'compat');
 	this.is_running = pgzp.win.setInterval(pgzp.mainBlock, 250);
@@ -87,7 +86,6 @@ PageZipper.prototype.stopPageZipper = function() {
 		pgzp.removeMenu();
 		pgzp.jq(pgzp.doc).unbind("keydown", this.keyDown);
 		pgzp.jq(pgzp.doc).unbind("keyup", this.keyUp);
-		if (pgzp.loader_type != "ffextension") pgzp.jq(pgzp.win).unbind("resize", this.positionMenu);
 
 		//compat only - turn off key bindings added to every iframe
 		if (pgzp.in_compat_mode) {

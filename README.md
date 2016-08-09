@@ -32,3 +32,7 @@ Bookmarklet:
 
 1.5 - 7/5/2016-----
 * Get firefox extension working with FF 49/Electrolysis
+* Add a whitelist - pgzp will always run on whitelisted domains
+Bug Fixes:
+* Fix bug on how tabs are handled in extensions
+* Fix issue with page number not being correct after stopping then restarting pgzp

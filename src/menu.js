@@ -28,8 +28,8 @@ PageZipper.prototype.addMenu = function() {
 				<img src='${media_path}zipper_32.png' alt='PageZipper!' style='border-width: 0px' />										\
 			</a>																																							\
 		</div>																																								\
-	";	
-	
+	";
+
 	//replace ${media_path} with actual value
 	css = pgzp.jq.trim( css.replace(/\$\{media_path\}/g, pgzp.media_path) );
 	html = pgzp.jq.trim( html.replace(/\$\{media_path\}/g, pgzp.media_path) );
@@ -49,6 +49,9 @@ PageZipper.prototype.addMenu = function() {
 	div.innerHTML = html;
 	div = div.childNodes[0];
 	pgzp.doc.body.appendChild(div);
+
+	//update pages loaded count
+	pgzp.menuIncrementPagesLoaded();
 
 	//add event handlers
 	var assignLinkHandler = function(linkId, eventHandler) {
@@ -71,32 +74,35 @@ PageZipper.prototype.removeMenu = function() {
 }
 
 PageZipper.prototype.menuIncrementPagesLoaded = function(numPages) {
-	var loadedPages = pgzp.doc.getElementById("pgzp_loaded_pages"), num;
-	if (loadedPages) {
-		//just to make this more confusing, parseInt is in window, not window.content in ff-extension
-		num = parseInt(loadedPages.textContent.replace("/", "", "g"), 10);
-		num = numPages ? numPages : num+1;
-		loadedPages.textContent = "/" + num;
+	var loadedPages = pgzp.doc.getElementById("pgzp_loaded_pages");
+	if (!loadedPages) return;
+
+	//Directly set # of pages loaded
+	if (numPages) {
+		loadedPages.textContent = "/" + numPages;
+		return;
 	}
+
+	loadedPages.textContent = "/" + pgzp.pages.length;
 }
 
 PageZipper.prototype.menuSetCurrPageNumber = function(currPage) {
 	var currPageObj = pgzp.pages[currPage - 1];
 	pgzp.doc.getElementById("pgzp_curr_page").textContent = currPage;
-	
+
 	//disable/enable arrows as required
 	if (pgzp.displayMode == "text") {
 		pgzp.updateButtonState((currPage != 1), "prev"); //if on first page, prev disabled, else enabled
 		pgzp.updateButtonState((currPage != pgzp.pages.length), "next"); //if on last page next, disabled, else enabled
 	} else {
 		var top = pgzp.screen.getScrollTop();
-		
+
 		//for prev, only disable when we are above first img on first page
-		var displayPrev = (pgzp.findPos(pgzp.pages[0].posterImgs[0]).y < top)
+		var displayPrev = (pgzp.findPos(pgzp.pages[0].posterImgs[0]).y < top);
 		pgzp.updateButtonState(displayPrev, "prev");
 		//for next, disble if currPage == lastPage and we are below last image on page
-		var disableNext = 	(currPage == pgzp.pages.length && 
-							currPageObj.posterImgs && 
+		var disableNext = 	(currPage == pgzp.pages.length &&
+							currPageObj.posterImgs &&
 							pgzp.findPos( currPageObj.posterImgs[ currPageObj.posterImgs.length-1 ] ).y < (top+pgzp.poster_image_min_vmargin+1)
 							);
 		pgzp.updateButtonState(!disableNext, "next");
@@ -108,13 +114,13 @@ PageZipper.prototype.updateButtonState = function(enable, buttonName) {
 	var button = pgzp.doc.getElementById("pgzp_button_" + buttonName);
 	var activeClass = "pgzp_button_" + buttonName + "_active";
 	var inactiveClass = "pgzp_button_" + buttonName + "_inactive";
-	
+
 	if (enable) {
 		pgzp.css.replaceClass(button, inactiveClass, activeClass);
 	} else {
 		pgzp.css.replaceClass(button, activeClass, inactiveClass);
 	}
-	
+
 	if (buttonName == 'compat') {
 		button.title = enable ? button.title.replace('disabled', 'enabled') : button.title.replace('enabled', 'disabled');
 	}
@@ -163,7 +169,7 @@ PageZipper.prototype.keyUp = function(event) {
 /*------------------------- Page Stuff ----------------------*/
 PageZipper.prototype.goToNext = function(inc){
 	var currPageIndex = pgzp.getViewableCurrentPage(pgzp.getCurrentPage());
-	
+
 	if (pgzp.displayMode == 'text') {
 		pgzp.goToNextPage(inc, currPageIndex);
 	} else {

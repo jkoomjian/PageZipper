@@ -46,3 +46,15 @@ function readInDom(url, callback) {
     callback(textToDom(data));
   });
 }
+
+function assertEquals(testValue, correctValue) {
+  return expect( testValue ).toBe(correctValue);
+}
+
+function assertTrue(testValue) {
+  return expect( testValue ).toBe(true);
+}
+
+function assertFalse(testValue) {
+  return expect( testValue ).toBe(false);
+}

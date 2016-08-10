@@ -20,6 +20,8 @@ require 'fileutils'
                     "image.js",
                     "lib/jstoolkit.js",
                     "menu.js",
+                    "nextlink.js",
+                    "next_url_trials.js",
                     "next_url.js",
                     "page_loader_ajax.js",
                     "page_loader_iframe.js",

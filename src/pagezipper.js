@@ -46,8 +46,8 @@ PageZipper.prototype.loadPageZipper = function() {
 	this.iframe = new PageZipperIframe();
 
 	//add in Node value - ff provides these, but they do not exist for the extension ?!?! Or for IE
-	if (!window['Node']) {
-	    window.Node = {
+	if (!pgzp.win['Node']) {
+	    pgzp.win.Node = {
 		    ELEMENT_NODE: 1,
 	    	TEXT_NODE: 3
 		};
@@ -55,19 +55,17 @@ PageZipper.prototype.loadPageZipper = function() {
 
 	pgzp.currDomain = pgzp.getDomain(pgzp.win.location.href);
 	pgzp.url_list = [ pgzp.win.location.href ];
-	if (pgzp.loader_type !=  "autorun") {
-		pgzp.addExistingPage(pgzp.win.location.href, pgzp.doc.body);
-		pgzp.displayMode = pgzp.calculateDisplayMode(pgzp.pages[0]);
-		if (pgzp.displayMode == 'image' && pgzp.pages[0].posterImgs.length == 1) {
-			pgzp.onePosterPerPageMode = true;
-			pgzp.minimumPageBuffer = pgzp.minimumPageBufferGallery;
-		}
-		//Override document.write to prevent additional pages from writing to this closed page and messing everything up! - won't apply in iframes
-		if (!pgzp.in_compat_mode) {
-			//FF makes this hard due to security: mikeconley.ca/blog/2009/05/02/overriding-firefox's-windowalert-part-2/ developer.mozilla.org/en/XPCNativeWrapper
-			var currDoc = pgzp.doc;
-			currDoc.write = currDoc.writeln = currDoc.open = currDoc.close = function(str) { return; };
-		}
+	pgzp.addExistingPage(pgzp.win.location.href, pgzp.doc.body);
+	pgzp.displayMode = pgzp.calculateDisplayMode(pgzp.pages[0]);
+	if (pgzp.displayMode == 'image' && pgzp.pages[0].posterImgs.length == 1) {
+		pgzp.onePosterPerPageMode = true;
+		pgzp.minimumPageBuffer = pgzp.minimumPageBufferGallery;
+	}
+	//Override document.write to prevent additional pages from writing to this closed page and messing everything up! - won't apply in iframes
+	if (!pgzp.in_compat_mode) {
+		//FF makes this hard due to security: mikeconley.ca/blog/2009/05/02/overriding-firefox's-windowalert-part-2/ developer.mozilla.org/en/XPCNativeWrapper
+		var currDoc = pgzp.doc;
+		currDoc.write = currDoc.writeln = currDoc.open = currDoc.close = function(str) { return; };
 	}
 };
 

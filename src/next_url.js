@@ -5,7 +5,7 @@ PageZipper.prototype.NextLink = function(text, link, alreadyLoaded, isHumanReada
 	this.text = text;
 	this.link = link;
 	this.syn = '';
-	this.isHumanReadableText = (isHumanReadableText == undefined) ? true : isHumanReadableText;
+	this.isHumanReadableText = (isHumanReadableText === undefined) ? true : isHumanReadableText;
 	this.isVisibleText = false;  //is this.text visible on the page?
 	this.alreadyLoaded = alreadyLoaded;
 	this.url = link.href;
@@ -33,7 +33,7 @@ PageZipper.prototype.NextLink = function(text, link, alreadyLoaded, isHumanReada
 				if (pgzp.debug) debugStr += "\n\t" + trial + "\t\t\t" + nScore + "\tx\t" + weight + "\t=\t" + (nScore * weight);
 			}
 		}
-		//pgzp.log(debugStr + "\nFinal Score:\t" + this.finalScore);
+		pgzp.log(debugStr + "\nFinal Score:\t" + this.finalScore);
 		return this.finalScore;
 	}
 	this.isSynNumber = function() {
@@ -41,7 +41,7 @@ PageZipper.prototype.NextLink = function(text, link, alreadyLoaded, isHumanReada
 	}
 }
 
-//Trials - These are the tests we will use to score the links
+//Trials - These are the tests used to score the links
 PageZipper.prototype.trials = {
 	'contains_next_syn': {
 						'doScore': function(nextLink) {
@@ -54,14 +54,14 @@ PageZipper.prototype.trials = {
 													if (
 														!nextLink.isHumanReadableText ||						//don't allow index as syn on urls
 														nextLink.text.toLowerCase().indexOf("comment") >= 0		//blogs often say something link '2 comments' - ignore this
-													) continue;  
+													) continue;
 												}
 												//make sure syns are not included as part of something else - ex 'page 2', not '2009', 'older' not placeholder.jpg
 												//for human readable, identify breaks by whitespace, for non-human readable, use any non a-z character
 												//'next' is never used outside its meaning, so dont worry about it
 												if (currWord.syn != "next" && !pgzp.isStandaloneWord(currWord.syn, nextLink.text, nextLink.isHumanReadableText)) continue;
 												if (currWord['pageBar'] && !nextLink.isPageBar) continue; //if this is a # from page bar, make sure this link is actually in page bar
-												//pgzp.log("adding syn: " + currWord.syn + " to " + nextLink.url);
+												pgzp.log("adding syn: " + currWord.syn + " to " + nextLink.url);
 												if (currWord.weight >= score) {
 													score = currWord.weight; //assign weight for keyword used
 													nextLink.syn = currWord.syn;
@@ -93,10 +93,10 @@ PageZipper.prototype.trials = {
 										shorter = currUrl;
 										longer = lastUrl;
 									}
-									
+
 									//subtract points for differences in length
 									score = shorter.length - longer.length;
-									
+
 									//add points for matching chars, remove for different chars
 									for (i=0; i<shorter.length; i++) {
 										if (shorter.charAt(i) == longer.charAt(i)) {
@@ -106,7 +106,7 @@ PageZipper.prototype.trials = {
 											if (notMatchingPos < 0) notMatchingPos = i;
 										}
 									}
-									
+
 									//if the two urls are the same except 1 number, which is off by 1, that is a dead giveaway
 									if (notMatchingPos > 0 &&
 										pgzp.isNumber(longer.charAt(notMatchingPos)) && pgzp.isNumber(shorter.charAt(notMatchingPos)) &&
@@ -164,11 +164,12 @@ PageZipper.prototype.trials = {
 									return nextLink.text.length * -1;
 								},
 					'weight': 10
-					}						
+					}
 };
 
+// Get the 'next' link from the given html
 PageZipper.prototype.getNextLink = function(body) {
-	var allNextLinks = pgzp.getAllScoredLinks(body)
+	var allNextLinks = pgzp.getAllScoredLinks(body);
 	if (allNextLinks.length <= 0) return null;
 
 	var highestLink = pgzp.getHighestTotalScore(allNextLinks);
@@ -182,49 +183,10 @@ PageZipper.prototype.getNextLink = function(body) {
 	return highestLink;
 }
 
-PageZipper.prototype.getAutorunNextLink = function(body) {
-	var scoredLinks = [];
-	var allNextLinks = pgzp.getAllScoredLinks(body)
-	if (allNextLinks.length <= 0) return null;
-
-	for (var i=0; i<allNextLinks.length; i++) {
-		var score = allNextLinks[i].calculateTotalScore();
-		scoredLinks.push( [score, allNextLinks[i]] );
-	}
-	
-	//sort
-	scoredLinks.sort(function(a, b){
-			return b[0] - a[0];
-		});
-
-	// pgzp.log(scoredLinks);
-
-	//make sure the top link has a score of at least 15000
-	if (scoredLinks[0][0] < 15000) return null;
-
-	//check if the top link is 30% than the next link
-	for (i=1; i<scoredLinks.length; i++) {
-		
-		if (scoredLinks[i][1].url == scoredLinks[0][1].url) {
-			continue;
-		}
-		
-		//next smallest link must be at least 30% smaller
-		if ( (scoredLinks[i][0] / scoredLinks[0][0]) > .7) {
-			return null;
-		} else {
-			return scoredLinks[0][1];
-		}
-	}
-	
-	//only 1 good link
-	return scoredLinks[0][1];
-}
-
 PageZipper.prototype.getAllScoredLinks = function(body) {
 	var allNextLinks = pgzp.getAllNextLinks(body);
 	var pageBarInfo = pgzp.getCurrentPageNumberFromPageBar(allNextLinks);
-	// pgzp.log("looking for page #: " + (pageBarInfo[0] + 1) + " w/confidence: " + pageBarInfo[1]);
+	pgzp.log("looking for page #: " + (pageBarInfo[0] + 1) + " w/confidence: " + pageBarInfo[1]);
 	pgzp.nextSynonyms[pgzp.nextSynonyms.length-1].syn = (pageBarInfo[0] + 1) + "";	//update nextSynonyms
 	pgzp.nextSynonyms[pgzp.nextSynonyms.length-1].weight = pageBarInfo[1];	//update weight/confidence
 	pgzp.linkTextIndex = pgzp.indexDuplicateLinks(allNextLinks);
@@ -250,7 +212,7 @@ PageZipper.prototype.scoreLinks = function(allNextLinks) {
 			}
 		}
 	}
-	// pgzp.log(debugMsg);
+	pgzp.log(debugMsg);
 }
 
 //normalize scores from 1-100
@@ -282,7 +244,7 @@ PageZipper.prototype.normalizeTrialSet = function(trialName, allLinks) {
 		allLinks[i].addScore(trialName, nScore, true);
 		if (pgzp.debug) debugMsg += "\nNScore " + i + ": " + allLinks[i].text + ": score: " + score + " curve: " + curve + " higest: " + highest + " lowest: " + lowest + " nscore: " + nScore;
 	}
-	//pgzp.log(debugMsg);
+	pgzp.log(debugMsg);
 }
 
 //calculate total score
@@ -294,7 +256,7 @@ PageZipper.prototype.getHighestTotalScore = function(allNextLinks) {
 			highestScoringLink = allNextLinks[i];
 		}
 	}
-	
+
 	if (pgzp.debug) {
 		var debugMsg = 'Final Score ' + allNextLinks.length;
 		allNextLinks.sort(function (a, b) {
@@ -303,9 +265,9 @@ PageZipper.prototype.getHighestTotalScore = function(allNextLinks) {
 		for (i=0; i<allNextLinks.length; i++) {
 			debugMsg += "\n" + allNextLinks[i].finalScore + ": " + allNextLinks[i].text + ": " + allNextLinks[i].url;
 		}
-		// pgzp.log(debugMsg);
+		pgzp.log(debugMsg);
 	}
-	
+
 	return highestScoringLink;
 }
 
@@ -316,29 +278,34 @@ PageZipper.prototype.getAllNextLinks = function(body) {
 	var pageUrl = pgzp.getUrlWOutAnchors( pgzp.pages[ pgzp.pages.length-1 ].url );
 	for (var i=0; i<links.length; i++) {
 		//ignore all links which point to a different domain than the existing domain
-		//pgzp.log("currdomain: "  + pgzp.currDomain + " currLink: " + pgzp.getDomain(links[i].href) + " full Link: " + links[i].href + " relative: " + links[i].getAttribute("href"));
+		pgzp.log("Curr Domain: "  + pgzp.currDomain + " Link Domain: " + pgzp.getDomain(links[i].href) + " Link url: " + links[i].href + " relative: " + links[i].getAttribute("href"));
+		// filter links which are obviously not the next link
 		if (
+			// has href
 			links[i].href &&
-			pgzp.getDomain(links[i].href) == pgzp.currDomain &&  //link points to this domain
-			(links[i].href.indexOf("#") < 0 || pageUrl != pgzp.getUrlWOutAnchors(links[i].href)) //avoid links to an anchor in current page, but include normal links curr page
+			// link points to this domain
+			pgzp.getDomain(links[i].href) == pgzp.currDomain &&
+			// not an anchor link to the current page
+			(links[i].href.indexOf("#") < 0 || pageUrl != pgzp.getUrlWOutAnchors(links[i].href))
 			) {
 			pgzp.addLinkComponents(links[i], allNextLinks, pgzp.contains(pgzp.url_list, links[i].href)); //mark links we've already loaded
 		}
 	}
-	//pgzp.logList(links, "All Links", "#{o.text}\t#{o.link}");
+	pgzp.logList(links, "All Links", "#{o.text}\t#{o.href}");
 	return allNextLinks;
 }
 
 //returns an array of all NextLink texts that could be derived from this link
 PageZipper.prototype.addLinkComponents = function(link, allNextLinks, alreadyLoaded) {
 	var NextLink = pgzp.NextLink;
+	//depth-first search to find link targets which are children of the <a> elem (ex. an <img> wrapped in a <a>)
 	var search = function(rootNode) {
 		for (var i=0; i<rootNode.childNodes.length; i++) {
 			var curr = rootNode.childNodes[i];
-		
+
 			//check if this node is useful
 			if (curr.nodeType == Node.TEXT_NODE && curr.nodeValue && pgzp.jq.trim(curr.nodeValue).length > 0) {
-				var nl = new NextLink(curr.nodeValue, link, alreadyLoaded); 
+				var nl = new NextLink(curr.nodeValue, link, alreadyLoaded);
 				nl.isVisibleText = true;
 				allNextLinks.push(nl);
 			//check for image link
@@ -352,7 +319,7 @@ PageZipper.prototype.addLinkComponents = function(link, allNextLinks, alreadyLoa
 			}
 		}
 	}
-	
+
 	if (link.title) allNextLinks.push(new NextLink(link.title, link));
 	if (link.alt) allNextLinks.push(new NextLink(link.alt, link));
 	search(link);
@@ -367,10 +334,11 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 	var allSequences = [], i = 0, currSeq = [], currNextLink, pageBar, pageBarScore = 0, pageNum, tmpPageBarScore;
 	var currPageUrl = pgzp.pages[ pgzp.pages.length-1 ].url;
 
-	//first find all consecutive numerical links, put them in arrays
+	//first find all consecutive numerical links, put them in allSequences array
 	for (i=0; i<allNextLinks.length; i++) {
 		currNextLink = allNextLinks[i];
-		if (currNextLink.isVisibleText) {  //only want text which actually appears on the page (one link may have multiple entries in allNextLinks)
+		//only want text which actually appears on the page (one link may have multiple entries in allNextLinks)
+		if (currNextLink.isVisibleText) {
 			if (pgzp.isNumber(currNextLink.text)) {
 				pageNum = parseInt(currNextLink.text, 10);
 				if (pageNum >= 0 && pageNum < 1000) {
@@ -386,7 +354,7 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 		}
 	}
 	if (currSeq.length > 0) allSequences.push(currSeq);
-	
+
 	//now find the sequence numerical links most likely to be the page bar
 	for (i=0; i<allSequences.length; i++) {
 		tmpPageBarScore = pgzp.__scorePageBar(allSequences[i]);
@@ -395,37 +363,40 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 			pageBar = allSequences[i];
 		}
 	}
-	
+
 	if (!pageBar) return [-1, 0];	//no page bar on this page
-	
+
 	//sort pageBar lowest to highest
 	pageBar.sort(	function(a,b){
 						return a.pageNum - b.pageNum;
 					});
-	// pgzp.logList(pageBar, "indexes ordered by size", "#{o.pageNum}\t#{o.text}");
-	
-	//mark pageBar for later
+	pgzp.logList(pageBar, "indexes ordered by size", "#{o.pageNum}\t#{o.text}");
+
+	//mark each link in pageBar for later
 	for (i=0; i<pageBar.length; i++) pageBar[i].isPageBar = true;
-	
+
 	//some page bars include links for the current page- ex. 1 2 3 4 where 1 is a link which is highlighted
 	for (i=0; i<pageBar.length; i++) {
 		if (pageBar[i].url == currPageUrl) {
 			return [pageBar[i].pageNum, 120];
 		}
 	}
-	
+
 	//there are 3 possibilities
-	
+
+	//curr page is at beginning - detect if first # in sequence is 2 or 1 (page bar starts at 1 or 0)
+	if (pageBar[0].pageNum == 2) return [1, 40];
+
 	//curr page is in the middle - detect by finding missing page
 	if (pageBar.length >= 2) {
 		var currPageNum, prevPageNum = pageBar[0].pageNum;
 		for (i=1; i<pageBar.length; i++) {
 			currPageNum = pageBar[i].pageNum;
-	
+
 			if (Math.abs(currPageNum - prevPageNum) == 2) {
-				//currPage should not have been visited yet - it is the next page.  
+				//currPage should not have been visited yet - it is the next page.
 				//check this to avoid getting tripped up by bad page bars - ex. 1, 2, 3, 5, 6, 8, 9, 12, 13, 14
-				//pgzp.log("currNextPage " + currPageNum + " url: " + pageBar[i].url + " visited previously: "  + pgzp.contains(pgzp.url_list, pageBar[i].url));
+				pgzp.log("currNextPage " + currPageNum + " url: " + pageBar[i].url + " visited previously: "  + pgzp.contains(pgzp.url_list, pageBar[i].url));
 				if (!pgzp.contains(pgzp.url_list, pageBar[i].url)) {
 					return [currPageNum - 1, 120];
 				}
@@ -434,11 +405,7 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 			}
 		}
 	}
-	
-	//curr page is at beginning - detect if first # in sequence is 2 or 1 (page bar starts at 1 or 0)
-	if (pageBar[0].pageNum == 2) return [1, 40];
-	// if (pageBar[0].pageNum == 1) return [0, 10];
-	
+
 	//curr page is last page
 	return [pageBar[pageBar.length-1].pageNum, 30];
 }
@@ -447,7 +414,7 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 PageZipper.prototype.__scorePageBar = function(pageBar) {
 	var similarityScore = pgzp.trials['url_similarity'].doScore(pageBar[0]);
 	var totalScore = pageBar.length + (similarityScore / 20);
-	// pgzp.log("page bar length: " + pageBar.length + " sim score: " + similarityScore + " total score: " + totalScore);
+	pgzp.log("page bar length: " + pageBar.length + " sim score: " + similarityScore + " total score: " + totalScore);
 	return totalScore;
 }
 

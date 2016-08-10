@@ -23,3 +23,46 @@ describe("page bar", function () {
   });
 
 });
+
+describe("getAllNextLinks", function () {
+  it("loads correct urls", function () {
+    var assertLinks = function(html, length) {
+      html = "<div>" + html + "</div>";
+      expect( pgzp.getAllNextLinks(textToDom(html)).length ).toBe(length);
+    };
+    _initWithPage("http://www.test.com/test.hml");
+    var html = "<a href='http://www.test.com/test2.hml'>adsf</a>";
+    assertLinks(html, 1);
+
+    //has href
+    html = "<a>adsf</a>";
+    assertLinks(html, 0);
+
+    //points to origin domain
+    html = "<a href='http://www.test2.com/test2.hml'>adsf</a>";
+    assertLinks(html, 0);
+
+    //not anchor link to current page
+    html = "<a href='http://www.test.com/test.hml#anchor'>adsf</a>";
+    assertLinks(html, 0);
+
+  });
+
+  it("gets all parts of the link", function (done) {
+    _initWithPage("http://www.test.com/test.hml");
+    readInDom("inputs/all-urls-1.html", function(body) {
+      var nextLinks = [];
+      pgzp.addLinkComponents(body, nextLinks, false);
+      expect( nextLinks.length ).toBe(5);
+      expect( nextLinks[0].text ).toBe("test2");
+      // alt attr only valid on img
+      // expect( nextLinks[1].text ).toBe("test3");
+      expect( nextLinks[1].text.trim() ).toBe("Test3 Text");
+      expect( nextLinks[2].text ).toBe("test4");
+      expect( nextLinks[3].text ).toBe("test5");
+      expect( !!nextLinks[4].text.match(/test5\.png$/) ).toBe(true);
+      done();
+    });
+  });
+
+});

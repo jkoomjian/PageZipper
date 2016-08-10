@@ -130,6 +130,8 @@ PageZipper.prototype.getAllNextLinks = function(body) {
 
 //returns an array of all NextLink texts that could be derived from this link
 PageZipper.prototype.addLinkComponents = function(link, allNextLinks, alreadyLoaded) {
+	var NextLink = pgzp.NextLink;
+
 	//depth-first search to find link targets which are children of the <a> elem (ex. an <img> wrapped in a <a>)
 	var search = function(rootNode) {
 		for (var i=0; i<rootNode.childNodes.length; i++) {
@@ -137,13 +139,13 @@ PageZipper.prototype.addLinkComponents = function(link, allNextLinks, alreadyLoa
 
 			//check if this node is useful
 			if (curr.nodeType == Node.TEXT_NODE && curr.nodeValue && pgzp.jq.trim(curr.nodeValue).length > 0) {
-				var nl = new pgzp.NextLink(curr.nodeValue, link, alreadyLoaded);
+				var nl = new NextLink(curr.nodeValue, link, alreadyLoaded);
 				nl.isVisibleText = true;
 				allNextLinks.push(nl);
 			//check for image link
 			} else if (curr.nodeType == Node.ELEMENT_NODE && curr.tagName.toLowerCase() == "img") {
-				if (curr.alt) allNextLinks.push(new NextLink(curr.alt, link, alreadyLoaded));
 				if (curr.title) allNextLinks.push(new NextLink(curr.title, link, alreadyLoaded));
+				if (curr.alt) allNextLinks.push(new NextLink(curr.alt, link, alreadyLoaded));
 				if (curr.src) allNextLinks.push(new NextLink(curr.src, link, alreadyLoaded, false));
 			} else {
 				//continue

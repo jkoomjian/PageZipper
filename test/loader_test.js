@@ -12,7 +12,7 @@ function _initWithPage(url) {
   pgzp.currDomain = pgzp.getDomain(url);
   pgzp.url_list = [url];
   var page = {'url': url};
-  pgzp.pages.push(page);
+  pgzp.pages[0] = page;
 }
 
 $(document).ready(function(){
@@ -27,7 +27,7 @@ function textToDom(str) {
   var div = document.createElement("div");
   div.innerHTML = str;
   document.getElementById("test_dock").appendChild(div);
-  return div.children[0];
+  return div;
 }
 
 // Get the text at url
@@ -46,6 +46,28 @@ function readInDom(url, callback) {
     callback(textToDom(data));
   });
 }
+
+// Given a url to an html page, return the body as a dom tree
+function readInPageBody(url, callback) {
+	readIn(url, function(data) {
+		var results = data.match(/<body.*?>([\w\W]*?)<\/body>/i);
+		data = (results && results.length >= 2) ? results[1] : data;
+    callback(textToDom(data));
+  });
+}
+
+// Change relative urls to absolute
+function preparePage(pageBody, startUrl) {
+	//Convert relative urls to absolute
+	document.querySelectorAll("a").forEach( elem => {
+		if (elem.host.indexOf("localhost") >= 0) {
+			let baseUri = elem.baseURI.replace('AccuracySpecRunner.html', '');
+			let path = elem.href.replace(baseUri, '');
+			elem.href = URI(path).absoluteTo(startUrl).toString();
+		}
+	});
+}
+
 
 function assertEquals(testValue, correctValue) {
   return expect( testValue ).toBe(correctValue);

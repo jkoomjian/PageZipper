@@ -1,24 +1,18 @@
-const pgzpBP = chrome.extension.getBackgroundPage();
-
 function saveChangeToList(siteUrl, callback, saveFlag) {
   var domain = getDomain(siteUrl);
   if (saveFlag === undefined) saveFlag = "domain";
   if (["deleted", "domain", "nohome"].indexOf(saveFlag) < 0) throw "Invalid save flag";
 
-  //Update local cache
-  // var listCache = window[ listName + "Cache"];
-  // listCache[domain] = saveFlag;
-
   //Update persistent storage
   var toGet = {};
   toGet["whitelist"] = {};
-  pgzpBP.browserStorage.get(toGet, function(items) {
+  browserStorage.get(toGet, function(items) {
     let currList = items["whitelist"];
     currList[domain] = saveFlag;
 
     var toSet = {};
     toSet["whitelist"] = currList;
-    pgzpBP.browserStorage.set(toSet, function() {
+    browserStorage.set(toSet, function() {
       if (callback) callback();
     });
 
@@ -28,7 +22,7 @@ function saveChangeToList(siteUrl, callback, saveFlag) {
 function getFromList(url, callback) {
   var domain = getDomain(url), toGet = {};
   toGet['whitelist'] = {};
-  pgzpBP.browserStorage.get(toGet, function(items) {
+  browserStorage.get(toGet, function(items) {
     callback( items['whitelist'][domain] );
   });
 }

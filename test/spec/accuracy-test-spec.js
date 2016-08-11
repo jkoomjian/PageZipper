@@ -36,6 +36,12 @@ var bigUrlsArray = [
 					["photoshopessentials.html",
             "http://www.photoshopessentials.com/photo-effects/photo-borders-photoshop-brushes/page-2.php",
             "http://www.photoshopessentials.com/photo-effects/photo-borders-photoshop-brushes/"],
+					["howstuffworks1.html",
+            "http://electronics.howstuffworks.com/gadgets/travel/gps1.htm",
+            "http://electronics.howstuffworks.com/gadgets/travel/gps.htm"],
+					["howstuffworks2.html",
+            "http://electronics.howstuffworks.com/gadgets/travel/gps4.htm",
+            "http://electronics.howstuffworks.com/gadgets/travel/gps3.htm"],
 				];
 
 

@@ -1,0 +1,1244 @@
+
+<!DOCTYPE html>
+<html class="article-structured content-347" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>How GPS Receivers Work | HowStuffWorks</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+		<link rel="canonical" href="http://electronics.howstuffworks.com/gadgets/travel/gps.htm" />			<meta property="og:title" content="How GPS Receivers Work" />
+			<meta property="og:url" content="http://electronics.howstuffworks.com/gadgets/travel/gps.htm" />
+			<meta property="og:site_name" content="HowStuffWorks" />
+			<meta property="og:description" content="For less than $100, you can get a pocket-sized gadget that will tell you exactly where you are on Earth at any moment. As long as you have a GPS receiver and a clear view of the sky, you&#039;ll never be lost again. Learn more!" />
+			<meta property="fb:admins" content="100001675325868" /> <!-- fb account (dci.dit) -->
+			<meta property="fb:app_id" content="508246805972410" /> <!-- application name (howstuffworks.com Global Application) -->				<meta property="og:image" content="http://s.hswstatic.com/gif/gps-100x60.jpg" />
+				<meta property="og:image:width" content="100" />
+				<meta property="og:image:height" content="60" />
+
+				<meta property="og:type" content="article" />
+				<meta property="article:publisher" content="http://www.howstuffworks.com" />
+				<meta property="article:published_time" content="2006-09-25T00:00:00-04:00" />
+
+		<meta property="article:author" content="http://www.howstuffworks.com/about-author.htm" />
+		<meta property="article:author" content="http://www.howstuffworks.com/about-author.htm" />
+
+
+			  <meta property="fb:pages" content="20767777944" />
+				<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@HowStuffWorks" />
+<meta name="twitter:image" content="http://r.hswstatic.com/u_0/w_480/gif/travel-gadgets-90x130.jpg" />
+
+
+<script type="application/ld+json">
+{
+	"@context": "http://schema.org",
+	"@type": "Article",
+	"headline": "How GPS Receivers Work",
+	"image": "http://s.hswstatic.com/gif/gps-100x60.jpg",
+	"datePublished": "2006-09-25T00:00:00-04:00",
+	"description": "For less than $100, you can get a pocket-sized gadget that will tell you exactly where you are on Earth at any moment. As long as you have a GPS receiver and a clear view of the sky, you&#039;ll never be lost again. Learn more!"
+}
+</script>
+
+		<meta name="keywords" content="gps, gps receivers, global positioning system, gps reviews, gps systems " />
+		<meta name="description" content="GPS can pinpoint your location anywhere on Earth. Find out how GPS works, learn about the amazing technology behind GPS and read reviews of GPS devices." />
+
+		<meta name="robots" content="noodp" />
+
+		<meta name="apple-itunes-app" content="app-id=401986544">
+		<meta name="google-play-app" content="app-id=com.twentythreedivide.hsw">
+
+		<link rel="search" type="application/opensearchdescription+xml" href="s.hswstatic.com/en-us/default/misc/hsw-search.xml" title="HowStuffWorks" /><link rel="apple-touch-icon" sizes="57x57" href="http://s.hswstatic.com/en-us/hsw/img/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="http://s.hswstatic.com/en-us/hsw/img/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="http://s.hswstatic.com/en-us/hsw/img/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="http://s.hswstatic.com/en-us/hsw/img/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="http://s.hswstatic.com/en-us/hsw/img/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="http://s.hswstatic.com/en-us/hsw/img/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="http://s.hswstatic.com/en-us/hsw/img/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="http://s.hswstatic.com/en-us/hsw/img/apple-touch-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="http://s.hswstatic.com/en-us/hsw/img/apple-touch-icon-180x180.png">
+		<link rel="icon" type="image/png" href="http://s.hswstatic.com/en-us/hsw/img/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="http://s.hswstatic.com/en-us/hsw/img/android-chrome-192x192.png" sizes="192x192">
+		<link rel="icon" type="image/png" href="http://s.hswstatic.com/en-us/hsw/img/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="http://s.hswstatic.com/en-us/hsw/img/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="http://s.hswstatic.com/en-us/hsw/img/manifest.json">
+		<link rel="mask-icon" href="http://s.hswstatic.com/en-us/hsw/img/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="msapplication-config" content="http://s.hswstatic.com/en-us/hsw/img/browserconfig.xml" />
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="msapplication-TileImage" content="http://s.hswstatic.com/en-us/hsw/img/mstile-144x144.png">
+		<meta name="theme-color" content="#ffffff"><link rel="dns-prefetch" href="//ajax.googleapis.com">
+		<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+		<link rel="dns-prefetch" href="//cf.shareasimage.com">
+		<link rel="dns-prefetch" href="//fonts.googleapis.com">
+		<link rel="dns-prefetch" href="//fonts.gstatic.com">
+		<link rel="dns-prefetch" href="//google-analytics.com">
+		<link rel="dns-prefetch" href="//googletagservices.com">
+		<link rel="dns-prefetch" href="//i.po.st">
+		<link rel="dns-prefetch" href="//js.bqcpu.com">
+		<link rel="dns-prefetch" href="//platform.twitter.com">
+		<link rel="dns-prefetch" href="//ad.doubleclick.net">
+		<link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+		<link rel="dns-prefetch" href="//partner.googleadservices.com">
+		<link rel="dns-prefetch" href="//i.yldbt.com">
+		<link rel="dns-prefetch" href="//cdn.yldbt.com">
+		<link rel="dns-prefetch" href="//hsw-d.openx.net">
+		<link rel="dns-prefetch" href="//us-u.openx.net">
+		<link rel="dns-prefetch" href="//js.indexww.com">
+		<link rel="dns-prefetch" href="//as.casalemedia.com/">
+		<link rel="dns-prefetch" href="//c.amazon-adsystem.com">
+		<link rel="dns-prefetch" href="//fls-na.amazon-adsystem.com">
+		<link rel="dns-prefetch" href="//z-na.amazon-adsystem.com">
+		<link rel="dns-prefetch" href="//rcm-na.amazon-adsystem.com">
+		<link rel="dns-prefetch" href="//ecx.images-amazon.com">
+		<link rel="dns-prefetch" href="//aax.amazon-adsystem.com/">
+		<link rel="dns-prefetch" href="//ws-na.amazon-adsystem.com/">
+		<link rel="dns-prefetch" href="//z-na.amazon-adsystem.com">
+		<link rel="dns-prefetch" href="//apex.go.sonobi.com">
+
+		<script>var viewingEnvironment = "prod";</script>
+
+
+
+
+<link rel="next" href="http://electronics.howstuffworks.com/gadgets/travel/gps1.htm" />
+
+<script src="http://assets.hswstatic.com/lite/315/js/base.min.js"></script><script>
+		$(document).ready(function () {
+			$('img').unveil();
+		});		</script>		<script>
+//Detect and extract any SEM referral tracking data
+var semCookie = HSW.utilities.getCookie('ws_hsw_rt'), semVars = {};
+if (semCookie) {
+    var varArr  = semCookie.split("&");
+    for (var i=0; i<varArr.length; i++) {
+        var pair = varArr[i].split("=");
+        semVars[pair[0]] = pair[1];
+    }
+}
+
+//Social media referral tracking
+var cookieMkcpgn = HSW.utilities.getCookie('mkcpgn');
+var queryMkcpgn = HSW.utilities.getQueryVar('mkcpgn');
+var mkcpgn = cookieMkcpgn || queryMkcpgn;
+var adUnit = '';
+
+						adUnit += "hsw_lite";
+											adUnit += "|tech";
+								adUnit += "|electronics";
+								adUnit += "|gadgets";
+
+if (!HSW.utilities.isMobile()) {
+	//When not on mobile, use desktop/tablet ad unit
+	adUnit = adUnit.replace("hsw_lite", "hsw");
+}
+
+
+var pageMetricsData = {
+    org         : "hsw",
+    name        : "hsw",
+    id          : "hsw",
+    guid        : HSW.utilities.generateGuid(),
+    domain      : "howstuffworks.com",
+    account     : 'UA-6568435-9',
+    suites      : "hswprod,hswprodhsw",
+    title       : "How\x20GPS\x20Receivers\x20Work",
+    tax         : "hsw/tech/electronics/gadgets/travel gadgets",
+    aType       : "editorial content",
+    cType       : "article-structured",
+    template    : "Article",
+    sType       : "",
+    search      : {},
+    content     : "",
+    sponsor     : "",
+    source      : "hsw",
+    author      : "marshall brain,tom harris",
+    show        : "",
+    pubDate     : "2006-09-25",
+    contentid   : "347",
+    model       : "article",
+    view        : "article/article-structured.html" + (("undefined" !== typeof abTestId) ? "-ab-"+abTestId+"-"+abTestInstance : ""),
+    width       : "998",
+    video       : "",
+    page        : "0",
+    codebase    : 'hsw-lite',
+    semSegment  : (typeof semVars['segment'] === 'undefined' ? '' : semVars['segment']),
+    abs         : (HSW.utilities.getCookie('hsw_abs') ? HSW.utilities.getCookie('hsw_abs') : '' ),
+    viewport    : HSW.utilities.getViewportWidth(),
+    mkcpgn      : (mkcpgn ? mkcpgn : 'organic'),
+    adUnit      : (adUnit ? adUnit : 'n/a')
+};
+
+var GACtest = HSW.utilities.getCookie('hsw_abs') || '';
+</script>
+
+								<script src="http://assets.hswstatic.com/lite/315/js/hsw.ads.min.js"></script>
+<script src="//s.hswstatic.com/ddm/javascript/apis/4.0.12/dist/prebid.min.js"></script>
+
+<script>
+
+var dfpSettings = {};
+
+dfpSettings.networkCode = 108939068;
+dfpSettings.pid      = "347-0";
+dfpSettings.hswpid   = "347";
+dfpSettings.type     = 'article-structured';
+dfpSettings.kw       = "";
+dfpSettings.adUnit   = '';
+
+
+
+			dfpSettings.topLevelAdUnit = "hsw_lite";
+dfpSettings.adUnit        += "hsw_lite";
+
+
+
+			dfpSettings.adUnit        += "/tech";
+dfpSettings.s1             = "tech";
+
+
+
+			dfpSettings.adUnit        += "/electronics";
+dfpSettings.s2             = "electronics";
+
+
+
+			dfpSettings.adUnit        += "/gadgets";
+dfpSettings.s3             = "gadgets";
+
+
+
+			dfpSettings.s4             = "travelgadgets";
+
+
+dfpSettings.slotName = "/108939068/" + dfpSettings.adUnit;
+
+//Attach any SEM referral data
+if (semVars['segment'] && semVars['keywords']) {
+	dfpSettings.sg = semVars['segment'];
+	dfpSettings.sk = semVars['keywords'];
+}
+dfpSettings.isMobile = HSW.utilities.isMobile();
+
+</script>
+
+
+
+	<script>
+
+		dfpSettings.ads = new Array;					dfpSettings.ads.push('ad-div-bannerTop');
+								dfpSettings.ads.push('ad-div-bannerBottom');
+								dfpSettings.ads.push('ad-div-rectangleRailTop');
+								dfpSettings.ads.push('ad-div-rectangleRailMiddle');
+								dfpSettings.ads.push('ad-div-rectangleRailBottom');
+								dfpSettings.ads.push('ad-div-brandscape');
+								dfpSettings.ads.push('ad-div-mobrectangle');
+								dfpSettings.ads.push('ad-div-moboutofpage');
+								dfpSettings.ads.push('ad-div-mobadhesion');
+								dfpSettings.ads.push('ad-div-mobRectangleInline');
+
+	</script>
+
+
+						<script>HSW.ads.init(dfpSettings);</script>
+		<link rel="stylesheet" href="http://assets.hswstatic.com/lite/315/css/editorial.min.css"><style>
+				</style>
+
+	</head>
+
+	<body class="cid-347 interior editorial-content  editorial article-template">
+
+		<nav id="offcanvas" class="navmenu navmenu-fixed-right navmenu-site offcanvas" data-track-gtm="Mobile Menu">
+		<div id="offcanvas-navigation">
+			<ul>
+				<li class="unit"><a class="navLink" href="http://now.howstuffworks.com">NOW</a></li>
+				<li class="unit"><a class="navLink" href="http://adventure.howstuffworks.com">Adventure</a></li>
+				<li class="unit"><a class="navLink" href="http://animals.howstuffworks.com/">Animals</a></li>
+				<li class="unit"><a class="navLink" href="http://auto.howstuffworks.com">Auto</a></li>
+				<li class="unit"><a class="navLink" href="http://people.howstuffworks.com/culture">Culture</a></li>
+				<li class="unit"><a class="navLink catActive" href="http://entertainment.howstuffworks.com">Entertainment</a></li>
+				<li class="unit"><a class="navLink" href="http://health.howstuffworks.com">Health</a></li>
+				<li class="unit"><a class="navLink" href="http://home.howstuffworks.com">Home &amp; Garden</a></li>
+				<li class="unit"><a class="navLink" href="http://lifestyle.howstuffworks.com">Lifestyle</a></li>
+				<li class="unit"><a class="navLink" href="http://money.howstuffworks.com">Money</a></li>
+				<li class="unit"><a class="navLink" href="http://science.howstuffworks.com">Science</a></li>
+				<li class="unit"><a class="navLink" href="http://electronics.howstuffworks.com/tech">Tech</a></li>
+				<li class="unit static"><a class="navLink navLinkAlt" href="http://www.howstuffworks.com/videos">Video</a></li>
+				<li class="unit static"><a class="navLink navLinkAlt" href="http://shows.howstuffworks.com">Shows</a></li>
+				<li class="unit static"><a class="navLink navLinkAlt" href="http://people.howstuffworks.com/quizzes.htm">Quizzes</a></li>
+			</ul>
+		</div>
+		<div id="offcanvas-social">
+			<p class="followText">Follow us</p>
+			<p><a class="symbol ss-social-circle ss-facebook" href="http://www.facebook.com/HowStuffWorks" target="_blank">Facebook</a></p>
+			<p><a class="symbol ss-social-circle ss-youtube" href="http://www.youtube.com/user/HowStuffWorks?sub_confirmation=1" target="_blank">YouTube</a></p>
+			<p><a class="symbol ss-social-circle ss-twitter" href="http://twitter.com/intent/follow?source=followbutton&amp;variant=1.0&amp;screen_name=HowStuffWorks" target="_blank">Twitter</a></p>
+			<p><a class="symbol ss-social-circle ss-pinterest" href="https://www.pinterest.com/HowStuffWorks/" target="_blank">Pinterest</a></p>
+		</div>
+	</nav>
+				<div id="ad-wrap-moboutofpage">
+	<div id="ad-div-moboutofpage" class="ad-tag ">
+			</div>
+</div>							<div class="ad-dock"><div id="ad-wrap-mobadhesion">
+	<div id="ad-div-mobadhesion" class="ad-tag text-center hidden-sm hidden-md hidden-lg hidden-xl ">
+			</div>
+</div></div>
+
+	<div id="wrap">
+				<header data-track-gtm="Header">
+	<div class="row fb-hsw-like-wrapper" data-track-gtm="Facebook Like">
+		<div class="col-xs-12 col-sm-12 col-md-12 fb-hsw-like">
+			<span id="like-us">Like HowStuffWorks on Facebook!</span>			<script>
+			//Only activate for mobile users
+			if (HSW.utilities.isMobile()) {
+				(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+
+				window.fbAsyncInit = function() {
+					FB.Event.subscribe('edge.create', function(response) {
+						//Try to push event to GA via GTM
+						if (dataLayer) {
+							dataLayer.push({
+								event : 'custom-event',
+								eventLabel : 'Header : Facebook Like'
+							});
+						}
+					});
+				};
+			}
+			</script>
+			<div class="fb-like" data-href="http://facebook.com/howstuffworks" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+	</div>
+	<div id="hsw-header">
+		<div class="header-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="expanded-logo">
+						<div class="hswLogo pull-left" data-track-gtm="Logo Graphic">
+							<a href="http://www.howstuffworks.com"><img src="http://s.hswstatic.com/en-us/hsw/img/logo.png" alt="HowStuffWorks" width="120" height="120" /></a>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 sectionLogo">
+														<p class="logo text-uppercase hidden-xs" data-track-gtm="Site Name"><a href="http://www.howstuffworks.com">How<span class="logo-alt">Stuff</span>Works</a></p>
+							<p class="channel-name text-uppercase" data-track-gtm="Channel Name"><a href="http://electronics.howstuffworks.com/tech">Tech</a></p>
+													</div>
+					</div>
+					<div class="collapsed-logo hidden-xs">
+						<div class="col-xs-6 col-sm-6 col-md-6 sectionLogo">
+							<p class="channel-name text-uppercase" data-track-gtm="Channel Name">
+															<a href="http://electronics.howstuffworks.com/tech">Tech</a>														</p>
+						</div>
+					</div>
+					<div class="buttonsModule hidden-sm hidden-md hidden-lg">
+						<a id="btn-search-nav" class="btn-search">
+							<i class="fa fa-search"></i>
+						</a>
+						<button type="button" class="navbar-toggle masthead-toggle" data-recalc="false" data-toggle="offcanvas" data-target="#offcanvas" data-canvas="body">
+						 <span class="sr-only">Toggle navigation</span>
+						 <span class="icon-bar"></span>
+						 <span class="icon-bar"></span>
+						 <span class="icon-bar"></span>
+						</button>
+					 </div>
+					 <div class="headerModule col-xs-12 col-sm-4 col-md-4">
+						<div id="socialFollowSection" class="hidden-xs" data-track-gtm="Social Follow">
+							<p class="followText">Follow us</p>
+
+							<p><a class="symbol ss-social-circle ss-facebook" href="http://www.facebook.com/HowStuffWorks" target="_blank">Facebook</a></p>
+							<p><a class="symbol ss-social-circle ss-youtube" href="http://www.youtube.com/user/HowStuffWorks?sub_confirmation=1" target="_blank">YouTube</a></p>
+							<p><a class="symbol ss-social-circle ss-twitter" href="http://twitter.com/intent/follow?source=followbutton&amp;variant=1.0&amp;screen_name=HowStuffWorks" target="_blank">Twitter</a></p>
+							<p><a class="symbol ss-social-circle ss-pinterest" href="https://www.pinterest.com/HowStuffWorks/" target="_blank">Pinterest</a></p>
+
+						</div>
+						<div class="searchSection">
+							<div class="searchBar">
+								<form class="searchForm" action="http://www.howstuffworks.com/search.php">
+									<span class="headerInput">
+										<input class="headerInputBox" type="text" name="terms" placeholder="SEARCH">
+										<input class="headerInputButton" type="submit" value="&#xf002;">
+									</span>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		$("#btn-search-nav").bind("click", function() {
+			var searchDropdown = '.headerModule';
+			var pageSlideDown = '#page'
+			$(this).toggleClass('reveal');
+			$(searchDropdown).toggleClass('reveal');
+			$(pageSlideDown).toggleClass('slide');
+		});
+		</script>
+
+		<nav class="horizontal hidden-xs" data-track-gtm="Channel Navigation">
+
+			<div class="container">
+				<div class="row">
+
+					<ul>
+						<li><a href="http://now.howstuffworks.com">NOW</a></li>
+						<li><a href="http://adventure.howstuffworks.com">Adventure</a></li>
+						<li><a href="http://animals.howstuffworks.com">Animals</a></li>
+						<li><a href="http://auto.howstuffworks.com">Auto</a></li>
+						<li><a href="http://people.howstuffworks.com/culture">Culture</a></li>
+						<li><a href="http://entertainment.howstuffworks.com">Entertainment</a></li>
+						<li><a href="http://health.howstuffworks.com">Health</a></li>
+						<li><a href="http://home.howstuffworks.com">Home &amp; Garden</a></li>
+						<li class="dropdown">
+							<a class="hidden-lg dropdown-toggle" data-toggle="dropdown" href>More</a>
+							<ul class="dropdown-menu pull-right">
+								<li><a href="http://lifestyle.howstuffworks.com">Lifestyle</a></li>
+								<li><a href="http://money.howstuffworks.com">Money</a></li>
+								<li><a href="http://science.howstuffworks.com">Science</a></li>
+								<li><a href="http://electronics.howstuffworks.com/tech">Tech</a></li>
+								<li><a href="http://www.howstuffworks.com/videos">Video</a></li>
+								<li><a href="http://shows.howstuffworks.com">Shows</a></li>
+								<li><a href="http://people.howstuffworks.com/quizzes.htm">Quizzes</a></li>
+							</ul>
+						</li>
+						<li class="subNav"><a href="http://lifestyle.howstuffworks.com">Lifestyle</a></li>
+						<li class="subNav"><a href="http://money.howstuffworks.com">Money</a></li>
+						<li class="subNav"><a href="http://science.howstuffworks.com">Science</a></li>
+						<li class="subNav"><a href="http://electronics.howstuffworks.com/tech">Tech</a></li>
+						<li class="subNav"><a href="http://www.howstuffworks.com/videos">Video</a></li>
+						<li class="subNav"><a href="http://shows.howstuffworks.com">Shows</a></li>
+						<li class="subNav"><a href="http://people.howstuffworks.com/quizzes.htm">Quizzes</a></li>
+					</ul>
+
+				</div>
+			</div>
+
+		</nav>
+	</div>
+</header>
+
+
+		<div id="page">
+			<div class="container" data-track-gtm="Page">
+				<div id="ad-wrap-bannerTop">
+	<div id="ad-div-bannerTop" class="ad-tag ">
+			</div>
+</div>
+
+
+
+	<div class="row ">
+
+		<div class="col-xs-12 editorial-title">
+
+			<h1>How GPS Receivers Work</h1>
+
+		</div>
+
+				<div class="col-xs-7 col-sm-8 share-right">
+
+<script type="text/javascript">
+var addthis_share = {
+	url: 'http://electronics.howstuffworks.com/gadgets/travel/gps.htm',
+	title: 'How\x20GPS\x20Receivers\x20Work',
+}
+
+var pubId = 'ra-54623f753bec8cb1';
+if (HSW.utilities.isMobile() === false) {
+	pubId = 'ra-5457ca106d18d8e5';
+}
+var js = document.createElement('script');
+js.async = true;
+js.src = '//s7.addthis.com/js/300/addthis_widget.js#pubid=' + pubId;
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(js, node);
+</script>
+
+<div data-track-gtm="Share Links" class="addthis_responsive_sharing basicFont padding-bottom1"></div>		</div>
+
+
+
+		<div class="col-xs-12 col-sm-8 title-sub text-uppercase">
+										<span class="content-author">by
+
+																		<a data-track-gtm="Byline" href="about-author.htm#brain">
+
+		Marshall
+		Brain
+					</a>
+
+					&amp;
+
+																		<a data-track-gtm="Byline" href="about-author.htm#tom harris">
+
+		Tom
+		Harris
+					</a>
+			</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+			<a href="http://electronics.howstuffworks.com/tech">Tech</a> | <a href="http://electronics.howstuffworks.com/gadgets/travel">Travel Gadgets</a>
+		</div>
+
+
+		<div class="col-xs-12">
+
+						<div id="pencil-tech" class="morestuff pencil-widget" data-track-gtm="Pencil : MoreStuff"></div>
+
+<script>
+var widgetLoadEvents = widgetLoadEvents || [];
+
+widgetLoadEvents.push({
+	url         : location.pathname + location.hash,
+	event       : "object-load",
+	eventAction : "morestuff-widget",
+	eventLabel  : "morestuff_techPencil"
+});
+</script>
+			<hr />
+
+		</div>
+
+	</div>
+
+
+
+
+				<div class="row" id="column-wrapper">
+	<div id="editorial-well" class="col-sm-9 editorial-well" data-track-gtm="Body">
+
+						<div id="editorial-main">
+				<!--  google_ad_section_start(name=content) -->
+				<div class="editorial-header">
+														</div>
+
+				<article class="editorial-body infinite-container">
+
+
+						<div id="pagination-upper" class="sticky" data-track-gtm="Pagination : Top">
+				<a href="http://electronics.howstuffworks.com/gadgets/travel/gps1.htm" data-page="1" class="btn rounded text-uppercase h4 btn-page-next btn-start" data-track-gtm="Next"><span class="visible-xs-inline">NEXT PAGE</span><span class="hidden-xs">NEXT</span>&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i></a>
+			</div>
+
+
+
+
+<div class="infinite-item" id="page0" data-slide="0">
+
+	<div class="editorial-sidebar" style="max-width: 215px;" data-track-gtm="Editorial Sidebar"><div class="row">
+			<div class="fragment-media  lead-image media-vertical"   >
+						<div class="media-hero-wrap">
+									<a href="http://electronics.howstuffworks.com/gadgets/gadget-pictures.htm" data-track-rule="module" data-module-name="" data-link-position="Pos 1 : Image">
+								<img class="media-hero" width="200" height="200" src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://s.hswstatic.com/gif/gps-ch.jpg" alt="A&#x20;GPS&#x20;receiver&#x20;uses&#x20;satellites&#x20;to&#x20;pinpoint&#x20;locations.&#x20;See&#x20;more&#x20;pictures&#x20;of&#x20;essential&#x20;gadgets." title="A&#x20;GPS&#x20;receiver&#x20;uses&#x20;satellites&#x20;to&#x20;pinpoint&#x20;locations.&#x20;See&#x20;more&#x20;pictures&#x20;of&#x20;essential&#x20;gadgets." />
+								</a>			</div>
+				<div class="media-body-wrap">
+				<div class="media-title">
+			<a href="http://electronics.howstuffworks.com/gadgets/gadget-pictures.htm" data-track-rule="module" data-module-name="" data-link-position="Pos 1 : Link"></a>		</div>
+											<div class="media-body">
+											A GPS receiver uses satellites to pinpoint locations. See more <a href="http://electronics.howstuffworks.com/gadgets/high-tech-gadgets/gadget-pictures.htm">pictures of essential gadgets</a>.
+									</div>
+												</div>
+</div>
+		</div>
+
+
+	</div>
+
+
+
+
+
+	<p>Our ancestors had to go to pretty extreme measures to keep from getting lost. They erected monumental landmarks, laboriously drafted detailed <a href="http://science.howstuffworks.com/environmental/earth/geophysics/map.htm">maps</a> and learned to read the <a href="http://science.howstuffworks.com/star.htm">stars</a> in the night sky.</p>
+
+
+
+
+
+	<p>Things are much, much easier today. For less than $100, you can get a pocket-sized gadget that will tell you exactly where you are on <a href="http://science.howstuffworks.com/environmental/earth/geophysics/earth.htm">Earth</a> at any moment. As long as you have a GPS receiver and a clear view of the sky, you'll never be lost again.</p>
+
+						<div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg hidden-xl no-gutter in-page-ad">
+				<div id="ad-wrap-mobRectangleInline">
+	<div id="ad-div-mobRectangleInline" class="ad-tag ad-tag-mobile">
+			</div>
+</div>			</div>
+
+												<div class="row recirc-panel">
+						<div class="col-sm-12 col-md-6">
+			<div class="cpc cpc-upper"></div>		</div>
+
+		<div class="col-sm-12 col-md-6">
+
+<h4>Up Next</h4>
+
+<ul class="margin-vert-1x">
+		<li><a href="http://electronics.howstuffworks.com/gadgets/automotive/5-car-gadgets.htm">Top 5 Car Gadgets</a></li>
+			<li><a href="http://electronics.howstuffworks.com/gadgets/quizzes/gps-receiver-quiz.htm">GPS Receiver Quiz</a></li>
+			<li><a href="http://community.howstuffworks.com/displayForumTopic/content/10434181395958826">HowStuffWorks Forums: Is the use of GPS causing our collective sense of direction to atrophy?</a></li>
+	</ul>
+
+		</div>
+	</div>
+
+
+
+	<p>In this article, we'll find out how these handy guides pull off this amazing trick. As we'll see, the Global Positioning System is vast, expensive and involves a lot of technical ingenuity, but the fundamental concepts at work are quite simple and intuitive.</p>
+
+
+
+
+
+	<p>­When people talk about &quot;a GPS,&quot; they usually mean a <b>GPS receiver</b>. The <b>Global Positioning System</b> (<a href="http://electronics.howstuffworks.com/10-unconventional-uses-gps.htm">GPS</a>) is actually a <b>constellation</b> of 27 Earth-orbiting <a href="http://science.howstuffworks.com/satellite.htm">satellites</a> (24 in operation and three extras in case one fails). The U.S. military developed and implemented this satellite network as a military navigation system, but soon opened it up to everybody else.</p>
+
+
+
+
+
+	<p>Each of these 3,000- to 4,000-pound solar-powered satellites circles the globe at about 12,000 miles (19,300 km), making two complete rotations every day. The orbits are arranged so that at any time, anywhere on Earth, there are at least four satellites &quot;visible&quot; in the sky.</p>
+
+
+
+
+
+	<p>A GPS receiver's job is to locate four or more of these satellites, figure out the distanc­e to each, and use this information to deduce its own location. This operation is based on a simple mathematical principle called <b>trilateration</b>. Trilateration in three-dimensional space can be a little tricky, so we'll start with an explanation of simple two-dimensional trilateration.</p>
+
+
+
+
+
+	<p> </p>
+
+
+
+
+
+
+
+
+
+
+</div>
+		<div class="video-embed">
+				</div>
+
+
+				</article>
+
+				<!--  google_ad_section_end(name=content) -->
+					<div class="row text-center top-margin2" id="pagination-lower" data-track-gtm="Pagination : Bottom">
+
+
+		<ul class="pagination">
+
+		<li><a href="" class="prev" rel="prev" data-page="-1" data-track-gtm="Prev"><i class="fa fa-angle-double-left"></i></a></li>
+			<li class="active"><span>1</span></li>
+
+
+									<li class="hidden-xs hidden-sm hidden-md"><a href="http://electronics.howstuffworks.com/gadgets/travel/gps1.htm" data-page="1">2</a></li>
+									<li class="hidden-xs hidden-sm hidden-md"><a href="http://electronics.howstuffworks.com/gadgets/travel/gps2.htm" data-page="2">3</a></li>
+													<li class="disabled"><span>…</span></li>
+													<li><a href="http://electronics.howstuffworks.com/gadgets/travel/gps4.htm" data-page="4">5</a></li>
+									<li><a href="http://electronics.howstuffworks.com/gadgets/travel/gps5.htm" data-page="5">6</a></li>
+
+
+					<li><a href="http://electronics.howstuffworks.com/gadgets/travel/gps1.htm" class="next infinite-more-link" rel="next" data-page="1" data-track-gtm="Next"><span class="hidden-xs hidden-sm">NEXT&nbsp;</span><i class="fa fa-angle-double-right"></i></a></li>
+
+	</ul>
+
+
+
+					</div>
+
+					<div class="row text-center">
+												<p><a href="http://electronics.howstuffworks.com/gadgets/travel/gps.htm/printable">Print</a> | <a class="citation" data-toggle="popover" data-container="body" data-placement="bottom" data-html="true" data-title="Cite This!" data-content="Please copy/paste the following text to properly cite this HowStuffWorks.com article:<br /><br />&#x09;&#x0A;&#x09;&#x09;&#x0A;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&lt;a&#x20;data-track-gtm&#x3D;&quot;Byline&quot;&#x20;href&#x3D;&quot;about-author.htm&#x23;brain&quot;&gt;&#x0A;&#x09;&#x09;&#x0A;&#x09;&#x09;Marshall&#x20;&#x0A;&#x09;&#x09;Brain&#x0A;&#x09;&#x09;&#x09;&#x09;&#x09;&lt;&#x2F;a&gt;&#x0A;&#x09;&#x09;&#x09;&#x0A;&#x09;&#x09;&#x09;&#x09;&#x09;&amp;amp&#x3B;&#x0A;&#x09;&#x09;&#x0A;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&lt;a&#x20;data-track-gtm&#x3D;&quot;Byline&quot;&#x20;href&#x3D;&quot;about-author.htm&#x23;tom&#x20;harris&quot;&gt;&#x0A;&#x09;&#x09;&#x0A;&#x09;&#x09;Tom&#x20;&#x0A;&#x09;&#x09;Harris&#x0A;&#x09;&#x09;&#x09;&#x09;&#x09;&lt;&#x2F;a&gt;&#x0A;&#x09;&#x09;&#x09;&#x20;&quot;How&#x20;GPS&#x20;Receivers&#x20;Work&quot;&#x20;25&#x20;September&#x20;2006.&lt;br&#x20;&#x2F;&gt;HowStuffWorks.com.&#x20;&amp;lt&#x3B;http&#x3A;&#x2F;&#x2F;electronics.howstuffworks.com&#x2F;gadgets&#x2F;travel&#x2F;gps.htm&amp;gt&#x3B;&#x20;11&#x20;August&#x20;2016" href="#">Citation &amp; Date</a></p>
+					</div>
+					<script>
+					$(function () {
+						$('.citation').click(function (e) { e.preventDefault(); }).popover();
+					});
+					</script>
+
+
+
+
+
+	<script>
+	/*! hsw-lite-frontend 2016-08-09 */
+function gtmPushTout(a,b){var c={videoId:a.label,videoTitle:a.label,videoType:"videoTout",url:location.pathname+location.hash,event:b};dataLayer?dataLayer.push(c):widgetLoadEvents.push(c)}var widgetLoadEvents=widgetLoadEvents||[];TOUT_TRACKING={tout_played:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"clip-start")},tout_played_complete:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"clip-complete")},ad_started:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"ad-start")},ad_completed:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"ad-complete")},tout_played_first_quartile:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"clip-25")},tout_played_mid_point:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"clip-50")},tout_played_third_quartile:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"clip-75")},ad_requested:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"ad_requested")},ad_loaded:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"ad_loaded")},ad_ready:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"ad_ready")},ad_error:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"ad_error")},product_initialized:function(a,b){var c={category:"video-events",label:"tout-"+b.tout_uid};gtmPushTout(c,"tout-initialized")}};
+	</script>
+
+	<script>
+	window.TOUT = {propertyUid: "d48ef5"};
+	</script>
+
+	<div id="abtout"></div>
+
+
+
+															<div class="col-xs-12 no-gutter hidden-sm hidden-md hidden-lg hidden-xl">
+							<div id="ad-wrap-mobrectangle">
+	<div id="ad-div-mobrectangle" class="ad-tag ad-tag-mobile">
+			</div>
+</div>						</div>
+
+
+
+
+
+							</div>
+
+
+
+
+					<hr />
+			<div id="recirc-body">
+			<div class="row module" data-track-gtm="MoreStuff">
+	<div class="col-xs-12">
+		<div id="hsw-tech" class="morestuff"></div>
+	</div>
+</div>
+
+
+<script>
+var widgetLoadEvents = widgetLoadEvents || [];
+$.getScript('http://cdn.widget.infospace.com/javascripts/more-stuff.js', function(data, textStatus, jqxhr) {
+	morestuff.showAll();
+});
+
+widgetLoadEvents.push({
+  url         : location.pathname + location.hash,
+  event       : "object-load",
+  eventAction : "morestuff-widget",
+  eventLabel  : "morestuff_techBody"
+});
+</script>
+			</div>
+
+									<div id="relatedLinksModule">
+
+<hr />
+
+<div data-track-gtm="Related Content" class="row module">
+	<div class="col-xs-12 col-sm-12">
+		<h3>Related Content</h3>
+		<div class="row">								<div class="col-xs-12 col-sm-4 margin-bottom1">
+					<div class="row">
+						<div class="col-sm-12 col-xs-4">
+							<a href="http://electronics.howstuffworks.com/gadgets/clocks-watches/harry-winston-opus-eleven.htm">
+								<img src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://r.hswstatic.com/w_250/h_150/gif/harry-winston-opus-eleven-250x150.jpg" alt="How&#x20;the&#x20;Harry&#x20;Winston&#x20;Opus&#x20;Eleven&#x20;Works" title="How&#x20;the&#x20;Harry&#x20;Winston&#x20;Opus&#x20;Eleven&#x20;Works" >
+							</a>
+						</div>
+						<div class="col-sm-12 col-xs-8">
+							<div class="h5"><a href="http://electronics.howstuffworks.com/gadgets/clocks-watches/harry-winston-opus-eleven.htm">How the Harry Winston Opus Eleven Works</a></div>
+						</div>
+					</div>
+				</div>
+															<div class="col-xs-12 col-sm-4 margin-bottom1">
+					<div class="row">
+						<div class="col-sm-12 col-xs-4">
+							<a href="http://electronics.howstuffworks.com/gadgets/automotive/headrest-monitor.htm">
+								<img src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://r.hswstatic.com/w_250/h_150/gif/headrest-monitor-250x150.jpg" alt="How&#x20;Headrest&#x20;Monitors&#x20;Work" title="How&#x20;Headrest&#x20;Monitors&#x20;Work" >
+							</a>
+						</div>
+						<div class="col-sm-12 col-xs-8">
+							<div class="h5"><a href="http://electronics.howstuffworks.com/gadgets/automotive/headrest-monitor.htm">How Headrest Monitors Work</a></div>
+						</div>
+					</div>
+				</div>
+															<div class="col-xs-12 col-sm-4 margin-bottom1">
+					<div class="row">
+						<div class="col-sm-12 col-xs-4">
+							<a href="http://electronics.howstuffworks.com/gadgets/clocks-watches/cern-synchronize-timing-devices.htm">
+								<img src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://r.hswstatic.com/w_250/h_150/gif/cern-timing-lhc.jpg" alt="How&#x20;does&#x20;CERN&#x20;synchronize&#x20;timing&#x20;devices&#x3F;" title="How&#x20;does&#x20;CERN&#x20;synchronize&#x20;timing&#x20;devices&#x3F;" >
+							</a>
+						</div>
+						<div class="col-sm-12 col-xs-8">
+							<div class="h5"><a href="http://electronics.howstuffworks.com/gadgets/clocks-watches/cern-synchronize-timing-devices.htm">How does CERN synchronize timing devices?</a></div>
+						</div>
+					</div>
+				</div>
+									</div>
+	</div>
+</div>	<div data-track-gtm="Related Links Text" class="row">
+		<div class="col-xs-12 col-md-12">
+			<div class="h4 margin-top0">
+				<a href="http://electronics.howstuffworks.com/gadgets/travel/hand-powered-generators.htm" data-track-gtm="Title">How Hand-powered Generators Work</a>
+			</div>
+		</div>
+	</div>
+	<div data-track-gtm="Related Links Text" class="row">
+		<div class="col-xs-12 col-md-12">
+			<div class="h4 margin-top0">
+				<a href="http://electronics.howstuffworks.com/gadgets/automotive/5-extravagant-car-amenities.htm" data-track-gtm="Title">5 Extravagant Car Amenities</a>
+			</div>
+		</div>
+	</div>
+	<div data-track-gtm="Related Links Text" class="row">
+		<div class="col-xs-12 col-md-12">
+			<div class="h4 margin-top0">
+				<a href="http://electronics.howstuffworks.com/gadgets/home/digital-jewelry.htm" data-track-gtm="Title">How Digital Jewelry Will Work</a>
+			</div>
+		</div>
+	</div>
+
+		</div>
+
+
+	</div>
+
+
+	<div id="rail" class="col-sm-3 hidden-xs" data-track-gtm="Rail">
+
+
+					<div id="ad-wrap-rectangleRailTop">
+	<div id="ad-div-rectangleRailTop" class="ad-tag ">
+			</div>
+</div>
+									<hr />
+								<div class="module" data-track-gtm="NOW">
+	<h3 class="text-uppercase hidden-xs">Today&#039;s Headlines</h3>
+
+
+	<div class="row margin-top1">
+		<div class="col-sm-5">
+			<a href="http://now.howstuffworks.com/2016/08/11/sorry-haters-you-do-have-floss"><img height="75" src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://cdn.now.howstuffworks.com/media-content/038e20e4-62f3-4d5e-8cc9-d4b157204f9a-1210-680.jpg" alt="Sorry&#x20;Haters,&#x20;You&#x20;Do&#x20;Have&#x20;to&#x20;Floss" title="Sorry&#x20;Haters,&#x20;You&#x20;Do&#x20;Have&#x20;to&#x20;Floss" /></a>
+		</div>
+		<div class="col-sm-7">
+			<p><strong><a href="http://now.howstuffworks.com/2016/08/11/sorry-haters-you-do-have-floss">Sorry Haters, You Do Have to Floss</a></strong></p>
+		</div>
+	</div>
+
+
+
+	<div class="row margin-top1">
+		<div class="col-sm-5">
+			<a href="http://now.howstuffworks.com/2016/08/11/what-does-your-playlist-say-your-personality"><img height="75" src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://cdn.now.howstuffworks.com/media-content/dd2ea5be-0bcb-4a25-a2d9-e7f89b62d06a-1210-680.jpg" alt="What&#x20;Does&#x20;Your&#x20;Playlist&#x20;Say&#x20;About&#x20;Your&#x20;Personality&#x3F;" title="What&#x20;Does&#x20;Your&#x20;Playlist&#x20;Say&#x20;About&#x20;Your&#x20;Personality&#x3F;" /></a>
+		</div>
+		<div class="col-sm-7">
+			<p><strong><a href="http://now.howstuffworks.com/2016/08/11/what-does-your-playlist-say-your-personality">What Does Your Playlist Say About Your Personality?</a></strong></p>
+		</div>
+	</div>
+
+
+
+	<div class="row margin-top1">
+		<div class="col-sm-5">
+			<a href="http://now.howstuffworks.com/2016/08/10/saurons-spies-are-everywhere-even-computers"><img height="75" src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://cdn.now.howstuffworks.com/media-content/8ff8801e-0e06-4902-a80c-c8b24e761956-1210-680.jpg" alt="Sauron&#x27;s&#x20;Spies&#x20;Are&#x20;Everywhere&#x20;&#x2014;&#x20;Even&#x20;on&#x20;Computers" title="Sauron&#x27;s&#x20;Spies&#x20;Are&#x20;Everywhere&#x20;&#x2014;&#x20;Even&#x20;on&#x20;Computers" /></a>
+		</div>
+		<div class="col-sm-7">
+			<p><strong><a href="http://now.howstuffworks.com/2016/08/10/saurons-spies-are-everywhere-even-computers">Sauron&#039;s Spies Are Everywhere — Even on Computers</a></strong></p>
+		</div>
+	</div>
+
+
+</div>
+
+<p><strong><a class="text-uppercase" href="http://now.howstuffworks.com">See More Headlines &raquo;</a></strong></p>
+
+					<div id="ad-wrap-rectangleRailMiddle">
+	<div id="ad-div-rectangleRailMiddle" class="ad-tag ad-border-top">
+			</div>
+</div>
+								<hr />
+
+
+<div data-track-gtm="Mobile : Menu : Most Popular" class="module">
+
+		<h3 class="">Most Popular</h3>
+
+
+				<div class="row margin-top1">
+						<div class="col-sm-5">
+				<a href="http://computer.howstuffworks.com/10-nightmare-scenarios-from-internet-of-things.htm"><img src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://r.hswstatic.com/w_140/gif/nightmare-scenarios-ch150.jpg" width="140" alt="10&#x20;Nightmare&#x20;Scenarios&#x20;From&#x20;the&#x20;Internet&#x20;of&#x20;Things" title="10&#x20;Nightmare&#x20;Scenarios&#x20;From&#x20;the&#x20;Internet&#x20;of&#x20;Things" /></a>
+			</div>
+			<div class="col-sm-7">
+							<p><strong><a href="http://computer.howstuffworks.com/10-nightmare-scenarios-from-internet-of-things.htm">10 Nightmare Scenarios From the Internet of Things</a></strong></p>
+						</div>
+					</div>
+
+				<div class="row margin-top1">
+						<div class="col-sm-5">
+				<a href="http://electronics.howstuffworks.com/gadgets/home/dyson-bladeless-fan.htm"><img src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://r.hswstatic.com/w_140/gif/fan-without-blades-ch150.jpg" width="140" alt="How&#x20;the&#x20;Dyson&#x20;Bladeless&#x20;Fan&#x20;Works" title="How&#x20;the&#x20;Dyson&#x20;Bladeless&#x20;Fan&#x20;Works" /></a>
+			</div>
+			<div class="col-sm-7">
+							<p><strong><a href="http://electronics.howstuffworks.com/gadgets/home/dyson-bladeless-fan.htm">How the Dyson Bladeless Fan Works</a></strong></p>
+						</div>
+					</div>
+
+				<div class="row margin-top1">
+						<div class="col-sm-5">
+				<a href="http://electronics.howstuffworks.com/future-tech/could-you-put-a-camera-in-a-contact-lens-.htm"><img src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://r.hswstatic.com/w_140/gif/camera-contact-ch150.jpg" width="140" alt="Could&#x20;you&#x20;put&#x20;a&#x20;camera&#x20;in&#x20;a&#x20;contact&#x20;lens&#x3F;" title="Could&#x20;you&#x20;put&#x20;a&#x20;camera&#x20;in&#x20;a&#x20;contact&#x20;lens&#x3F;" /></a>
+			</div>
+			<div class="col-sm-7">
+							<p><strong><a href="http://electronics.howstuffworks.com/future-tech/could-you-put-a-camera-in-a-contact-lens-.htm">Could you put a camera in a contact lens?</a></strong></p>
+						</div>
+					</div>
+
+				<div class="row margin-top1">
+						<div class="col-sm-5">
+				<a href="http://electronics.howstuffworks.com/amazon-fire-tv.htm"><img src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://r.hswstatic.com/w_140/gif/amazon-fire-ch150.jpg" width="140" alt="How&#x20;Amazon&#x20;Fire&#x20;TV&#x20;Works" title="How&#x20;Amazon&#x20;Fire&#x20;TV&#x20;Works" /></a>
+			</div>
+			<div class="col-sm-7">
+							<p><strong><a href="http://electronics.howstuffworks.com/amazon-fire-tv.htm">How Amazon Fire TV Works</a></strong></p>
+						</div>
+					</div>
+
+				<div class="row margin-top1">
+						<div class="col-sm-5">
+				<a href="http://electronics.howstuffworks.com/gadgets/other-gadgets/project-glass.htm"><img src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://r.hswstatic.com/w_140/gif/project-glass-hpa-150x150.jpg" width="140" alt="How&#x20;Google&#x20;Glass&#x20;Works" title="How&#x20;Google&#x20;Glass&#x20;Works" /></a>
+			</div>
+			<div class="col-sm-7">
+							<p><strong><a href="http://electronics.howstuffworks.com/gadgets/other-gadgets/project-glass.htm">How Google Glass Works</a></strong></p>
+						</div>
+					</div>
+
+</div>
+
+
+					<div data-track-gtm="Outbrain" class="module">
+	<hr />
+	<h3 id="ob_tower_title" style="display:none;" >More to Explore</h3>
+
+	<div id="ob_tower"  data-src="http://electronics.howstuffworks.com/gadgets/travel/gps.htm" data-widget-id="SB_3" data-ob-template="howstuffworks" style="font-family: arial;"></div>
+
+</div>
+
+<div id="zergnet-widget-38635"></div>
+
+<script>
+if (HSW.utilities.isMobile() === false) {
+	if (pageMetricsData.template != 'Article') {
+		var widgetLoadEvents = widgetLoadEvents || [];
+
+		$('#ob_tower').addClass('OUTBRAIN');
+		$('#ob_tower_title').show();
+		$.getScript('//widgets.outbrain.com/outbrain.js');
+
+		var widgetLoadEvents = widgetLoadEvents || [];
+		widgetLoadEvents.push({
+			url         : location.pathname + location.hash,
+			event       : "object-load",
+			eventAction : "outbrain-widget",
+			eventLabel  : "outbrain_SB_3"
+		});
+	}
+	else
+	{
+		var zergnet = document.createElement('script');
+		zergnet.type = 'text/javascript';
+		zergnet.async = true;
+		zergnet.src = 'http://www.zergnet.com/zerg.js?id=38635';
+		var znscr = document.getElementsByTagName('script')[0];
+		znscr.parentNode.insertBefore(zergnet, znscr);
+
+		var widgetLoadEvents = widgetLoadEvents || [];
+		widgetLoadEvents.push({
+			url         : location.pathname + location.hash,
+			event       : "object-load",
+			eventAction : "zergnet-widget",
+			eventLabel  : "zergnet-tech"
+		});
+	}
+}
+</script>
+					<div id="ad-wrap-rectangleRailBottom">
+	<div id="ad-div-rectangleRailBottom" class="ad-tag ad-border-top">
+			</div>
+</div>
+
+	</div>
+
+
+
+
+				</div>
+
+								<div id="ad-wrap-bannerBottom">
+	<div id="ad-div-bannerBottom" class="ad-tag ">
+			</div>
+</div>				</div>
+
+
+		</div>
+
+				<footer data-track-gtm="Footer">
+
+<div class="footer-wrapper">
+	<div class="container">
+
+		<div class="hidden-xs hidden-sm row devices-graphic center-block">
+		</div>
+		<script>
+		//Only add this graphic if we're not on mobile
+		if (HSW.utilities.isMobile() === false) {
+			$('<img/>').attr({
+				'src' : 'http://s.hswstatic.com/gif/transparent.gif',
+				'data-src' : 'http://s.hswstatic.com/en-us/hsw//img/footer_devices.png'
+			}).appendTo('.devices-graphic');
+		}
+		</script>
+
+		<div class="row top-margin2 bottom-margin2 col-gutter2">
+
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-5">
+				<p><img class="logo" src="http://s.hswstatic.com/gif/transparent.gif" data-src="http://s.hswstatic.com/en-us/hsw/img/footer_logo.png" width="330" height="75" alt="HowStuffWorks" title="HowStuffWorks" /></p>
+
+				<div class="row">
+					<div class="col-xs-5">
+						<ul class="list-unstyled">
+							<li><a href="http://www.howstuffworks.com/about-hsw.htm">About</a></li>
+							<li><a href="http://shows.howstuffworks.com">Shows</a></li>
+							<li><a href="http://www.howstuffworks.com/privacy.htm">Privacy</a></li>
+							<li><a href="http://www.howstuffworks.com/privacy.htm#ad-choices">Ad Choices</a></li>
+							<li><a href="http://www.howstuffworks.com/terms-and-conditions.htm">Terms</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-7">
+						<ul class="list-unstyled">
+							<li><a href="http://howstuffworks.spreadshirt.com/">Store</a></li>
+							<li><a href="http://www.howstuffworks.com/advertise.htm">Advertising</a></li>
+							<li><a href="http://www.howstuffworks.com/jobs.htm">Careers</a></li>
+							<li><a href="http://www.howstuffworks.com/hsw-contact.htm">Contact Us</a></li>
+							<li><a href="http://www.howstuffworks.com/faq.htm">Help</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 col-lg-3 hidden-xs hidden-sm col-devices">
+				<h4><a href="http://www.howstuffworks.com/app.htm">HOWSTUFFWORKS<br/>
+				ON THE GO</a></h4>
+				<p>Take us with you on your iPad, iPhone or favorite Android device.</p>
+
+			</div>
+
+
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 hidden-xs">
+				<hr class="visible-xs" />
+				<h4>NEWSLETTERS</h4>
+				<p>Get the best of HowStuffWorks by email. Keep up to date on:</p>
+				<ul class="p">
+					<li>Latest Buzz</li>
+					<li>Stuff Shows &amp; Podcasts</li>
+					<li>Tours</li>
+					<li>Weird &amp; Wacky</li>
+				</ul>
+				<div id="original_mailchimp_embed">
+					<div id="mc_embed_signup">
+						<form id="subscribe-form" action="//howstuffworks.us12.list-manage.com/subscribe/post-json?u=07caa1d5a5ef231b0ad47ff92&amp;id=e3a3faca54&SOURCE=footer" method="get">
+						<div id="mc_embed_signup_scroll">
+							<div class="signup-div"><label class="signup-label">Sign-up Now!</label></div>
+							<div class="mc-field-group">
+								<input class="mc-field-group-input" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+							</div>
+							<div id="mce-responses" class="clear">
+								<div class="response" id="mce-error-response"   style="display:none;">Testing this long verbose error message to check the behaviour</div>
+								<div class="response" id="mce-success-response" style="display:none;"></div>
+							</div><div id="mc_secret" style="position: absolute; left: -5000px; " aria-hidden="true"><input type="text" name="b_07caa1d5a5ef231b0ad47ff92_e3a3faca54" tabindex="-1" value=""></div>
+							<div id="mc_submit" class="clear" style="float:right;"><input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe" class="button" ></div>
+						</div>
+						<div id="subscribe-result"> </div>
+						</form>
+					</div>
+				</div>
+
+				<div class="clearfix"></div>
+				<hr class="visible-xs" />
+			</div>
+
+			<div class="col-xs-12 col-md-6 copyright">
+				<p data-track-gtm="Copyright">Copyright &copy; 2016 <a href="http://www.howstuffworks.com">HowStuffWorks</a>,<br />a division of <a href="http://www.infospace.com/">InfoSpace Holdings LLC</a></p>
+			</div>
+
+
+		</div>
+
+
+	</div>
+</div>
+		</footer>
+
+
+	</div><script type="text/javascript">
+	WebFontConfig = {
+		google: { families: [ 'Source+Sans+Pro:300,400,600,900' ] }
+	};
+	(function() {
+		var wf = document.createElement('script');
+		wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+		'://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+		wf.type = 'text/javascript';
+		wf.async = 'true';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(wf, s);
+	})();
+	</script><script>(function(){'use strict';var f=[];function g(a){f.push(a);1===f.length&&l()}function m(){for(;f.length;)f[0](),f.shift()}if(window.MutationObserver){var n=document.createElement("div");(new MutationObserver(m)).observe(n,{attributes:!0});var l=function(){n.setAttribute("x",0)}}else l=function(){setTimeout(m)};function p(a){this.a=q;this.b=void 0;this.f=[];var b=this;try{a(function(a){r(b,a)},function(a){t(b,a)})}catch(c){t(b,c)}}var q=2;function u(a){return new p(function(b,c){c(a)})}function v(a){return new p(function(b){b(a)})}
+function r(a,b){if(a.a===q){if(b===a)throw new TypeError("Promise settled with itself.");var c=!1;try{var d=b&&b.then;if(null!==b&&"object"===typeof b&&"function"===typeof d){d.call(b,function(b){c||r(a,b);c=!0},function(b){c||t(a,b);c=!0});return}}catch(e){c||t(a,e);return}a.a=0;a.b=b;w(a)}}function t(a,b){if(a.a===q){if(b===a)throw new TypeError("Promise settled with itself.");a.a=1;a.b=b;w(a)}}
+function w(a){g(function(){if(a.a!==q)for(;a.f.length;){var b=a.f.shift(),c=b[0],d=b[1],e=b[2],b=b[3];try{0===a.a?"function"===typeof c?e(c.call(void 0,a.b)):e(a.b):1===a.a&&("function"===typeof d?e(d.call(void 0,a.b)):b(a.b))}catch(h){b(h)}}})}p.prototype.g=function(a){return this.c(void 0,a)};p.prototype.c=function(a,b){var c=this;return new p(function(d,e){c.f.push([a,b,d,e]);w(c)})};
+function x(a){return new p(function(b,c){function d(c){return function(d){h[c]=d;e+=1;e===a.length&&b(h)}}var e=0,h=[];0===a.length&&b(h);for(var k=0;k<a.length;k+=1)a[k].c(d(k),c)})}function y(a){return new p(function(b,c){for(var d=0;d<a.length;d+=1)a[d].c(b,c)})};window.Promise||(window.Promise=p,window.Promise.resolve=v,window.Promise.reject=u,window.Promise.race=y,window.Promise.all=x,window.Promise.prototype.then=p.prototype.c,window.Promise.prototype["catch"]=p.prototype.g);}());
+
+(function(){'use strict';function h(a){document.body?a():document.addEventListener("DOMContentLoaded",a)};function v(a){this.a=document.createElement("div");this.a.setAttribute("aria-hidden","true");this.a.appendChild(document.createTextNode(a));this.b=document.createElement("span");this.c=document.createElement("span");this.h=document.createElement("span");this.g=document.createElement("span");this.f=-1;this.b.style.cssText="display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;";this.c.style.cssText="display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;";
+this.g.style.cssText="display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;";this.h.style.cssText="display:inline-block;width:200%;height:200%;font-size:16px;";this.b.appendChild(this.h);this.c.appendChild(this.g);this.a.appendChild(this.b);this.a.appendChild(this.c)}
+function w(a,c,b){a.a.style.cssText="min-width:20px;min-height:20px;display:inline-block;overflow:hidden;position:absolute;width:auto;margin:0;padding:0;top:-999px;left:-999px;white-space:nowrap;font-size:100px;font-family:"+c+";"+b}function x(a){var c=a.a.offsetWidth,b=c+100;a.g.style.width=b+"px";a.c.scrollLeft=b;a.b.scrollLeft=a.b.scrollWidth+100;return a.f!==c?(a.f=c,!0):!1}
+function y(a,c){a.b.addEventListener("scroll",function(){x(a)&&null!==a.a.parentNode&&c(a.f)},!1);a.c.addEventListener("scroll",function(){x(a)&&null!==a.a.parentNode&&c(a.f)},!1);x(a)};function z(a,c){var b=c||{};this.family=a;this.style=b.style||"normal";this.variant=b.variant||"normal";this.weight=b.weight||"normal";this.stretch=b.stretch||"stretch";this.featureSettings=b.featureSettings||"normal"}var B=null;
+z.prototype.a=function(a,c){var b=a||"BESbswy",C=c||3E3,k="font-style:"+this.style+";font-variant:"+this.variant+";font-weight:"+this.weight+";font-stretch:"+this.stretch+";font-feature-settings:"+this.featureSettings+";-moz-font-feature-settings:"+this.featureSettings+";-webkit-font-feature-settings:"+this.featureSettings+";",g=document.createElement("div"),l=new v(b),m=new v(b),n=new v(b),d=-1,e=-1,f=-1,q=-1,r=-1,t=-1,p=this;return new Promise(function(a,b){function c(){null!==g.parentNode&&g.parentNode.removeChild(g)}
+function u(){if(-1!==d&&-1!==e||-1!==d&&-1!==f||-1!==e&&-1!==f)if(d===e||d===f||e===f){if(null===B){var b=/AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent);B=!!b&&(536>parseInt(b[1],10)||536===parseInt(b[1],10)&&11>=parseInt(b[2],10))}B?d===q&&e===q&&f===q||d===r&&e===r&&f===r||d===t&&e===t&&f===t||(c(),a(p)):(c(),a(p))}}h(function(){function a(){if(Date.now()-D>=C)c(),b(p);else{var A=document.hidden;if(!0===A||void 0===A)d=l.a.offsetWidth,e=m.a.offsetWidth,f=n.a.offsetWidth,
+u();setTimeout(a,50)}}var D=Date.now();w(l,"sans-serif",k);w(m,"serif",k);w(n,"monospace",k);g.appendChild(l.a);g.appendChild(m.a);g.appendChild(n.a);document.body.appendChild(g);q=l.a.offsetWidth;r=m.a.offsetWidth;t=n.a.offsetWidth;a();y(l,function(a){d=a;u()});w(l,p.family+",sans-serif",k);y(m,function(a){e=a;u()});w(m,p.family+",serif",k);y(n,function(a){f=a;u()});w(n,p.family+",monospace",k)})})};window.FontFaceObserver=z;window.FontFaceObserver.prototype.check=z.prototype.a;}());</script>
+	<script>
+	(function( w ){
+	    if( w.document.documentElement.className.indexOf( "fonts-loaded" ) > -1 ){
+	        return;
+	    }
+	    var font1 = new w.FontFaceObserver( "Source Sans Pro", {
+	        weight: 300
+	    });
+	    var font2 = new w.FontFaceObserver( "Source Sans Pro", {
+	        weight: 400
+	    });
+	    var font3 = new w.FontFaceObserver( "Source Sans Pro", {
+	        weight: 600
+	    });
+	    var font4 = new w.FontFaceObserver( "Source Sans Pro", {
+	        weight: 900
+	    });
+	    w.Promise
+	        .all([font1.check(), font2.check(), font3.check(), font4.check()])
+	        .then(function(){
+	            w.document.documentElement.className += " fonts-loaded";
+	        });
+	}( this ));
+	</script><script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+
+						<div id="ad-wrap-brandscape">
+	<div id="ad-div-brandscape" class="ad-tag ">
+			</div>
+</div>			<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NXHP8V"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer',"GTM-NXHP8V");</script>
+
+
+<script>
+//Attach flag for SEM referral tracking when appropriate
+var semChannel = (semCookie ? ',r0' : '');
+var GACChannel = (pageMetricsData.abs ? ','+$.trim(pageMetricsData.abs) : '');
+//Config vars for google ad call
+var google_ad_client="ca-howstuffworks_rs_js",google_ad_channel="electronics,electronics-Article,article-structured,hsw-lite"+semChannel+GACChannel,google_ad_output="js",google_max_num_ads=4,google_safe="medium",google_ad_type="text",google_hints="Travel\x20Gadgets\x20How\x20GPS\x20Receivers\x20Work";
+
+/**
+ * Callback for google CPC ad request
+ *
+ * @param array google_ads
+ */
+function google_ad_request_done(google_ads) {
+	//Nothing returned so nothing to do
+	if (0 == google_ads.length || google_ads[0].type != 'text' ) { return; }
+
+	//Determine what page configuration we have for ad placement
+	var totalSlots = $('.cpc').length,
+		bodySlots  = $('.cpc-body').length,
+		hasUpper   = ($('.cpc-upper').length == 1),
+		hasLower   = ($('.cpc-lower').length == 1),
+		totalAds   = google_ads.length;
+
+	//Example: list-condensed
+	if (bodySlots && hasLower) {
+		var adsPlaced = 0;
+		//Drop one ad in each body slot
+		$('.cpc-body').each (function (i) {
+			if (i < bodySlots) {
+				$(this).html(buildAdHtml(google_ads.slice(i, i+1)));
+				adsPlaced++;
+			}
+		});
+		//Drop remaining ads in cpc-lower slot
+		if (adsPlaced < totalAds) {
+			lowerAds = google_ads.slice(adsPlaced);
+			$('.cpc-lower').html(buildAdHtml(lowerAds));
+		}
+	} else if (hasUpper && hasLower) {
+		//Split number of ads between the two slots
+		var adsForUpper = Math.floor( totalAds / 2 );
+		$('.cpc-upper').html(buildAdHtml(google_ads.slice(0, adsForUpper)));
+		$('.cpc-lower').html(buildAdHtml(google_ads.slice(adsForUpper)));
+	} else if (hasUpper) {
+		//Put all ads in cpc-upper slot
+		$('.cpc-upper').html(buildAdHtml(google_ads));
+	} else if (hasLower) {
+		//Put all ads in cpc-lower slot
+		$('.cpc-lower').html(buildAdHtml(google_ads));
+	} else {
+		//Absolute fallback - build a place for all ads to show and stick it at
+		//the bottom of the page
+		var $div = $('<div>').addClass('cpc cpc-lower');
+		$div.appendTo('#site-content');
+		$div.html(buildAdHtml(google_ads));
+	}
+}
+</script><script>
+/**
+ * Take google ad data and form the HTML to show the ad
+ *
+ * @param array ads
+ */
+function buildAdHtml (ads) {
+	var i, html = '';
+
+	html += "<p class=\"ads-by-google text-right\"><a target=\"_blank\" href=\"" + google_info.feedback_url + "\" onclick=\"window.open(this.href)\; return false\;\">Ads by Google</a></p>";
+
+	for (i = 0; i < ads.length; i++) {
+		html += "<div class=\"row margin-top1\"><div class=\"col-xs-12\">";
+		html += "<p><a target=\"_blank\" href=\"" + ads[i].url + "\" class=\"event-click-tracking title\" onmouseout=\"window.status=''\;\" onmouseover=\"window.status='go to " + ads[i].visible_url + "'\;\" data-track-rule=\"google\" data-module-name=\"afc\" data-module-location=\"0\" data-link-position=\""+(i+1)+"\">" + ads[i].line1 + "</a></p>";
+		html += "<p class=\"description\">" + ads[i].line2 + ads[i].line3 + "</p>";
+		html += "<p><a target=\"_blank\" href=\"" + ads[i].url + "\" class=\"event-click-tracking url\" onmouseout=\"window.status=''\;\" onmouseover=\"window.status='go to " + ads[i].visible_url + "'\;\" data-track-rule=\"google\" data-module-name=\"afc\" data-module-location=\"0\" data-link-position=\""+(i+1)+"\">" + ads[i].visible_url + "</a></p>";
+		html += "</div></div>";
+	}
+	//html += "</div>";
+
+	return html;
+}
+</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+
+
+
+
+
+	<script>
+	var cb = function() {
+		var styles = [
+			'//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'
+		];
+		for (var i = 0; i < styles.length; i++) {
+			var l = document.createElement('link'); l.rel = 'stylesheet';
+			l.href = styles[i];
+			var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+		}
+	};
+	var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
+	if (raf) raf(cb);
+	else window.addEventListener('load', cb);
+</script>
+	<script>
+		if (typeof addthis_share !== 'undefined') {
+			var campaignQueryString = assembleCampaignQueryString();
+			if (campaignQueryString) {
+				addthis_share['url'] = location.origin.concat(location.pathname).concat(campaignQueryString).concat(location.hash);
+			}
+		}
+	</script>
+
+	<script>
+		// was in tout_embed prior to a/b testing
+		if (typeof(TOUT) !== 'undefined') {
+			$("#abtout").addClass("tout-sdk tout-mid-article");
+			$.getScript( "http://platform.tout.com/sdk.js" );
+		}
+		</script>
+
+</body>
+</html>

@@ -36,10 +36,22 @@ function runPgzp(tab) {
 	chrome.browserAction.setIcon({tabId: tab.id, path: chrome.extension.getURL(icon_src)});
 }
 
+// On refresh, the script injected into the tab context will be lost
+function updateActiveTab(tabId, changeInfo, tab) {
+	if (changeInfo.status == "complete" && loaded_tabs[tabId]) {
+		// deactivate pgzp button on page load - restarting pgzp in this tab will require reloading everything
+		delete loaded_tabs[tabId];
+		chrome.browserAction.setIcon({tabId: tab.id, path: chrome.extension.getURL("extension_icons/icon19.png")});
+	}
+}
+
 /*-------------------- Event Handlers -----------------*/
 
-//Update media queries after page load
+// Update media queries after page load
 chrome.webNavigation.onDOMContentLoaded.addListener(autoRun);
 
 // Run Pgzp when the toolbar button is clicked
 chrome.browserAction.onClicked.addListener(runPgzp);
+
+// Update after page refresh - the script injected into the tab context will be lost
+chrome.tabs.onUpdated.addListener(updateActiveTab);

@@ -13,6 +13,7 @@ function PageZipper() {
 							{syn: ">>", weight: 30, humanReadableOnly: true},
 							{syn: "more", weight: 20},
 							{syn: "page", weight: 10},
+							{syn: "part", weight: 5},
 							{syn: "-1", weight: 0, humanReadableOnly: true, pageBar: true}		//for nav bars that list pages 1234, list the next page
 						];
 	this.minimumPageBuffer = 1;				//number of unread pages to keep queued

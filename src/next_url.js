@@ -19,7 +19,7 @@ PageZipper.prototype.getNextLink = function(body) {
 PageZipper.prototype.getAllScoredLinks = function(body) {
 	var allNextLinks = pgzp.getAllNextLinks(body);
 	var pageBarInfo = pgzp.getCurrentPageNumberFromPageBar(allNextLinks);
-	pgzp.log("looking for page #: " + (pageBarInfo[0] + 1) + " w/confidence: " + pageBarInfo[1]);
+	// pgzp.log("looking for page #: " + (pageBarInfo[0] + 1) + " w/confidence: " + pageBarInfo[1]);
 	pgzp.nextSynonyms[pgzp.nextSynonyms.length-1].syn = (pageBarInfo[0] + 1) + "";	//update nextSynonyms
 	pgzp.nextSynonyms[pgzp.nextSynonyms.length-1].weight = pageBarInfo[1];	//update weight/confidence
 	pgzp.linkTextIndex = pgzp.indexDuplicateLinks(allNextLinks);
@@ -31,12 +31,12 @@ PageZipper.prototype.getAllScoredLinks = function(body) {
 
 //get all links and score them
 PageZipper.prototype.scoreLinks = function(allNextLinks) {
-	if (pgzp.debug) var debugMsg = '';
+	//if (pgzp.debug) var debugMsg = '';
 	for (var trial in pgzp.trials) {
 		if (pgzp.trials.hasOwnProperty(trial)) { //block out stuff added by site with Object.prototype
 			for (var i=0; i<allNextLinks.length; i++) {
 				allNextLinks[i].addScore(trial, pgzp.trials[trial].doScore(allNextLinks[i]));
-				if (pgzp.debug) debugMsg += "\nScore " + trial + " " + allNextLinks[i].text + ": " + allNextLinks[i].getScore(trial);
+				//if (pgzp.debug) debugMsg += "\nScore " + trial + " " + allNextLinks[i].text + ": " + allNextLinks[i].getScore(trial);
 				//remove any links which scored 0 on containing a keyword - do it here so we don't have to continue scoring links we know are bad
 				if (trial == 'contains_next_syn' && allNextLinks[i].getScore('contains_next_syn') <= 0) {
 					allNextLinks.splice(i, 1);
@@ -45,7 +45,7 @@ PageZipper.prototype.scoreLinks = function(allNextLinks) {
 			}
 		}
 	}
-	pgzp.log(debugMsg);
+	//pgzp.log(debugMsg);
 }
 
 //normalize scores from 1-100
@@ -69,15 +69,15 @@ PageZipper.prototype.normalizeTrialSet = function(trialName, allLinks) {
 	}
 
 	//now normalize
-	if (pgzp.debug) var debugMsg = 'Normalizing Trial Set: ' + trialName;
+	// if (pgzp.debug) var debugMsg = 'Normalizing Trial Set: ' + trialName;
 	var curve = (highest == lowest) ? 0 : (100 / (highest - lowest));
 	for (var i=0; i<allLinks.length; i++) {
 		var score = allLinks[i].getScore(trialName);
 		var nScore = Math.floor((score - lowest) * curve);
 		allLinks[i].addScore(trialName, nScore, true);
-		if (pgzp.debug) debugMsg += "\nNScore " + i + ": " + allLinks[i].text + ": score: " + score + " curve: " + curve + " higest: " + highest + " lowest: " + lowest + " nscore: " + nScore;
+		// if (pgzp.debug) debugMsg += "\nNScore " + i + ": " + allLinks[i].text + ": score: " + score + " curve: " + curve + " higest: " + highest + " lowest: " + lowest + " nscore: " + nScore;
 	}
-	pgzp.log(debugMsg);
+	// pgzp.log(debugMsg);
 }
 
 //calculate total score
@@ -90,16 +90,16 @@ PageZipper.prototype.getHighestTotalScore = function(allNextLinks) {
 		}
 	}
 
-	if (pgzp.debug) {
-		var debugMsg = 'Final Score ' + allNextLinks.length;
-		allNextLinks.sort(function (a, b) {
-							return b.finalScore - a.finalScore;
-						});
-		for (i=0; i<allNextLinks.length; i++) {
-			debugMsg += "\n" + allNextLinks[i].finalScore + ": " + allNextLinks[i].text + ": " + allNextLinks[i].url;
-		}
-		pgzp.log(debugMsg);
-	}
+	// if (pgzp.debug) {
+	// 	var debugMsg = 'Final Score ' + allNextLinks.length;
+	// 	allNextLinks.sort(function (a, b) {
+	// 						return b.finalScore - a.finalScore;
+	// 					});
+	// 	for (i=0; i<allNextLinks.length; i++) {
+	// 		debugMsg += "\n" + allNextLinks[i].finalScore + ": " + allNextLinks[i].text + ": " + allNextLinks[i].url;
+	// 	}
+	// 	pgzp.log(debugMsg);
+	// }
 
 	return highestScoringLink;
 }
@@ -110,8 +110,7 @@ PageZipper.prototype.getAllNextLinks = function(body) {
 
 	var pageUrl = pgzp.getUrlWOutAnchors( pgzp.pages[ pgzp.pages.length-1 ].url );
 	for (var i=0; i<links.length; i++) {
-		//ignore all links which point to a different domain than the existing domain
-		pgzp.log("Curr Domain: "  + pgzp.currDomain + " Link Domain: " + pgzp.getDomain(links[i].href) + " Link url: " + links[i].href + " relative: " + links[i].getAttribute("href"));
+		// pgzp.log("Curr Domain: "  + pgzp.currDomain + " Link Domain: " + pgzp.getDomain(links[i].href) + " Link url: " + links[i].href + " relative: " + links[i].getAttribute("href"));
 		// filter links which are obviously not the next link
 		if (
 			// has href
@@ -124,7 +123,7 @@ PageZipper.prototype.getAllNextLinks = function(body) {
 			pgzp.addLinkComponents(links[i], allNextLinks, pgzp.contains(pgzp.url_list, links[i].href)); //mark links we've already loaded
 		}
 	}
-	pgzp.logList(links, "All Links", "#{o.text}\t#{o.href}");
+	// pgzp.logList(links, "All Links", "#{o.text}\t#{o.href}");
 	return allNextLinks;
 }
 
@@ -168,25 +167,40 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 	var allSequences = [], i = 0, currSeq = [], currNextLink, pageBar, pageBarScore = 0, pageNum, tmpPageBarScore;
 	var currPageUrl = pgzp.pages[ pgzp.pages.length-1 ].url;
 
+	var pushCurrSeq = function() {
+		if (currSeq.length > 0) {
+			allSequences.push(currSeq);
+			currSeq = [];
+		}
+	};
+
 	//first find all consecutive numerical links, put them in allSequences array
 	for (i=0; i<allNextLinks.length; i++) {
 		currNextLink = allNextLinks[i];
+
 		//only want text which actually appears on the page (one link may have multiple entries in allNextLinks)
-		if (currNextLink.isVisibleText) {
-			if (pgzp.isNumber(currNextLink.text)) {
-				pageNum = parseInt(currNextLink.text, 10);
-				if (pageNum >= 0 && pageNum < 1000) {
-					currNextLink.pageNum = pageNum;
-					currSeq.push(currNextLink);
-				}
-			} else {
-				if (currSeq.length > 0) {
-					allSequences.push(currSeq);
-					currSeq = [];
-				}
-			}
+		if (!currNextLink.isVisibleText) continue;
+
+		if (!pgzp.isNumber(currNextLink.text)) {
+			pushCurrSeq();
+			continue;
 		}
+
+		pageNum = parseInt(currNextLink.text, 10);
+		if (pageNum < 0 || pageNum > 1000) {
+			pushCurrSeq();
+			continue;
+		}
+
+		if (currSeq.length > 0 && pageNum <= currSeq[ currSeq.length -1 ].pageNum) {
+			pushCurrSeq();
+			continue;
+		}
+
+		currNextLink.pageNum = pageNum;
+		currSeq.push(currNextLink);
 	}
+
 	if (currSeq.length > 0) allSequences.push(currSeq);
 
 	//now find the sequence numerical links most likely to be the page bar
@@ -204,7 +218,7 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 	pageBar.sort(	function(a,b){
 						return a.pageNum - b.pageNum;
 					});
-	pgzp.logList(pageBar, "indexes ordered by size", "#{o.pageNum}\t#{o.text}");
+	// pgzp.logList(pageBar, "indexes ordered by size", "#{o.pageNum}\t#{o.text}");
 
 	//mark each link in pageBar for later
 	for (i=0; i<pageBar.length; i++) pageBar[i].isPageBar = true;
@@ -230,7 +244,7 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 			if (Math.abs(currPageNum - prevPageNum) == 2) {
 				//currPage should not have been visited yet - it is the next page.
 				//check this to avoid getting tripped up by bad page bars - ex. 1, 2, 3, 5, 6, 8, 9, 12, 13, 14
-				pgzp.log("currNextPage " + currPageNum + " url: " + pageBar[i].url + " visited previously: "  + pgzp.contains(pgzp.url_list, pageBar[i].url));
+				// pgzp.log("currNextPage " + currPageNum + " url: " + pageBar[i].url + " visited previously: "  + pgzp.contains(pgzp.url_list, pageBar[i].url));
 				if (!pgzp.contains(pgzp.url_list, pageBar[i].url)) {
 					return [currPageNum - 1, 120];
 				}
@@ -248,7 +262,7 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 PageZipper.prototype.__scorePageBar = function(pageBar) {
 	var similarityScore = pgzp.trials['url_similarity'].doScore(pageBar[0]);
 	var totalScore = pageBar.length + (similarityScore / 20);
-	pgzp.log("page bar length: " + pageBar.length + " sim score: " + similarityScore + " total score: " + totalScore);
+	// pgzp.log("page bar length: " + pageBar.length + " sim score: " + similarityScore + " total score: " + totalScore);
 	return totalScore;
 }
 

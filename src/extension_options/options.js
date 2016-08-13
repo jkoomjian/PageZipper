@@ -14,7 +14,7 @@ optionsApp.config(function($routeProvider){
 optionsApp.factory('chromeSync', function() {
   return {
     get: function(callback) {
-      pgzpBP.browserStorage.get("whitelist", function(items) {
+      getBrowserStorage().get("whitelist", function(items) {
         items = items["whitelist"] || {};
         callback(items);
       });

@@ -8,12 +8,17 @@ function autoRun(details) {
 	if (details.frameId !== 0) return;
 
 	var url = details.url;
-	var currTab = {id: details.tabId};
-	getFromList(url, function(domainValue) {
-		if (domainValue == "domain" || (domainValue == "nohome" && !is_homepage(url))) {
-			loadAndStartPgzp(currTab);
-		}
-	});
+  _isActiveAutorun(url, details.tabId, loadAndStartPgzp);
+}
+
+function _isActiveAutorun(url, currTabId, callbackIsAutorun, callbackIsNotAutorun) {
+  getFromList(url, function(domainValue) {
+    if (domainValue == "domain" || (domainValue == "nohome" && !is_homepage(url))) {
+      if (callbackIsAutorun) callbackIsAutorun(currTabId);
+    } else {
+      if (callbackIsNotAutorun) callbackIsNotAutorun(currTabId);
+    }
+  });
 }
 
 //Handler for button
@@ -21,7 +26,7 @@ function runPgzp(tab) {
 	var icon_src = "";
 
 	if (!loaded_tabs[tab.id]) {
-		loadAndStartPgzp(tab);
+		loadAndStartPgzp(tab.id);
 		icon_src = "extension_icons/icon19-on.png";
 	} else if (loaded_tabs[tab.id] == "on") {
 		loaded_tabs[tab.id] = "off";
@@ -37,12 +42,15 @@ function runPgzp(tab) {
 }
 
 // On refresh, the script injected into the tab context will be lost
+// Also called on page load, which causes problems for autoload
 function updateActiveTab(tabId, changeInfo, tab) {
 	if (changeInfo.status == "complete" && loaded_tabs[tabId]) {
-    debugger;
-		// deactivate pgzp button on page load - restarting pgzp in this tab will require reloading everything
-		delete loaded_tabs[tabId];
-		chrome.browserAction.setIcon({tabId: tab.id, path: chrome.extension.getURL("extension_icons/icon19.png")});
+    // Only run if not an autorun page
+    _isActiveAutorun(tab.url, tabId, null, function() {
+      // deactivate pgzp button on page load - restarting pgzp in this tab will require reloading everything
+      delete loaded_tabs[tabId];
+      chrome.browserAction.setIcon({tabId: tabId, path: chrome.extension.getURL("extension_icons/icon19.png")});
+    });
 	}
 }
 

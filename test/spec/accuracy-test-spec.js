@@ -42,6 +42,9 @@ var bigUrlsArray = [
 					["howstuffworks2.html",
             "http://electronics.howstuffworks.com/gadgets/travel/gps4.htm",
             "http://electronics.howstuffworks.com/gadgets/travel/gps3.htm"],
+					["leboncoin.html",
+						"http://www.leboncoin.fr/instruments_de_musique/offres/provence_alpes_cote_d_azur/var/?o=4",
+						"http://www.leboncoin.fr/instruments_de_musique/offres/provence_alpes_cote_d_azur/var/?o=3"],
 				];
 
 

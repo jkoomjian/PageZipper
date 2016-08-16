@@ -140,7 +140,7 @@ PageZipper.prototype.addLinkComponents = function(link, allNextLinks, alreadyLoa
 			var curr = rootNode.childNodes[i];
 
 			//check if this node is useful
-			if (curr.nodeType == Node.TEXT_NODE && curr.nodeValue && pgzp.jq.trim(curr.nodeValue).length > 0) {
+			if (curr.nodeType == Node.TEXT_NODE && curr.nodeValue && curr.nodeValue.trim().length) {
 				var nl = new NextLink(curr.nodeValue, link, alreadyLoaded);
 				nl.isVisibleText = true;
 				allNextLinks.push(nl);
@@ -154,10 +154,11 @@ PageZipper.prototype.addLinkComponents = function(link, allNextLinks, alreadyLoa
 				search(curr);
 			}
 		}
+
+		if (rootNode.title) allNextLinks.push(new NextLink(rootNode.title, rootNode));
+		if (rootNode.alt) allNextLinks.push(new NextLink(rootNode.alt, rootNode));
 	};
 
-	if (link.title) allNextLinks.push(new NextLink(link.title, link));
-	if (link.alt) allNextLinks.push(new NextLink(link.alt, link));
 	search(link);
 };
 

@@ -31,8 +31,9 @@ Bookmarklet:
 === Change Log ===
 
 1.5 - 7/5/2016-----
-* Get firefox extension working with FF 49/Electrolysis
+* Get the firefox extension working with FF 49/Electrolysis
 * Add a whitelist - pgzp will always run on whitelisted domains
+* Now works with page bars in the format "[1-20] [21-40] [41-60]"
 Bug Fixes:
 * Fix bug on how tabs are handled in extensions
 * Fix issue with page number not being correct after stopping then restarting pgzp

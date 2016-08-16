@@ -5,8 +5,9 @@ describe("page bar", function () {
     readInDom("inputs/page-bar-1.html", function(body) {
       var allNextLinks = pgzp.getAllNextLinks(body);
       var results = pgzp.getCurrentPageNumberFromPageBar(allNextLinks);
-      expect( results[0] ).toBe(1);
-      expect( results[1] ).toBe(40);
+      expect( results[0] ).toBe(null);
+      expect( results[1].text ).toBe("2");
+      expect( results[2] ).toBe(40);
       done();
     });
   });
@@ -16,8 +17,9 @@ describe("page bar", function () {
     readInDom("inputs/page-bar-2.html", function(body) {
       var allNextLinks = pgzp.getAllNextLinks(body);
       var results = pgzp.getCurrentPageNumberFromPageBar(allNextLinks);
-      expect( results[0] ).toBe(4);
-      expect( results[1] ).toBe(120);
+      expect( results[0].text ).toBe("3");
+      expect( results[1].text ).toBe("5");
+      expect( results[2] ).toBe(120);
       done();
     });
   });
@@ -54,13 +56,13 @@ describe("getAllNextLinks", function () {
       var nextLinks = [];
       pgzp.addLinkComponents(body, nextLinks, false);
       expect( nextLinks.length ).toBe(5);
-      expect( nextLinks[0].text ).toBe("test2");
+      expect( nextLinks[0].text.trim() ).toBe("Test3 Text");
+      expect( nextLinks[1].text ).toBe("test4");
+      expect( nextLinks[2].text ).toBe("test5");
+      expect( !!nextLinks[3].text.match(/test5\.png$/) ).toBe(true);
+      expect( nextLinks[4].text ).toBe("test2");
       // alt attr only valid on img
       // expect( nextLinks[1].text ).toBe("test3");
-      expect( nextLinks[1].text.trim() ).toBe("Test3 Text");
-      expect( nextLinks[2].text ).toBe("test4");
-      expect( nextLinks[3].text ).toBe("test5");
-      expect( !!nextLinks[4].text.match(/test5\.png$/) ).toBe(true);
       done();
     });
   });

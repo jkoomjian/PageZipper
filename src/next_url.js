@@ -93,16 +93,16 @@ PageZipper.prototype.getHighestTotalScore = function(allNextLinks) {
 		}
 	}
 
-	// if (pgzp.debug) {
-	// 	var debugMsg = 'Final Score ' + allNextLinks.length;
-	// 	allNextLinks.sort(function (a, b) {
-	// 						return b.finalScore - a.finalScore;
-	// 					});
-	// 	for (i=0; i<allNextLinks.length; i++) {
-	// 		debugMsg += "\n" + allNextLinks[i].finalScore + ": " + allNextLinks[i].text + ": " + allNextLinks[i].url;
-	// 	}
-	// 	pgzp.log(debugMsg);
-	// }
+	if (pgzp.debug) {
+		var debugMsg = 'Final Score ' + allNextLinks.length;
+		allNextLinks.sort(function (a, b) {
+							return b.finalScore - a.finalScore;
+						});
+		for (i=0; i<allNextLinks.length; i++) {
+			debugMsg += "\n" + allNextLinks[i].finalScore + ": " + allNextLinks[i].text + ": " + allNextLinks[i].url;
+		}
+		pgzp.log(debugMsg);
+	}
 
 	return highestScoringLink;
 };
@@ -243,7 +243,9 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 	//there are 3 possibilities
 
 	//curr page is at beginning - detect if first # in sequence is 2 or 1 (page bar starts at 1 or 0)
-	if (pageBar[0].pageNum == 2) return [null, pageBar[0], 40];
+	if (pageBar[0].pageNum == 2) {
+		return [null, pageBar[0], pgzp.pages.length == 1 ? 80 : 30];
+	}
 
 	//curr page is in the middle - detect by finding missing page
 	if (pageBar.length >= 2) {
@@ -258,9 +260,9 @@ PageZipper.prototype.getCurrentPageNumberFromPageBar = function(allNextLinks) {
 				if (!pgzp.contains(pgzp.url_list, pageBar[i].url)) {
 					return [pageBar[i - 1], nextLinkInPagebar(i - 1, pageBar), 120];
 				}
-			} else {
-				prevPageNum = currPageNum;
 			}
+
+			prevPageNum = currPageNum;
 		}
 	}
 

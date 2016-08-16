@@ -24,6 +24,19 @@ describe("page bar", function () {
     });
   });
 
+  it("handles pages which have previously been seen correctly", function(done) {
+    _initWithPage("http://www.pcmag.com/article2/0,2817,2361879,00.asp");
+    pgzp.url_list.push("http://www.pcmag.com/article2/0,2817,2361878,00.asp");
+    readInDom("inputs/page-bar-3.html", function(body) {
+      var allNextLinks = pgzp.getAllNextLinks(body);
+      var results = pgzp.getCurrentPageNumberFromPageBar(allNextLinks);
+      expect( results[1].text ).toBe("5");
+      expect( results[2] ).toBe(120);
+      expect( pgzp.getNextLink(body).url ).toBe("http://www.pcmag.com/article2/0,2817,2361880,00.asp");
+      done();
+    });
+  });
+
 });
 
 describe("getAllNextLinks", function () {

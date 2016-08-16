@@ -19,6 +19,7 @@ require 'fileutils'
                     "compat.js",
                     "image.js",
                     "lib/jstoolkit.js",
+                    "lib/levenshtein.js",
                     "menu.js",
                     "nextlink.js",
                     "next_url_trials.js",

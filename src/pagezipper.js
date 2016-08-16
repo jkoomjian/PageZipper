@@ -102,8 +102,7 @@ PageZipper.prototype.mainBlock = function() {
 	var currPageIndex = pgzp.getCurrentPage();
 	var currViewablePage = pgzp.getViewableCurrentPage(currPageIndex);
 
-	// var nextLinkObj = pgzp.pages[pgzp.pages.length-1]["nextLinkObj"]
-	// console.log("is loading: " + !pgzp.is_loading_page + "# pages: " + pgzp.pages.length + " nextLink: " + (nextLinkObj ? nextLinkObj.url : 'none') + " currPageIndex: " + currPageIndex + " currViewablePage: " + currViewablePage);
+	//pgzp.log("is loading: " + !pgzp.is_loading_page + "# pages: " + pgzp.pages.length + " currPageIndex: " + currPageIndex + " currViewablePage: " + currViewablePage);
 
 	pgzp.menuSetCurrPageNumber(currViewablePage + 1);
 	pgzp.setPageVisibility(currViewablePage);

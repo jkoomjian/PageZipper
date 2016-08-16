@@ -10,17 +10,20 @@ PageZipper.prototype.NextLink = function(text, link, alreadyLoaded, isHumanReada
 	this.url = link.href;
 	this.finalScore = null;
 	this.trialScores = {};
+
 	this.addScore = function(trialName, score, isNormalized) {
 		var normalizedKey = isNormalized ? 'normalizedScore' : 'unnormalizedScore';
 		if (!this.trialScores[trialName]) this.trialScores[trialName] = {};
 		this.trialScores[trialName][normalizedKey] = score;
-	}
+	};
+
 	this.getScore = function(trialName, isNormalized) {
 		//for trials which do not get normalized, just return unnormalized score
 		if (isNormalized && pgzp.trials[trialName].noNormailization) isNormalized = false;
 		var normalizedKey = isNormalized ? 'normalizedScore' : 'unnormalizedScore';
 		return this.trialScores[trialName][normalizedKey];
-	}
+	};
+
 	this.calculateTotalScore = function() {
 		this.finalScore = 0;
 		if (pgzp.debug) var debugStr = "Calculate Final Score: " + this.text + ": " + this.url;
@@ -34,8 +37,14 @@ PageZipper.prototype.NextLink = function(text, link, alreadyLoaded, isHumanReada
 		}
 		pgzp.log(debugStr + "\nFinal Score:\t" + this.finalScore);
 		return this.finalScore;
-	}
+	};
+
 	this.isSynNumber = function() {
-		return pgzp.isNumber(this.syn);
-	}
+		return pgzp.isPageBarNumber(this.syn);
+	};
+
+	this.toString = function() {
+		return this.text;
+	};
+
 }

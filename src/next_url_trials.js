@@ -40,38 +40,12 @@ PageZipper.prototype.trials = {
 	//urls similar to known next urls are more likely to be correct
 	'url_similarity': {
 						'doScore': function(nextLink) {
-									var lastUrl, currUrl, shorter, longer, score = 0, notMatchingPos = -1, i;
-									lastUrl = pgzp.pages[ pgzp.pages.length-1 ].url;
-									currUrl = nextLink.url;
-									if (lastUrl.length <= currUrl.length) {
-										shorter = lastUrl;
-										longer = currUrl;
-									} else {
-										shorter = currUrl;
-										longer = lastUrl;
-									}
+									var lastUrl = pgzp.pages[ pgzp.pages.length-1 ].url;
+									var currUrl = nextLink.url;
 
-									//subtract points for differences in length
-									score = shorter.length - longer.length;
-
-									//add points for matching chars, remove for different chars
-									for (i=0; i<shorter.length; i++) {
-										if (shorter.charAt(i) == longer.charAt(i)) {
-											score++;
-										} else {
-											score--;
-											if (notMatchingPos < 0) notMatchingPos = i;
-										}
-									}
-
-									//if the two urls are the same except 1 number, which is off by 1, that is a dead giveaway
-									if (notMatchingPos > 0 &&
-										pgzp.isNumber(longer.charAt(notMatchingPos)) && pgzp.isNumber(shorter.charAt(notMatchingPos)) &&
-										(Math.abs(pgzp.getNumberAtPos(shorter, notMatchingPos) - pgzp.getNumberAtPos(longer, notMatchingPos)) == 1)
-										) {
-											score += 100;
-									}
-									return score;
+									var l = new Levenshtein(lastUrl, currUrl);
+									var lDistance = l.distance;
+									return lastUrl.length - lDistance;
 								},
 						'weight': 70,
 						'noNormailization': true

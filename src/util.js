@@ -2,11 +2,12 @@
 
 PageZipper.prototype.startsWith = function(pattern, str) {
 	return str.indexOf(pattern) === 0;
-}
+};
+
 PageZipper.prototype.endsWith = function(pattern, str) {
 	var d = str.length - pattern.length;
  	return d >= 0 && str.lastIndexOf(pattern) === d;
-}
+};
 
 PageZipper.prototype.log = function(html, override) {
 	if (pgzp.debug || override) {
@@ -14,13 +15,13 @@ PageZipper.prototype.log = function(html, override) {
 			pgzp.win.console.log(html);
 			return;
 		}
-		
+
 		var div = pgzp.doc.createElement("textarea");
 		pgzp.doc.body.appendChild(div);
 		div.value = html;
-		
+
 	}
-}
+};
 
 //handles log strings in form "msg: #{o.src}" where o is the object in the list
 PageZipper.prototype.logList = function(list, initialStr, listStr) {
@@ -28,23 +29,23 @@ PageZipper.prototype.logList = function(list, initialStr, listStr) {
 		return s.replace(/\#\{([^}]+)\}/g,	function (match, exp) {
 												return eval(exp);
 											});
-	}
-	
+};
+
 	for (var i=0; i<list.length; i++) {
 		initialStr += "\n" + interpolate(listStr, list[i]);
 	}
 	pgzp.log(initialStr);
-}
+};
 
 PageZipper.prototype.noBubble = function(event) {
 	if (event) {
 		event.cancelBubble = true; //IE
-		if (event.stopPropagation) 
+		if (event.stopPropagation)
 			event.stopPropagation(); //Everyone else
 		event.returnValue = false; //required by stupid browsers which do not respect cancelling bubbling on arrow keys - IE and Safari
 	}
 	return event;
-}
+};
 
 //Find the length of page the user has left to read, in px
 PageZipper.prototype.getRemaningBufferSize = function() {
@@ -52,7 +53,7 @@ PageZipper.prototype.getRemaningBufferSize = function() {
 	var left = pgzp.screen.getDocumentHeight() - pgzp.screen.getScrollTop() - pgzp.screen.getViewportHeight();
 	if (left < 0) return 0;
 	return Math.floor(left);
-}
+};
 
 //http://www.quirksmode.org/js/findpos.html
 PageZipper.prototype.findPos = function(obj) {
@@ -63,7 +64,7 @@ PageZipper.prototype.findPos = function(obj) {
 			curtop += obj.offsetTop || parseInt(obj.style.top.replace("px", ""), 10) || 0;
 		} while (obj = obj.offsetParent);
 	}
-	
+
 	//if obj is inside an iframe, curtop will be the pos inside the iframe
 	//add the y of the iframe to make currtop absolute
 	if (objOrig.ownerDocument != pgzp.win.parent.document) {
@@ -75,18 +76,23 @@ PageZipper.prototype.findPos = function(obj) {
 			curtop += ifrPos.y;
 		}
 	}
-	
+
 	return {"x": curleft, "y": curtop};
-}
+};
 
 PageZipper.prototype.getDocumentHeight = function(doc) {
 	var body = doc.body, html = doc.documentElement;
 	return Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
-}
+};
 
 PageZipper.prototype.isNumber = function(str) {
 	return str && (typeof(str) == "number" || (typeof(str) == "string" && (str.search(/^\d+$/) >= 0)));
-}
+};
+
+// Returns true for strings which match a number or are format "number - number"
+PageZipper.prototype.isPageBarNumber = function(str) {
+	return !!(str && (pgzp.isNumber(str) || str.match(/\d+\s*-\s*\d+/g)));
+};
 
 PageZipper.prototype.getDomain = function(url) {
 	if (url.match("http://localhost/")) return "localhost";
@@ -96,7 +102,7 @@ PageZipper.prototype.getDomain = function(url) {
 	if (hna) {
 		//remove subdomains if they exist
 		var parts = hna[1].split(".");
-		if (parts.length > 2) 
+		if (parts.length > 2)
 			return parts[parts.length-2] + "." + parts[parts.length-1];
 		return hna[1];
 	}
@@ -107,7 +113,7 @@ PageZipper.prototype.getDomain = function(url) {
 	}
 	//relative link
 	return pgzp.currDomain;
-}
+};
 
 /* Removes the anchor part of urls */
 PageZipper.prototype.getUrlWOutAnchors = function(url) {
@@ -116,13 +122,13 @@ PageZipper.prototype.getUrlWOutAnchors = function(url) {
 		if (results.length > 0) return results[1];
 	}
 	return url;
-}
+};
 
 PageZipper.prototype.convertToArray = function(a) {
 	var b = [];
 	for (var i=0; i<a.length; i++) b.push(a[i]);
 	return b;
-}
+};
 
 /* Remove all elements from the given array on which filter returns true */
 PageZipper.prototype.filter = function(arr, filter) {
@@ -132,7 +138,7 @@ PageZipper.prototype.filter = function(arr, filter) {
 			i--;
 		}
 	}
-}
+};
 
 PageZipper.prototype.depthFirstRecursion = function(root, callback) {
 	for (var i=0; i<root.childNodes.length; i++) {
@@ -143,7 +149,7 @@ PageZipper.prototype.depthFirstRecursion = function(root, callback) {
 		}
 	}
 	callback(root);
-}
+};
 
 PageZipper.prototype.contains = function(ar, obj) {
 	if(Array.indexOf){
@@ -157,7 +163,7 @@ PageZipper.prototype.contains = function(ar, obj) {
         }
         return false;
 	}
-}
+};
 
 PageZipper.prototype.getContentType = function() {
 	var metas = pgzp.doc.getElementsByTagName("head")[0].getElementsByTagName("meta");
@@ -166,7 +172,7 @@ PageZipper.prototype.getContentType = function() {
 			return metas[i].getAttribute("content");
 	}
 	return null;
-}
+};
 
 /* Is word an actual word, or is it part of something else
  * ie. isStandaloneWord('older', 'more older entries') => true
@@ -175,28 +181,28 @@ PageZipper.prototype.getContentType = function() {
 PageZipper.prototype.isStandaloneWord = function(word, text, humanReadable) {
 	var delimiter = humanReadable ? "\\s" : "[^a-zA-Z]" ;
 	return new RegExp("^(.*" + delimiter + "+)?" + word + "(" + delimiter + "+.*)?$", "i").test(text);
-}
+};
 
 /* Given a string and a position (0 based), find the full # at that position.
  * ex. ('ab324', 3) returns 324
- * return -1 if no # is found 
+ * return -1 if no # is found
  */
 PageZipper.prototype.getNumberAtPos = function(str, pos) {
 	var currNum = "" + str.charAt(pos);
 	var currPos = pos - 1;
-	
+
 	//walk forward
 	while(currPos >= 0 && pgzp.isNumber(str.charAt(currPos))) {
 		currNum = str.charAt(currPos) + currNum;
 		currPos--;
 	}
-	
+
 	//walk backward
 	currPos = pos + 1;
 	while(currPos < str.length && pgzp.isNumber(str.charAt(currPos))) {
 		currNum += str.charAt(currPos);
 		currPos++;
 	}
-	
+
 	return pgzp.isNumber(currNum) ? parseInt(currNum, 10) : -1;
-}
+};

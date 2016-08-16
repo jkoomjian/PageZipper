@@ -1,8 +1,8 @@
 /*------------------------- Load Page In Ajax ----------------------*/
 function PageZipperAjax() {
-	
+
 	/*----- Add New Page -----*/
-	
+
 	//takes a url, returns a div containing the body content of the page at url
 	this.loadPage = function(url) {
 		//load page
@@ -21,9 +21,9 @@ function PageZipperAjax() {
 						}
 					});
 	}
-	
+
 	this.processPageAdd = function(url, nextPageData) {
-		
+
 		//store page height - make sure this increases when the new page is added
 		var docHeight = pgzp.jq(pgzp.doc).height();
 
@@ -41,13 +41,13 @@ function PageZipperAjax() {
 		if (!pgzp.in_compat_mode) {
 			var updatedDocHeight = pgzp.jq(pgzp.doc).height();
 			if ((updatedDocHeight - 100) <= docHeight) {
-				pgzp.toggleCompatMode();	
+				pgzp.toggleCompatMode();
 			}
 		}
 
 		pgzp.mainBlock(); //continue the loop
 	}
-	
+
 	this.buildPageFromData = function(url, data) {
 		var page = pgzp.doc.createElement("div");
 		page.id = "pgzp_page" + pgzp.pages.length;
@@ -55,16 +55,16 @@ function PageZipperAjax() {
 		page.innerHTML = data;
 		return pgzp.buildPage(url, page);
 	}
-	
+
 	/*----- Utils -----*/
 	this.copyPage = function(body) {
 		pgzp.doc.body.appendChild(body);
 	}
-	
+
 	//switch position: absolute with position: relative
 	this.removeAbsolutePositioning = function(body) {
 		pgzp.jq( pgzp.doc.body ).children().each(function() {
-															if (pgzp.jq(this).css("position") == "absolute") pgzp.jq(this).css("position", "static"); 
+															if (pgzp.jq(this).css("position") == "absolute") pgzp.jq(this).css("position", "static");
 														});
 		}
 }

@@ -1,17 +1,17 @@
 /*! PageZipper - www.printwhatyoulike.com/pagezipper
  *  A bookmarklet to make any page infinte scroll
  *  Written by Jonathan Koomjian (jonathan@printwhatyoulike.com)
- *  
- *  You are free to reuse this software. 
- *  Please be friendly and include a link back to the PageZipper 
- *  homepage (http://www.printwhatyoulike.com/pagezipper) on 
+ *
+ *  You are free to reuse this software.
+ *  Please be friendly and include a link back to the PageZipper
+ *  homepage (http://www.printwhatyoulike.com/pagezipper) on
  *  the website of any software which incorporates PageZippper code.
- * 
+ *
  * PageZipper is open source
  * Contributions are welcome - https://github.com/jkoomjian/PageZipper
- * 
- * 
- *  Version 1.4.4 - October 9, 2014
+ *
+ *
+ *  Version 1.5 - August 16, 2016
  *
  *                                           /;    ;\
  *                                      __  \\____//
@@ -32,5 +32,5 @@
  *       :__\  \    * `,'*         \  \  :  \   *  8`;'*  *
  *           `^'     \ :/           `^'  `-^-'   \v/ :  \/
  *
- * 
+ *
  */

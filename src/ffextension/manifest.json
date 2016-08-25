@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "PageZipper",
-  "version": "1.5",
+  "version": "1.5.1",
   "description": "Painlessly merge a series of web pages into one.",
   "homepage_url": "http://printwhatyoulike.com/pagezipper",
   "options_ui": {

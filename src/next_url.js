@@ -155,8 +155,8 @@ PageZipper.prototype.addLinkComponents = function(link, allNextLinks, alreadyLoa
 			}
 		}
 
-		if (rootNode.title) allNextLinks.push(new NextLink(rootNode.title, rootNode));
-		if (rootNode.alt) allNextLinks.push(new NextLink(rootNode.alt, rootNode));
+		if (rootNode.title) allNextLinks.push(new NextLink(rootNode.title, link));
+		if (rootNode.alt) allNextLinks.push(new NextLink(rootNode.alt, link));
 	};
 
 	search(link);

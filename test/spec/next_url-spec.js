@@ -7,7 +7,14 @@ describe("page bar", function () {
       var results = pgzp.getCurrentPageNumberFromPageBar(allNextLinks);
       expect( results[0] ).toBe(null);
       expect( results[1].text ).toBe("2");
-      expect( results[2] ).toBe(40);
+      //score = 80 when pageBar = 2, and 1 page has been loaded
+      //score = 30 if pageBar = 2 but multiple pages have been loaded
+      expect( results[2] ).toBe(80);
+      pgzp.pages[0].nextLinkObj = results[1];
+      pgzp.pages.push( {'url': window.location.href} );
+      results = pgzp.getCurrentPageNumberFromPageBar(allNextLinks);
+      expect( results[2] ).toBe(30);
+      pgzp.pages.pop();
       done();
     });
   });
@@ -67,6 +74,7 @@ describe("getAllNextLinks", function () {
     _initWithPage("http://www.test.com/test.hml");
     readInDom("inputs/all-urls-1.html", function(body) {
       var nextLinks = [];
+      body = body.childNodes[0];
       pgzp.addLinkComponents(body, nextLinks, false);
       expect( nextLinks.length ).toBe(5);
       expect( nextLinks[0].text.trim() ).toBe("Test3 Text");
@@ -76,6 +84,11 @@ describe("getAllNextLinks", function () {
       expect( nextLinks[4].text ).toBe("test2");
       // alt attr only valid on img
       // expect( nextLinks[1].text ).toBe("test3");
+      expect( nextLinks[0].url ).toBe("http://www.test.com/test2.hml");
+      expect( nextLinks[1].url ).toBe("http://www.test.com/test2.hml");
+      expect( nextLinks[2].url ).toBe("http://www.test.com/test2.hml");
+      expect( nextLinks[3].url ).toBe("http://www.test.com/test2.hml");
+      expect( nextLinks[4].url ).toBe("http://www.test.com/test2.hml");
       done();
     });
   });

@@ -48,6 +48,9 @@ var bigUrlsArray = [
 					["amazon-category.html",
 						"https://www.amazon.com/Best-Sellers-Electronics-Computer-Audio-Video-Accessories/zgbs/electronics/11548951011/ref=zg_bs_11548951011_pg_2?_encoding=UTF8&pg=2",
 						"https://www.amazon.com/Best-Sellers-Electronics-Computer-Audio-Video-Accessories/zgbs/electronics/11548951011/ref=zg_bs_11548951011_pg_1?_encoding=UTF8&pg=1"],
+					["gallery.html",
+						"http://localhost/gallery/henrieke/2/",
+						"http://localhost/gallery/henrieke/"],
 				];
 
 

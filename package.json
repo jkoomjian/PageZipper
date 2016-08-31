@@ -1,0 +1,19 @@
+{
+  "name": "pagezipper",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkoomjian/PageZipper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jkoomjian/PageZipper/issues"
+  },
+  "homepage": "https://github.com/jkoomjian/PageZipper#readme"
+}

@@ -1,2 +1,4 @@
 /compiled
+/dist
 .tags*
+/node_modules

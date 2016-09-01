@@ -23,8 +23,8 @@ PageZipper.prototype.addMenu = function() {
 			<a href='#' id='pgzp_button_prev' class='pgzp_block pgzp_button pgzp_button_prev_active' title='Previous - Cntrl Up or Cntrl <'></a>
 			<a href='#' id='pgzp_button_next' class='pgzp_block pgzp_button pgzp_button_next_active' title='Next - Cntrl Down or Cntrl >'></a>
 			<div class='pgzp_block' style='padding-left: 5px;'>
-				<span id='pgzp_curr_page' title='Current Page'>1</span>
-				<span id='pgzp_loaded_pages' title='Pages Loaded'>/1</span>
+				<span id='pgzp_curr_page' title='Current Page'>1</span><!--
+				--><span id='pgzp_loaded_pages' title='Pages Loaded'>/1</span>
 			</div>
 			<a href='#' id='pgzp_button_compat' class='pgzp_block pgzp_button pgzp_button_compat_inactive' title='Compatibility Mode - Slower, but less likely to encounter problems'></a>
 			<a href='http://www.printwhatyoulike.com/pagezipper' target='_blank' title='PageZipper Home' class='pgzp_block pgzp_button' style='margin-left: -6px'>
@@ -45,8 +45,9 @@ PageZipper.prototype.addMenu = function() {
 
 	//insert html
 	var div = pgzp.doc.createElement("div");
+	// block inherited css properties from messing up the menu styling
+	div.style['all'] = 'initial';
 	div.innerHTML = pgzp.jq.trim(html);
-	// div = div.childNodes[0];
 	pgzp.doc.body.appendChild(div);
 
 	//update pages loaded count

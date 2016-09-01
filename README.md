@@ -30,6 +30,8 @@ Bookmarklet:
 
 === Change Log ===
 
+* Add {all: inital} to menu css to prevent the host page's css from altering the menu css
+
 1.5 - 7/5/2016-----
 * Get the firefox extension working with FF 49/Electrolysis
 * Add a whitelist - pgzp will always run on whitelisted domains

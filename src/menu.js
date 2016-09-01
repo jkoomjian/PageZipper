@@ -1,38 +1,37 @@
 /*------------------------ Menu Stuff ----------------------------*/
 PageZipper.prototype.addMenu = function() {
-	var css = "																																\
-		#pgzp_menu a, #pgzp_menu a * {border: 0; text-decoration: none;}																	\
-		#pgzp_menu {position: fixed; top: 0px; right: 8px; padding: 0px 5px; background-color: #D3D3D3; color: black; z-index: 2147483647;}	\
-		.pgzp_block {display: block; float: left; line-height: 32px;}																		\
-		.pgzp_button {display: block; width: 32px; height: 32px;}																			\
-		a.pgzp_button_prev_active {background: transparent url('${media_path}32-gnome-prev.png') no-repeat scroll top left; }				\
-		a:hover.pgzp_button_prev_active {background-image: url('${media_path}32-gnome-prev_red.png'); }										\
-		a.pgzp_button_prev_inactive {background: transparent url('${media_path}32-gnome-prev_gray.png') no-repeat scroll top left; }		\
-		a.pgzp_button_next_active {background: transparent url('${media_path}32-gnome-next.png') no-repeat scroll top left; }				\
-		a:hover.pgzp_button_next_active {background-image: url('${media_path}32-gnome-next_red.png'); }										\
-		a.pgzp_button_next_inactive {background: transparent url('${media_path}32-gnome-next_gray.png') no-repeat scroll top left; }		\
-		#pgzp_button_compat {padding-left: 6px;}																							\
-		.pgzp_button_compat_active {background: transparent url('${media_path}compat-mode.png') no-repeat scroll 4px 4px;}					\
-		.pgzp_button_compat_inactive {background: transparent url('${media_path}compat-mode-inactive.png') no-repeat scroll 4px 4px;}		\
-		#pgzp_curr_page {font-size: 24px;}																									\
-		#pgzp_loaded_pages {font-size: 18px;}																								\
-	";
+	var css = `
+		#pgzp_menu a, #pgzp_menu a * {border: 0; text-decoration: none;}
+		#pgzp_menu {position: fixed; top: 0px; right: 8px; padding: 0px 5px; background-color: #D3D3D3; color: black; z-index: 2147483647;}
+		.pgzp_block {display: block; float: left; line-height: 32px;}
+		.pgzp_button {display: block; width: 32px; height: 32px;}
+		a.pgzp_button_prev_active {background: transparent url('${pgzp.media_path}32-gnome-prev.png') no-repeat scroll top left; }
+		a:hover.pgzp_button_prev_active {background-image: url('${pgzp.media_path}32-gnome-prev_red.png'); }
+		a.pgzp_button_prev_inactive {background: transparent url('${pgzp.media_path}32-gnome-prev_gray.png') no-repeat scroll top left; }
+		a.pgzp_button_next_active {background: transparent url('${pgzp.media_path}32-gnome-next.png') no-repeat scroll top left; }
+		a:hover.pgzp_button_next_active {background-image: url('${pgzp.media_path}32-gnome-next_red.png'); }
+		a.pgzp_button_next_inactive {background: transparent url('${pgzp.media_path}32-gnome-next_gray.png') no-repeat scroll top left; }
+		#pgzp_button_compat {padding-left: 6px;}
+		.pgzp_button_compat_active {background: transparent url('${pgzp.media_path}compat-mode.png') no-repeat scroll 4px 4px;}
+		.pgzp_button_compat_inactive {background: transparent url('${pgzp.media_path}compat-mode-inactive.png') no-repeat scroll 4px 4px;}
+		#pgzp_curr_page {font-size: 24px;}
+		#pgzp_loaded_pages {font-size: 18px;}
+	`;
 
-	var html = "																																							\
-		<div id='pgzp_menu'>																																				\
-			<a href='#' id='pgzp_button_prev' class='pgzp_block pgzp_button pgzp_button_prev_active' title='Previous - Cntrl Up or Cntrl <'></a>	\
-			<a href='#' id='pgzp_button_next' class='pgzp_block pgzp_button pgzp_button_next_active' title='Next - Cntrl Down or Cntrl >'></a>	\
-			<div class='pgzp_block' style='padding-left: 5px;'><span id='pgzp_curr_page' title='Current Page'>1</span><span id='pgzp_loaded_pages' title='Pages Loaded'>/1</span></div>								\
-			<a href='#' id='pgzp_button_compat' class='pgzp_block pgzp_button pgzp_button_compat_inactive' title='Compatibility Mode - Slower, but less likely to encounter problems'></a>	\
-			<a href='http://www.printwhatyoulike.com/pagezipper' target='_blank' title='PageZipper Home' class='pgzp_block pgzp_button' style='margin-left: -6px'>			\
-				<img src='${media_path}zipper_32.png' alt='PageZipper!' style='border-width: 0px' />										\
-			</a>																																							\
-		</div>																																								\
-	";
-
-	//replace ${media_path} with actual value
-	css = pgzp.jq.trim( css.replace(/\$\{media_path\}/g, pgzp.media_path) );
-	html = pgzp.jq.trim( html.replace(/\$\{media_path\}/g, pgzp.media_path) );
+	var html = `
+		<div id='pgzp_menu'>
+			<a href='#' id='pgzp_button_prev' class='pgzp_block pgzp_button pgzp_button_prev_active' title='Previous - Cntrl Up or Cntrl <'></a>
+			<a href='#' id='pgzp_button_next' class='pgzp_block pgzp_button pgzp_button_next_active' title='Next - Cntrl Down or Cntrl >'></a>
+			<div class='pgzp_block' style='padding-left: 5px;'>
+				<span id='pgzp_curr_page' title='Current Page'>1</span>
+				<span id='pgzp_loaded_pages' title='Pages Loaded'>/1</span>
+			</div>
+			<a href='#' id='pgzp_button_compat' class='pgzp_block pgzp_button pgzp_button_compat_inactive' title='Compatibility Mode - Slower, but less likely to encounter problems'></a>
+			<a href='http://www.printwhatyoulike.com/pagezipper' target='_blank' title='PageZipper Home' class='pgzp_block pgzp_button' style='margin-left: -6px'>
+				<img src='${pgzp.media_path}zipper_32.png' alt='PageZipper!' style='border-width: 0px' />
+			</a>
+		</div>
+	`;
 
 	//insert css
 	var cssElem = pgzp.doc.createElement('style');
@@ -46,8 +45,8 @@ PageZipper.prototype.addMenu = function() {
 
 	//insert html
 	var div = pgzp.doc.createElement("div");
-	div.innerHTML = html;
-	div = div.childNodes[0];
+	div.innerHTML = pgzp.jq.trim(html);
+	// div = div.childNodes[0];
 	pgzp.doc.body.appendChild(div);
 
 	//update pages loaded count
@@ -62,16 +61,17 @@ PageZipper.prototype.addMenu = function() {
 			event.preventDefault ? event.preventDefault() : event.returnValue = false;
 			return false;
 		});
-	}
-	assignLinkHandler("pgzp_button_prev", function(){pgzp.goToNext(-1)});
-	assignLinkHandler("pgzp_button_next", function(){pgzp.goToNext(1)});
-	assignLinkHandler("pgzp_button_compat", function(){pgzp.toggleCompatMode()});
-}
+	};
+
+	assignLinkHandler("pgzp_button_prev", function(){pgzp.goToNext(-1);});
+	assignLinkHandler("pgzp_button_next", function(){pgzp.goToNext(1);});
+	assignLinkHandler("pgzp_button_compat", function(){pgzp.toggleCompatMode();});
+};
 
 PageZipper.prototype.removeMenu = function() {
 	var menu = pgzp.doc.getElementById('pgzp_menu');
 	if (menu) pgzp.doc.body.removeChild(menu);
-}
+};
 
 PageZipper.prototype.menuIncrementPagesLoaded = function(numPages) {
 	var loadedPages = pgzp.doc.getElementById("pgzp_loaded_pages");
@@ -84,7 +84,7 @@ PageZipper.prototype.menuIncrementPagesLoaded = function(numPages) {
 	}
 
 	loadedPages.textContent = "/" + pgzp.pages.length;
-}
+};
 
 PageZipper.prototype.menuSetCurrPageNumber = function(currPage) {
 	var currPageObj = pgzp.pages[currPage - 1];
@@ -107,7 +107,7 @@ PageZipper.prototype.menuSetCurrPageNumber = function(currPage) {
 							);
 		pgzp.updateButtonState(!disableNext, "next");
 	}
-}
+};
 
 //buttonName = 'prev' or 'next' or 'compat'
 PageZipper.prototype.updateButtonState = function(enable, buttonName) {
@@ -124,7 +124,7 @@ PageZipper.prototype.updateButtonState = function(enable, buttonName) {
 	if (buttonName == 'compat') {
 		button.title = enable ? button.title.replace('disabled', 'enabled') : button.title.replace('enabled', 'disabled');
 	}
-}
+};
 
 /*------------------------- Menu Events ----------------------*/
 PageZipper.prototype.keyDown = function(event) {
@@ -153,7 +153,7 @@ PageZipper.prototype.keyDown = function(event) {
 			pgzp.ctrl_key_pressed = true;
 			break;
 	}
-}
+};
 
 PageZipper.prototype.keyUp = function(event) {
 	//pgzp.log("key up: " + event.which, true);
@@ -164,7 +164,7 @@ PageZipper.prototype.keyUp = function(event) {
 			pgzp.ctrl_key_pressed = false;
 			break;
 	}
-}
+};
 
 /*------------------------- Page Stuff ----------------------*/
 PageZipper.prototype.goToNext = function(inc){
@@ -178,7 +178,7 @@ PageZipper.prototype.goToNext = function(inc){
 		else
 			pgzp.goToPreviousPosterImage();
 	}
-}
+};
 
 PageZipper.prototype.goToNextPage = function(inc, currPageIndex) {
 	var currPage, pos, amountToScroll, ps;
@@ -195,4 +195,4 @@ PageZipper.prototype.goToNextPage = function(inc, currPageIndex) {
 //		}
 		pgzp.win.scrollBy(0, amountToScroll);
 	}
-}
+};

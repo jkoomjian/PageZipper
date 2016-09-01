@@ -5,6 +5,7 @@ const del = require('del');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const gulpIf = require('gulp-if');
+const babel = require('gulp-babel');
 
 const src = "src"
 const dest = "dist";
@@ -15,31 +16,51 @@ const ext_name = "pagezipper.js"
 
 var isProd = false
 
-const jsFiles = [
-                    "header.js",
-                    "lib/jquery.js",
-                    "pagezipper.js",
-                    "compat.js",
-                    "image.js",
-                    "lib/jstoolkit.js",
-                    "lib/levenshtein.js",
-                    "menu.js",
-                    "nextlink.js",
-                    "next_url_trials.js",
-                    "next_url.js",
-                    "page_loader_ajax.js",
-                    "page_loader_iframe.js",
-                    "page_loader.js",
-                    "util.js",
-                  ];
+const srcs = {
+              headers: ["header.js"],
+              libs: [
+                  "lib/jquery.js",
+                  "lib/jstoolkit.js",
+                  "lib/levenshtein.js",
+              ],
+              pgzp_srcs: [
+                "pagezipper.js",
+                "compat.js",
+                "image.js",
+                "menu.js",
+                "nextlink.js",
+                "next_url_trials.js",
+                "next_url.js",
+                "page_loader_ajax.js",
+                "page_loader_iframe.js",
+                "page_loader.js",
+                "util.js",
+              ]
+};
 
 function build_pgzp(output_name, loader_file, destLoc) {
-  var currJsFiles = jsFiles.map( f => { return `${src}/${f}` });
-  currJsFiles.push(loader_file);
-  gulp.src(currJsFiles)
+
+  // prepend 'src/' to filepaths
+  ['headers', 'libs', 'pgzp_srcs'].forEach( jsFileArray => {
+    global[`curr_${jsFileArray}`] = srcs[jsFileArray].map( f => { return `${src}/${f}` });
+  });
+
+  curr_pgzp_srcs.push(loader_file);
+  var allJsFiles = curr_headers.concat(curr_libs).concat([`${destLoc}/${output_name}`]);
+
+  //compile pgzp src files
+  gulp.src(curr_pgzp_srcs)
     .pipe(concat(output_name, {newLine: '\n\n'}))
+    .pipe(babel( {presets: ['es2015']} ))
     .pipe(gulpIf(isProd, uglify()))
-    .pipe(gulp.dest(destLoc));
+    .pipe(gulp.dest(destLoc))
+    .on('end', function() {
+
+        // combine headers, libs, and compiled srcs
+        gulp.src(allJsFiles)
+          .pipe(concat(output_name, {newLine: '\n\n'}))
+          .pipe(gulp.dest(destLoc));
+    });
 }
 
 function copy_ext_files(ext_dir) {
@@ -55,7 +76,7 @@ gulp.task('clean', [], () => {
 });
 
 gulp.task('make_bookmarklet', [], () => {
-  let loader_file = `${src}/loader_bookmarklet.js`;
+  var loader_file = `${src}/loader_bookmarklet.js`;
   build_pgzp(bookmarklet_name, loader_file, dest);
 });
 
@@ -73,7 +94,7 @@ gulp.task('make_ff_ext', [], () => {
   copy_ext_files(ffext_dir)
 
   // remove jquery from src files, and copy it over
-  var jq = jsFiles.splice(1,1)[0];
+  var jq = srcs.libs.splice(0,1)[0];
   gulp.src(`${src}/${jq}`).pipe(gulp.dest(`${dest}/${ffext_dir}/`));
 
   // no compression for FF

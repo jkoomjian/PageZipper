@@ -6,7 +6,9 @@
   "devDependencies": {
     "del": "^2.2.2",
     "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0"
+    "gulp-concat": "^2.6.0",
+    "gulp-if": "^2.0.1",
+    "gulp-uglify": "^2.0.0"
   },
   "repository": {
     "type": "git",

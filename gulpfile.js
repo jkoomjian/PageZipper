@@ -3,6 +3,8 @@
 const gulp = require("gulp");
 const del = require('del');
 const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const gulpIf = require('gulp-if');
 
 const src = "src"
 const dest = "dist";
@@ -35,6 +37,8 @@ function build_pgzp(output_name, loader_file, destLoc) {
   var currJsFiles = jsFiles.map( f => { return `${src}/${f}` });
   currJsFiles.push(loader_file);
   gulp.src(currJsFiles)
+    .pipe(concat(output_name, {newLine: '\n\n'}))
+    .pipe(gulpIf(isProd, uglify()))
     .pipe(gulp.dest(destLoc));
 }
 

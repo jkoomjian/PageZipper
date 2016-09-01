@@ -38,7 +38,7 @@ const srcs = {
               ]
 };
 
-function build_pgzp(output_name, loader_file, destLoc) {
+function build_pgzp(output_name, loader_file, destLoc, isProd=false, skipJq=false) {
 
   // prepend 'src/' to filepaths
   ['headers', 'libs', 'pgzp_srcs'].forEach( jsFileArray => {
@@ -46,6 +46,8 @@ function build_pgzp(output_name, loader_file, destLoc) {
   });
 
   curr_pgzp_srcs.push(loader_file);
+
+  if (skipJq) curr_libs.splice(0, 1);
   var allJsFiles = curr_headers.concat(curr_libs).concat([`${destLoc}/${output_name}`]);
 
   //compile pgzp src files
@@ -77,12 +79,12 @@ gulp.task('clean', [], () => {
 
 gulp.task('make_bookmarklet', [], () => {
   var loader_file = `${src}/loader_bookmarklet.js`;
-  build_pgzp(bookmarklet_name, loader_file, dest);
+  build_pgzp(bookmarklet_name, loader_file, dest, isProd);
 });
 
 gulp.task('make_chrome_ext', [], () => {
   copy_ext_files(chrome_dir);
-  build_pgzp(ext_name, `${src}/loader_chrome.js`, `${dest}/${chrome_dir}`);
+  build_pgzp(ext_name, `${src}/loader_chrome.js`, `${dest}/${chrome_dir}`, isProd);
 });
 
 gulp.task('make_ff_ext', [], () => {
@@ -93,16 +95,19 @@ gulp.task('make_ff_ext', [], () => {
   // copy over assets, common files
   copy_ext_files(ffext_dir)
 
-  // remove jquery from src files, and copy it over
-  var jq = srcs.libs.splice(0,1)[0];
+  // copy jQuery over
+  var jq = srcs.libs[0];
   gulp.src(`${src}/${jq}`).pipe(gulp.dest(`${dest}/${ffext_dir}/`));
 
-  // no compression for FF
-  isProd = false;
-  build_pgzp(ext_name, `${src}/loader_firefox.js`, `${dest}/${ffext_dir}`);
+  // no compression for FF, remove jQuery
+  build_pgzp(ext_name, `${src}/loader_firefox.js`, `${dest}/${ffext_dir}`, false, true);
 });
 
 gulp.task('build', ['clean', 'make_bookmarklet', 'make_chrome_ext', 'make_ff_ext'], () => {
+});
+
+gulp.task('watch', () => {
+  gulp.watch(['src/**.js', 'src/**.html', 'src/**.css'], ['build']);
 });
 
 // Deploy to prod

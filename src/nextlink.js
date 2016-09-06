@@ -1,30 +1,34 @@
 //NextLink object we will be scoring
 //isReadableText = human readable content- not url
-PageZipper.prototype.NextLink = function(text, link, alreadyLoaded, isHumanReadableText) {
-	this.text = text;
-	this.link = link;
-	this.syn = '';
-	this.isHumanReadableText = (isHumanReadableText === undefined) ? true : isHumanReadableText;
-	this.isVisibleText = false;  //is this.text visible on the page?
-	this.alreadyLoaded = alreadyLoaded;
-	this.url = link.href;
-	this.finalScore = null;
-	this.trialScores = {};
 
-	this.addScore = function(trialName, score, isNormalized) {
+PageZipper.prototype.NextLink = class {
+
+	constructor(text, link, alreadyLoaded, isHumanReadableText) {
+		this.text = text;
+		this.link = link;
+		this.syn = '';
+		this.isHumanReadableText = (isHumanReadableText === undefined) ? true : isHumanReadableText;
+		this.isVisibleText = false;  //is this.text visible on the page?
+		this.alreadyLoaded = alreadyLoaded;
+		this.url = link.href;
+		this.finalScore = null;
+		this.trialScores = {};
+	}
+
+	addScore(trialName, score, isNormalized) {
 		var normalizedKey = isNormalized ? 'normalizedScore' : 'unnormalizedScore';
 		if (!this.trialScores[trialName]) this.trialScores[trialName] = {};
 		this.trialScores[trialName][normalizedKey] = score;
-	};
+	}
 
-	this.getScore = function(trialName, isNormalized) {
+	getScore(trialName, isNormalized) {
 		//for trials which do not get normalized, just return unnormalized score
 		if (isNormalized && pgzp.trials[trialName].noNormailization) isNormalized = false;
 		var normalizedKey = isNormalized ? 'normalizedScore' : 'unnormalizedScore';
 		return this.trialScores[trialName][normalizedKey];
-	};
+	}
 
-	this.calculateTotalScore = function() {
+	calculateTotalScore() {
 		this.finalScore = 0;
 		if (pgzp.debug) var debugStr = "Calculate Final Score: " + this.text + ": " + this.url;
 		for (var trial in this.trialScores) {
@@ -37,13 +41,13 @@ PageZipper.prototype.NextLink = function(text, link, alreadyLoaded, isHumanReada
 		}
 		pgzp.log(debugStr + "\nFinal Score:\t" + this.finalScore);
 		return this.finalScore;
-	};
+	}
 
-	this.isSynNumber = function() {
+	isSynNumber() {
 		return pgzp.isPageBarNumber(this.syn);
-	};
+	}
 
-	this.toString = function() {
+	toString() {
 		return this.text;
 	};
 

@@ -5,6 +5,7 @@ function PageZipper() {
 	this.nextSynonyms = [
 							//beware, the order of this list is referenced elsewhere!
 							{syn: "next", weight: 100},
+							{syn: "nächste", weight: 100},
 							{syn: "older", weight: 80},
 							{syn: "previous", weight: 60},
 							{syn: "forward", weight: 50},

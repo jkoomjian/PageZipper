@@ -18,11 +18,18 @@ PageZipper.prototype.getNextLink = function(body) {
 
 PageZipper.prototype.getAllScoredLinks = function(body) {
 	var allNextLinks = pgzp.getAllNextLinks(body);
+	var rels = pgzp.find_rel_next(allNextLinks);
+	if (rels) {
+		return rels;
+	}
 	var pageBarInfo = pgzp.getCurrentPageNumberFromPageBar(allNextLinks);
 	if (pageBarInfo[1]) {
 		pgzp.log("looking for page #: " + pageBarInfo[1].text + " w/confidence: " + pageBarInfo[2]);
 		pgzp.nextSynonyms[pgzp.nextSynonyms.length-1].syn = pageBarInfo[1].text;	//update nextSynonyms
 		pgzp.nextSynonyms[pgzp.nextSynonyms.length-1].weight = pageBarInfo[2];	//update weight/confidence
+	}
+	else if (pgzp.debug) {
+		pgzp.log("Couldn't find a pagebar");
 	}
 	pgzp.linkTextIndex = pgzp.indexDuplicateLinks(allNextLinks);
 	pgzp.filter(allNextLinks, function(link) {return link.alreadyLoaded;});	//filter out already loaded links, needed by pageBar, but not anymore
@@ -56,6 +63,16 @@ PageZipper.prototype.normalizeLinks = function(allLinks) {
 		//block out stuff added by site with Object.prototype, trials not meant to be normailzed
 		if (pgzp.trials.hasOwnProperty(trial) && !pgzp.trials[trial].noNormailization) {
 			pgzp.normalizeTrialSet(trial, allLinks);
+		}
+	}
+};
+
+// Sometimes the website is nice and just tells is which one it is.
+PageZipper.prototype.find_rel_next = function(allLinks) {
+	for (var i in allLinks) {
+		link = allLinks[i];
+		if (link.link.rel == "next") {
+			return [link];
 		}
 	}
 };
@@ -157,6 +174,7 @@ PageZipper.prototype.addLinkComponents = function(link, allNextLinks, alreadyLoa
 
 		if (rootNode.title) allNextLinks.push(new NextLink(rootNode.title, link));
 		if (rootNode.alt) allNextLinks.push(new NextLink(rootNode.alt, link));
+		if (rootNode.rel) allNextLinks.push(new NextLink(rootNode.rel, link));
 	};
 
 	search(link);
